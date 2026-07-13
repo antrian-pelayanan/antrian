@@ -255,7 +255,7 @@ export default function Kiosk() {
             ) : (
               <div className="row g-4 justify-content-center">
                 {pelayanan.map((p, index) => (
-                  <div className="col-md-6 col-lg-5" key={p.id}>
+                  <div className="col-md-4" key={p.id}>
                     <div 
                       onClick={() => setSelectedLayananForForm(p)}
                       className="card text-white text-decoration-none h-100"
@@ -264,7 +264,7 @@ export default function Kiosk() {
                         backdropFilter: 'blur(15px)',
                         border: '1px solid rgba(255, 255, 255, 0.1)',
                         borderRadius: '20px',
-                        padding: '45px',
+                        padding: '30px',
                         cursor: 'pointer',
                         transition: 'all 0.3s'
                       }}
@@ -272,16 +272,16 @@ export default function Kiosk() {
                       onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)'; }}
                     >
                       <div className="d-flex justify-content-between align-items-start mb-4">
-                        <span style={{ fontSize: '5.2rem', fontWeight: 800, background: 'linear-gradient(135deg, #0dcaf0, #0d6efd)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+                        <span style={{ fontSize: '4.2rem', fontWeight: 800, background: 'linear-gradient(135deg, #0dcaf0, #0d6efd)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
                           {p.kode}
                         </span>
-                        <span className="badge bg-info bg-opacity-25 text-info px-4 py-3 rounded-pill fs-6">
+                        <span className="badge bg-info bg-opacity-25 text-info px-3 py-2 rounded-pill fs-6">
                           Estimasi: {p.estimasi_waktu} mnt
                         </span>
                       </div>
                       <div>
-                        <h2 className="fw-bold mb-3" style={{ fontSize: '2.1rem', lineHeight: 1.2 }}>{p.nama}</h2>
-                        <p className="m-0 text-white-50" style={{ fontSize: '1.15rem' }}>Tekan tombol fisik ({p.kode}) atau sentuh layar untuk mengambil nomor.</p>
+                        <h2 className="fw-bold mb-3" style={{ fontSize: '1.8rem', lineHeight: 1.2 }}>{p.nama}</h2>
+                        <p className="m-0 text-white-50" style={{ fontSize: '1rem' }}>Tekan tombol ({p.kode}) atau sentuh layar.</p>
                       </div>
                     </div>
                   </div>
