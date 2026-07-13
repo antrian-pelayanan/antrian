@@ -216,36 +216,36 @@ export default function Display() {
         </div>
 
         {/* Right Area */}
-        <div className="col-lg-5 d-flex flex-column gap-3">
+        <div className="col-lg-5 d-flex flex-column gap-2" style={{ height: '100%' }}>
           
           {/* Giant Call Box */}
           <div className="text-center w-100 rounded-4" style={{
             background: 'rgba(255,255,255,0.95)', border: '3px solid rgba(13,110,253,0.35)', 
-            padding: '30px 30px', boxShadow: '0 12px 30px rgba(0,0,0,0.08)'
+            padding: '12px 20px', boxShadow: '0 8px 24px rgba(0,0,0,0.08)'
           }}>
-            <h2 className="text-primary fw-bold text-uppercase mb-2" style={{ fontSize: '2.5rem', letterSpacing: '1px' }}>Panggilan Saat Ini</h2>
-            <div className="fw-bold text-danger" style={{ fontSize: '11.5rem', lineHeight: 1.1, textShadow: '0 0 25px rgba(220,53,69,0.3)' }}>
+            <h3 className="text-primary fw-bold text-uppercase mb-1" style={{ fontSize: '1.8rem', letterSpacing: '0.5px' }}>Panggilan Saat Ini</h3>
+            <div className="fw-bold text-danger" style={{ fontSize: '8.5rem', lineHeight: 1.0, textShadow: '0 0 20px rgba(220,53,69,0.25)' }}>
               {latestCalling ? latestCalling.nomor_lengkap : '---'}
             </div>
-            <div className="mt-3 fw-bold text-dark text-uppercase" style={{ fontSize: '2.4rem' }}>
-              MENUJU <span className="text-danger fw-black" style={{ fontSize: '3.3rem', fontWeight: 900, textShadow: '0 0 10px rgba(220,53,69,0.1)' }}>{latestCalling ? latestCalling.loket : '---'}</span>
+            <div className="mt-1 fw-bold text-dark text-uppercase" style={{ fontSize: '1.8rem' }}>
+              MENUJU <span className="text-danger fw-black" style={{ fontSize: '2.4rem', fontWeight: 900 }}>{latestCalling ? latestCalling.loket : '---'}</span>
             </div>
           </div>
 
           {/* Active Queues */}
-          <div className="flex-grow-1 p-4 d-flex flex-column rounded-4" style={{ background: 'rgba(255,255,255,0.9)' }}>
-            <h3 className="text-center fw-bold border-bottom pb-3 mb-3 text-dark text-uppercase" style={{ fontSize: '2.4rem', letterSpacing: '1px' }}>ANTRIAN BERLANGSUNG</h3>
-            <div className="row g-3 flex-grow-1 justify-content-center">
+          <div className="flex-grow-1 p-3 d-flex flex-column rounded-4" style={{ background: 'rgba(255,255,255,0.9)', overflowY: 'auto' }}>
+            <h4 className="text-center fw-bold border-bottom pb-2 mb-2 text-dark text-uppercase" style={{ fontSize: '1.9rem', letterSpacing: '0.5px' }}>ANTRIAN BERLANGSUNG</h4>
+            <div className="row g-2 flex-grow-1 justify-content-center">
               {lokets.map(lok => (
                 <div className="col-12" key={lok}>
-                  <div className="d-flex align-items-center justify-content-between py-3 px-4 bg-white rounded-3" style={{ borderLeft: '8px solid #0d6efd', boxShadow: '0 4px 12px rgba(0,0,0,0.04)' }}>
+                  <div className="d-flex align-items-center justify-content-between py-2 px-3 bg-white rounded-3" style={{ borderLeft: '8px solid #0d6efd', boxShadow: '0 3px 8px rgba(0,0,0,0.03)' }}>
                     <div className="text-start">
-                      <h3 className="fw-bold text-primary m-0" style={{ fontSize: '2.3rem' }}>{lok}</h3>
-                      <div className="text-secondary fw-semibold mt-1" style={{ fontSize: '1.25rem' }}>
-                        Status: <span className={`badge ${activeCalls[lok] ? 'bg-success' : 'bg-secondary'} px-3 py-1 rounded-pill`} style={{ fontSize: '1.1rem' }}>{activeCalls[lok] ? 'Melayani' : 'Kosong'}</span>
+                      <h4 className="fw-bold text-primary m-0" style={{ fontSize: '1.9rem' }}>{lok}</h4>
+                      <div className="text-secondary fw-semibold mt-1" style={{ fontSize: '1.05rem' }}>
+                        Status: <span className={`badge ${activeCalls[lok] ? 'bg-success' : 'bg-secondary'} px-2 py-0.5 rounded-pill`} style={{ fontSize: '0.9rem' }}>{activeCalls[lok] ? 'Melayani' : 'Kosong'}</span>
                       </div>
                     </div>
-                    <div className="fw-bold text-dark" style={{ fontSize: '4.8rem', lineHeight: 1 }}>
+                    <div className="fw-bold text-dark" style={{ fontSize: '4rem', lineHeight: 1 }}>
                       {activeCalls[lok] ? activeCalls[lok].nomor_lengkap : '---'}
                     </div>
                   </div>
