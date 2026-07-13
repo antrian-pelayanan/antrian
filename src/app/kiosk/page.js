@@ -107,7 +107,7 @@ export default function Kiosk() {
         pelayanan_id: layanan.id,
         pelayanan_nama: layanan.nama,
         status: 'menunggu',
-        loket: null,
+        loket: layanan.loket_nama || null,
         panggil_at: null,
         panggil_ulang: 0,
         selesai_at: null,
@@ -123,10 +123,11 @@ export default function Kiosk() {
         instansiAlamat,
         nomorLengkap,
         pelayananNama: layanan.nama,
+        loketNama: layanan.loket_nama || '',
         waktu: new Date().toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' })
       });
 
-      setSuccessMessage(`Berhasil mengambil nomor: ${nomorLengkap}`);
+      setSuccessMessage(`Berhasil mengambil nomor: ${nomorLengkap}${layanan.loket_nama ? ' (Menuju ke ' + layanan.loket_nama + ')' : ''}`);
       setTimeout(() => setSuccessMessage(''), 4000);
     } catch (err) {
       console.error(err);
@@ -380,6 +381,11 @@ export default function Kiosk() {
             <div className="title">NOMOR ANTRIAN</div>
             <div className="nomor">{ticketToPrint.nomorLengkap}</div>
             <div className="layanan">{ticketToPrint.pelayananNama}</div>
+            {ticketToPrint.loketNama && (
+              <div className="loket" style={{ fontSize: '13pt', fontWeight: 'bold', marginTop: '2mm', textTransform: 'uppercase', border: '1px dashed #000', padding: '1mm 0' }}>
+                MENUJU: {ticketToPrint.loketNama}
+              </div>
+            )}
             <div className="divider">--------------------------------</div>
           </div>
           <div className="ticket-footer">

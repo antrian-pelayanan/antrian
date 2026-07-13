@@ -51,7 +51,7 @@ export default function Pengaturan() {
 
   // Services State
   const [layananList, setLayananList] = useState([]);
-  const [layananForm, setLayananForm] = useState({ id: '', kode: '', nama: '', estimasi_waktu: '' });
+  const [layananForm, setLayananForm] = useState({ id: '', kode: '', nama: '', estimasi_waktu: '', loket_id: '', loket_nama: '' });
   const [isEditingLayanan, setIsEditingLayanan] = useState(false);
 
   // Counters State
@@ -244,11 +244,13 @@ export default function Pengaturan() {
       await setDoc(doc(db, 'pelayanan', docId), {
         kode: layananForm.kode.toUpperCase(),
         nama: layananForm.nama,
-        estimasi_waktu: parseInt(layananForm.estimasi_waktu, 10)
+        estimasi_waktu: parseInt(layananForm.estimasi_waktu, 10),
+        loket_id: layananForm.loket_id || '',
+        loket_nama: layananForm.loket_nama || ''
       });
 
       showAlert(isEditingLayanan ? 'Layanan berhasil diupdate.' : 'Layanan baru berhasil ditambahkan.');
-      setLayananForm({ id: '', kode: '', nama: '', estimasi_waktu: '' });
+      setLayananForm({ id: '', kode: '', nama: '', estimasi_waktu: '', loket_id: '', loket_nama: '' });
       setIsEditingLayanan(false);
     } catch (err) {
       console.error(err);
@@ -262,7 +264,9 @@ export default function Pengaturan() {
       id: layanan.id,
       kode: layanan.kode,
       nama: layanan.nama,
-      estimasi_waktu: String(layanan.estimasi_waktu)
+      estimasi_waktu: String(layanan.estimasi_waktu),
+      loket_id: layanan.loket_id || '',
+      loket_nama: layanan.loket_nama || ''
     });
     setIsEditingLayanan(true);
   };
@@ -648,12 +652,12 @@ export default function Pengaturan() {
                     {isEditingLayanan ? 'Edit Layanan' : 'Tambah Kategori Layanan Baru'}
                   </h4>
                   <form onSubmit={handleSaveLayanan} className="row g-3 mb-5 align-items-end p-3 rounded-3" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)' }}>
-                    <div className="col-md-2">
-                      <label className="form-label fw-bold text-white-50">Kode Layanan</label>
+                    <div className="col-md-1">
+                      <label className="form-label fw-bold text-white-50">Kode</label>
                       <input 
                         type="text" 
                         className="form-control bg-dark text-white border-secondary" 
-                        placeholder="Contoh: A" 
+                        placeholder="A" 
                         maxLength="2" 
                         required 
                         disabled={isEditingLayanan}
@@ -661,7 +665,7 @@ export default function Pengaturan() {
                         onChange={e => setLayananForm({ ...layananForm, kode: e.target.value })}
                       />
                     </div>
-                    <div className="col-md-6">
+                    <div className="col-md-4">
                       <label className="form-label fw-bold text-white-50">Nama Layanan</label>
                       <input 
                         type="text" 
@@ -672,12 +676,33 @@ export default function Pengaturan() {
                         onChange={e => setLayananForm({ ...layananForm, nama: e.target.value })}
                       />
                     </div>
+                    <div className="col-md-3">
+                      <label className="form-label fw-bold text-white-50">Loket Pelayanan</label>
+                      <select 
+                        className="form-select bg-dark text-white border-secondary" 
+                        required 
+                        value={layananForm.loket_id || ''} 
+                        onChange={e => {
+                          const selectedLok = loketList.find(l => l.id === e.target.value);
+                          setLayananForm({ 
+                            ...layananForm, 
+                            loket_id: e.target.value,
+                            loket_nama: selectedLok ? selectedLok.nama : ''
+                          });
+                        }}
+                      >
+                        <option value="">-- Pilih Loket --</option>
+                        {loketList.map(l => (
+                          <option key={l.id} value={l.id}>{l.nama}</option>
+                        ))}
+                      </select>
+                    </div>
                     <div className="col-md-2">
-                      <label className="form-label fw-bold text-white-50">Estimasi (Menit)</label>
+                      <label className="form-label fw-bold text-white-50">Estimasi (Mnt)</label>
                       <input 
                         type="number" 
                         className="form-control bg-dark text-white border-secondary" 
-                        placeholder="Contoh: 15" 
+                        placeholder="15" 
                         required 
                         value={layananForm.estimasi_waktu} 
                         onChange={e => setLayananForm({ ...layananForm, estimasi_waktu: e.target.value })}
@@ -692,7 +717,7 @@ export default function Pengaturan() {
                           type="button" 
                           className="btn btn-outline-danger w-100 py-2" 
                           onClick={() => {
-                            setLayananForm({ id: '', kode: '', nama: '', estimasi_waktu: '' });
+                            setLayananForm({ id: '', kode: '', nama: '', estimasi_waktu: '', loket_id: '', loket_nama: '' });
                             setIsEditingLayanan(false);
                           }}
                         >
@@ -708,8 +733,9 @@ export default function Pengaturan() {
                       <thead>
                         <tr className="table-secondary text-dark">
                           <th style={{ width: '10%' }} className="text-center">Kode</th>
-                          <th style={{ width: '50%' }}>Nama Layanan</th>
-                          <th style={{ width: '20%' }} className="text-center">Estimasi Waktu</th>
+                          <th style={{ width: '35%' }}>Nama Layanan</th>
+                          <th style={{ width: '20%' }} className="text-center">Loket Pelayanan</th>
+                          <th style={{ width: '15%' }} className="text-center">Estimasi Waktu</th>
                           <th style={{ width: '20%' }} className="text-center">Aksi</th>
                         </tr>
                       </thead>
@@ -718,6 +744,7 @@ export default function Pengaturan() {
                           <tr key={layanan.id}>
                             <td className="text-center fw-bold text-info fs-5">{layanan.kode}</td>
                             <td className="fw-semibold">{layanan.nama}</td>
+                            <td className="text-center fw-semibold text-warning">{layanan.loket_nama || '-'}</td>
                             <td className="text-center">{layanan.estimasi_waktu} Menit</td>
                             <td className="text-center">
                               <div className="d-flex justify-content-center gap-2">
@@ -733,7 +760,7 @@ export default function Pengaturan() {
                         ))}
                         {layananList.length === 0 && (
                           <tr>
-                            <td colSpan="4" className="text-center py-4 text-white-50">Belum ada kategori layanan. Silakan tambahkan di atas.</td>
+                            <td colSpan="5" className="text-center py-4 text-white-50">Belum ada kategori layanan. Silakan tambahkan di atas.</td>
                           </tr>
                         )}
                       </tbody>

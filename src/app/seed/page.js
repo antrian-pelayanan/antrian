@@ -14,17 +14,23 @@ export default function Seed() {
       await setDoc(doc(collection(db, 'pelayanan'), 'pelayanan-A'), {
         kode: 'A',
         nama: 'Legalisasi',
-        estimasi_waktu: 15
+        estimasi_waktu: 15,
+        loket_id: 'loket-1',
+        loket_nama: 'Loket 1'
       });
       await setDoc(doc(collection(db, 'pelayanan'), 'pelayanan-B'), {
         kode: 'B',
         nama: 'Kependudukan',
-        estimasi_waktu: 10
+        estimasi_waktu: 10,
+        loket_id: 'loket-2-3-4',
+        loket_nama: 'Loket 2, 3, 4'
       });
       await setDoc(doc(collection(db, 'pelayanan'), 'pelayanan-C'), {
         kode: 'C',
         nama: 'Perekaman E-KTP',
-        estimasi_waktu: 20
+        estimasi_waktu: 20,
+        loket_id: 'loket-2-3-4',
+        loket_nama: 'Loket 2, 3, 4'
       });
 
       // 2. Settings

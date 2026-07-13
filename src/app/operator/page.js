@@ -40,8 +40,10 @@ export default function Operator() {
   const [loginError, setLoginError] = useState('');
 
   const [waitingQueues, setWaitingQueues] = useState([]);
+  const [waitingQueuesB, setWaitingQueuesB] = useState([]);
+  const [waitingQueuesC, setWaitingQueuesC] = useState([]);
   const [currentQueue, setCurrentQueue] = useState(null);
-  const [stats, setStats] = useState({ waiting: 0, served: 0 });
+  const [stats, setStats] = useState({ waiting: 0, waitingB: 0, waitingC: 0, served: 0 });
   const [lastCompleted, setLastCompleted] = useState(null);
 
   useEffect(() => {
@@ -70,6 +72,8 @@ export default function Operator() {
     return () => unsubLoket();
   }, []);
 
+  const isMultiService = ['Loket 2', 'Loket 3', 'Loket 4'].includes(selectedLoket);
+
   useEffect(() => {
     if (!isLogged) return;
 
@@ -85,17 +89,33 @@ export default function Operator() {
 
     const unsubscribe = onSnapshot(q, (snap) => {
       let waiting = [];
+      let waitingB = [];
+      let waitingC = [];
       let current = null;
       let served = 0;
       let totalWait = 0;
+      let totalWaitB = 0;
+      let totalWaitC = 0;
       let lastComp = null;
 
       snap.forEach(docSnap => {
         const data = { id: docSnap.id, ...docSnap.data() };
         
-        if (data.status === 'menunggu' && data.pelayanan_id === selectedLayanan) {
-          waiting.push(data);
-          totalWait++;
+        if (data.status === 'menunggu') {
+          if (isMultiService) {
+            if (data.pelayanan_id === 'pelayanan-B') {
+              waitingB.push(data);
+              totalWaitB++;
+            } else if (data.pelayanan_id === 'pelayanan-C') {
+              waitingC.push(data);
+              totalWaitC++;
+            }
+          } else {
+            if (data.pelayanan_id === selectedLayanan) {
+              waiting.push(data);
+              totalWait++;
+            }
+          }
         }
         if (data.status === 'dipanggil' && data.loket === selectedLoket) {
           current = data;
@@ -107,13 +127,15 @@ export default function Operator() {
       });
 
       setWaitingQueues(waiting);
+      setWaitingQueuesB(waitingB);
+      setWaitingQueuesC(waitingC);
       setCurrentQueue(current);
-      setStats({ waiting: totalWait, served });
+      setStats({ waiting: totalWait, waitingB: totalWaitB, waitingC: totalWaitC, served });
       setLastCompleted(lastComp);
     });
 
     return () => unsubscribe();
-  }, [isLogged, selectedLayanan, selectedLoket]);
+  }, [isLogged, selectedLayanan, selectedLoket, isMultiService]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -184,6 +206,22 @@ export default function Operator() {
       await layaniSekarang(waitingQueues[0]);
     } else {
       alert('Tidak ada antrian yang menunggu.');
+    }
+  };
+
+  const panggilBerikutnyaB = async () => {
+    if (waitingQueuesB.length > 0) {
+      await layaniSekarang(waitingQueuesB[0]);
+    } else {
+      alert('Tidak ada antrian B yang menunggu.');
+    }
+  };
+
+  const panggilBerikutnyaC = async () => {
+    if (waitingQueuesC.length > 0) {
+      await layaniSekarang(waitingQueuesC[0]);
+    } else {
+      alert('Tidak ada antrian C yang menunggu.');
     }
   };
 
@@ -262,19 +300,48 @@ export default function Operator() {
 
             <div className="row g-2 mb-4">
               <div className="col-md-6">
-                <label className="form-label text-white-50 small fw-bold">Pilih Layanan</label>
-                <select className="form-select bg-dark text-white border-secondary" required value={selectedLayanan} onChange={e => setSelectedLayanan(e.target.value)}>
+                <label className="form-label text-white-50 small fw-bold">Pilih Loket</label>
+                <select 
+                  className="form-select bg-dark text-white border-secondary" 
+                  required 
+                  value={selectedLoket} 
+                  onChange={e => {
+                    const val = e.target.value;
+                    setSelectedLoket(val);
+                    const match = pelayananList.find(p => p.loket_nama && p.loket_nama.includes(val));
+                    if (match) {
+                      setSelectedLayanan(match.id);
+                    }
+                  }}
+                >
                   <option value="">-- Pilih --</option>
-                  {pelayananList.map(p => (
-                    <option key={p.id} value={p.id}>{p.nama} ({p.kode})</option>
-                  ))}
+                  {loketList.map(l => <option key={l} value={l}>{l}</option>)}
                 </select>
               </div>
               <div className="col-md-6">
-                <label className="form-label text-white-50 small fw-bold">Pilih Loket</label>
-                <select className="form-select bg-dark text-white border-secondary" required value={selectedLoket} onChange={e => setSelectedLoket(e.target.value)}>
+                <label className="form-label text-white-50 small fw-bold">Pilih Layanan</label>
+                <select 
+                  className="form-select bg-dark text-white border-secondary" 
+                  required 
+                  value={selectedLayanan} 
+                  onChange={e => {
+                    const val = e.target.value;
+                    setSelectedLayanan(val);
+                    const match = pelayananList.find(p => p.id === val);
+                    if (match && match.loket_nama) {
+                      if (match.loket_nama.includes(', ')) {
+                        const firstLoket = match.loket_nama.split(', ')[0];
+                        setSelectedLoket(firstLoket);
+                      } else {
+                        setSelectedLoket(match.loket_nama);
+                      }
+                    }
+                  }}
+                >
                   <option value="">-- Pilih --</option>
-                  {loketList.map(l => <option key={l} value={l}>{l}</option>)}
+                  {pelayananList.map(p => (
+                    <option key={p.id} value={p.id}>{p.nama} ({p.kode}){p.loket_nama ? ` - ${p.loket_nama}` : ''}</option>
+                  ))}
                 </select>
               </div>
             </div>
@@ -310,7 +377,11 @@ export default function Operator() {
           <div className="card p-4 text-center mb-4 shadow-sm border-0">
             <div className="d-flex justify-content-between align-items-center border-bottom pb-3 mb-4">
               <div className="text-start">
-                <h5 className="fw-bold m-0 text-primary">{pelayananList.find(p => p.id === selectedLayanan)?.nama}</h5>
+                <h5 className="fw-bold m-0 text-primary">
+                  {isMultiService 
+                    ? 'Kependudukan (B) & Perekaman E-KTP (C)' 
+                    : pelayananList.find(p => p.id === selectedLayanan)?.nama}
+                </h5>
                 <small className="text-muted">Melayani: <strong>{selectedLoket}</strong></small>
               </div>
               <span className="badge bg-success py-2 px-3 fs-6">Aktif Tersinkronisasi</span>
@@ -335,11 +406,26 @@ export default function Operator() {
             </div>
 
             <div className="row g-3 mt-2">
-              <div className="col-sm-6">
-                <button onClick={panggilBerikutnya} className="btn btn-primary btn-lg w-100 py-3 fw-bold">
-                  <i className="bi bi-chevron-double-right"></i> Panggil Berikutnya
-                </button>
-              </div>
+              {isMultiService ? (
+                <>
+                  <div className="col-sm-6">
+                    <button onClick={panggilBerikutnyaB} className="btn btn-primary btn-lg w-100 py-3 fw-bold">
+                      <i className="bi bi-chevron-double-right"></i> Panggil Antrian B
+                    </button>
+                  </div>
+                  <div className="col-sm-6">
+                    <button onClick={panggilBerikutnyaC} className="btn btn-success btn-lg w-100 py-3 fw-bold text-white">
+                      <i className="bi bi-chevron-double-right"></i> Panggil Antrian C
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <div className="col-sm-6">
+                  <button onClick={panggilBerikutnya} className="btn btn-primary btn-lg w-100 py-3 fw-bold">
+                    <i className="bi bi-chevron-double-right"></i> Panggil Berikutnya
+                  </button>
+                </div>
+              )}
               
               {currentQueue && (
                 <>
@@ -365,47 +451,127 @@ export default function Operator() {
 
           {/* Waiting Queue List */}
           <div className="card p-4 shadow-sm border-0">
-            <h5 className="fw-bold mb-3 d-flex align-items-center gap-2">
-              <i className="bi bi-people-fill text-muted"></i> Daftar Tunggu ({stats.waiting})
-            </h5>
-            <div className="table-responsive">
-              <table className="table table-hover align-middle">
-                <thead className="table-light">
-                  <tr>
-                    <th>Nomor</th>
-                    <th>Detail Warga</th>
-                    <th>Status</th>
-                    <th>Aksi</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {waitingQueues.map(q => (
-                    <tr key={q.id}>
-                      <td><span className="badge bg-secondary p-2 fs-6">{q.nomor_lengkap}</span></td>
-                      <td>
-                        {q.warga_nama ? (
-                          <div>
-                            <strong className="text-dark d-block">{q.warga_nama}</strong>
-                            <span className="text-muted small">{q.warga_alamat} | {q.warga_hp}</span>
-                          </div>
-                        ) : (
-                          <span className="text-muted small">-</span>
+            {isMultiService ? (
+              <div className="row g-4">
+                {/* Column for Antrian B */}
+                <div className="col-md-6 border-end">
+                  <h5 className="fw-bold mb-3 d-flex align-items-center gap-2 text-primary">
+                    <i className="bi bi-people-fill"></i> Antrian B ({stats.waitingB})
+                  </h5>
+                  <div className="table-responsive">
+                    <table className="table table-hover align-middle">
+                      <thead className="table-light">
+                        <tr>
+                          <th>Nomor</th>
+                          <th>Nama Warga</th>
+                          <th>Aksi</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {waitingQueuesB.map(q => (
+                          <tr key={q.id}>
+                            <td><span className="badge bg-primary p-2 fs-6">{q.nomor_lengkap}</span></td>
+                            <td>
+                              <strong className="text-dark d-block">{q.warga_nama}</strong>
+                              <span className="text-muted small">{q.warga_alamat}</span>
+                            </td>
+                            <td>
+                              <button onClick={() => layaniSekarang(q)} className="btn btn-sm btn-outline-primary fw-semibold">Panggil</button>
+                            </td>
+                          </tr>
+                        ))}
+                        {waitingQueuesB.length === 0 && (
+                          <tr>
+                            <td colSpan="3" className="text-center text-muted py-4">Kosong</td>
+                          </tr>
                         )}
-                      </td>
-                      <td><span className="badge bg-info text-white">Menunggu</span></td>
-                      <td>
-                        <button onClick={() => layaniSekarang(q)} className="btn btn-sm btn-outline-primary fw-semibold">Panggil</button>
-                      </td>
-                    </tr>
-                  ))}
-                  {waitingQueues.length === 0 && (
-                    <tr>
-                      <td colSpan="3" className="text-center text-muted py-4">Tidak ada antrian yang menunggu.</td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
-            </div>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                {/* Column for Antrian C */}
+                <div className="col-md-6">
+                  <h5 className="fw-bold mb-3 d-flex align-items-center gap-2 text-success">
+                    <i className="bi bi-people-fill"></i> Antrian C ({stats.waitingC})
+                  </h5>
+                  <div className="table-responsive">
+                    <table className="table table-hover align-middle">
+                      <thead className="table-light">
+                        <tr>
+                          <th>Nomor</th>
+                          <th>Nama Warga</th>
+                          <th>Aksi</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {waitingQueuesC.map(q => (
+                          <tr key={q.id}>
+                            <td><span className="badge bg-success p-2 fs-6">{q.nomor_lengkap}</span></td>
+                            <td>
+                              <strong className="text-dark d-block">{q.warga_nama}</strong>
+                              <span className="text-muted small">{q.warga_alamat}</span>
+                            </td>
+                            <td>
+                              <button onClick={() => layaniSekarang(q)} className="btn btn-sm btn-outline-success fw-semibold">Panggil</button>
+                            </td>
+                          </tr>
+                        ))}
+                        {waitingQueuesC.length === 0 && (
+                          <tr>
+                            <td colSpan="3" className="text-center text-muted py-4">Kosong</td>
+                          </tr>
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <>
+                <h5 className="fw-bold mb-3 d-flex align-items-center gap-2">
+                  <i className="bi bi-people-fill text-muted"></i> Daftar Tunggu ({stats.waiting})
+                </h5>
+                <div className="table-responsive">
+                  <table className="table table-hover align-middle">
+                    <thead className="table-light">
+                      <tr>
+                        <th>Nomor</th>
+                        <th>Detail Warga</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {waitingQueues.map(q => (
+                        <tr key={q.id}>
+                          <td><span className="badge bg-secondary p-2 fs-6">{q.nomor_lengkap}</span></td>
+                          <td>
+                            {q.warga_nama ? (
+                              <div>
+                                <strong className="text-dark d-block">{q.warga_nama}</strong>
+                                <span className="text-muted small">{q.warga_alamat} | {q.warga_hp}</span>
+                              </div>
+                            ) : (
+                              <span className="text-muted small">-</span>
+                            )}
+                          </td>
+                          <td><span className="badge bg-info text-white">Menunggu</span></td>
+                          <td>
+                            <button onClick={() => layaniSekarang(q)} className="btn btn-sm btn-outline-primary fw-semibold">Panggil</button>
+                          </td>
+                        </tr>
+                      ))}
+                      {waitingQueues.length === 0 && (
+                        <tr>
+                          <td colSpan="4" className="text-center text-muted py-4">Tidak ada antrian yang menunggu.</td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </>
+            )}
           </div>
         </div>
 
@@ -414,10 +580,23 @@ export default function Operator() {
           <div className="card p-4 mb-4 shadow-sm border-0">
             <h5 className="fw-bold mb-4">Statistik {selectedLoket}</h5>
             
-            <div className="d-flex align-items-center justify-content-between mb-3 border-bottom pb-2">
-              <span className="text-muted"><i className="bi bi-person-clock me-2"></i> Menunggu</span>
-              <span className="fs-4 fw-bold text-danger">{stats.waiting}</span>
-            </div>
+            {isMultiService ? (
+              <>
+                <div className="d-flex align-items-center justify-content-between mb-3 border-bottom pb-2">
+                  <span className="text-muted"><i className="bi bi-person-clock me-2"></i> Menunggu B</span>
+                  <span className="fs-4 fw-bold text-primary">{stats.waitingB}</span>
+                </div>
+                <div className="d-flex align-items-center justify-content-between mb-3 border-bottom pb-2">
+                  <span className="text-muted"><i className="bi bi-person-clock me-2"></i> Menunggu C</span>
+                  <span className="fs-4 fw-bold text-success">{stats.waitingC}</span>
+                </div>
+              </>
+            ) : (
+              <div className="d-flex align-items-center justify-content-between mb-3 border-bottom pb-2">
+                <span className="text-muted"><i className="bi bi-person-clock me-2"></i> Menunggu</span>
+                <span className="fs-4 fw-bold text-danger">{stats.waiting}</span>
+              </div>
+            )}
             
             <div className="d-flex align-items-center justify-content-between mb-3 border-bottom pb-2">
               <span className="text-muted"><i className="bi bi-check-all me-2"></i> Selesai</span>
