@@ -251,6 +251,17 @@ export default function Operator() {
     }
   };
 
+  const filteredPelayanan = pelayananList.filter(p => {
+    if (!selectedLoket) return true;
+    if (selectedLoket === 'Loket 1') {
+      return p.kode === 'A';
+    }
+    if (['Loket 2', 'Loket 3', 'Loket 4'].includes(selectedLoket)) {
+      return p.kode === 'B' || p.kode === 'C';
+    }
+    return true;
+  });
+
   if (!isLogged) {
     return (
       <div style={{ background: 'radial-gradient(circle at 50% 50%, #1a233a 0%, #0d111b 100%)', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
@@ -308,6 +319,10 @@ export default function Operator() {
                   onChange={e => {
                     const val = e.target.value;
                     setSelectedLoket(val);
+                    if (!val) {
+                      setSelectedLayanan('');
+                      return;
+                    }
                     const match = pelayananList.find(p => p.loket_nama && p.loket_nama.includes(val));
                     if (match) {
                       setSelectedLayanan(match.id);
@@ -327,6 +342,10 @@ export default function Operator() {
                   onChange={e => {
                     const val = e.target.value;
                     setSelectedLayanan(val);
+                    if (!val) {
+                      setSelectedLoket('');
+                      return;
+                    }
                     const match = pelayananList.find(p => p.id === val);
                     if (match && match.loket_nama) {
                       if (match.loket_nama.includes(', ')) {
@@ -339,7 +358,7 @@ export default function Operator() {
                   }}
                 >
                   <option value="">-- Pilih --</option>
-                  {pelayananList.map(p => (
+                  {filteredPelayanan.map(p => (
                     <option key={p.id} value={p.id}>{p.nama} ({p.kode}){p.loket_nama ? ` - ${p.loket_nama}` : ''}</option>
                   ))}
                 </select>

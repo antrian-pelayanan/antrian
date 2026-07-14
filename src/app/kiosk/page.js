@@ -110,6 +110,8 @@ export default function Kiosk() {
 
       const nomorLengkap = `${layanan.kode}-${nextNumber}`;
 
+      const sisaAntrian = todayLayananQueues.filter(item => item.status === 'menunggu').length + 1;
+
       // Insert antrian
       await addDoc(collection(db, 'antrian'), {
         nomor: nextNumber,
@@ -134,7 +136,8 @@ export default function Kiosk() {
         nomorLengkap,
         pelayananNama: layanan.nama,
         loketNama: layanan.loket_nama || '',
-        waktu: new Date().toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' })
+        waktu: new Date().toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' }),
+        sisaAntrian: sisaAntrian
       });
 
       setSuccessMessage(`Berhasil mengambil nomor: ${nomorLengkap}${layanan.loket_nama ? ' (Menuju ke ' + layanan.loket_nama + ')' : ''}`);
@@ -396,6 +399,9 @@ export default function Kiosk() {
                 MENUJU: {ticketToPrint.loketNama}
               </div>
             )}
+            <div className="sisa-antrian">
+              Sisa Antrian Menunggu Saat Ini: {ticketToPrint.sisaAntrian}
+            </div>
             <div className="divider">--------------------------------</div>
           </div>
           <div className="ticket-footer">
@@ -474,6 +480,12 @@ export default function Kiosk() {
             font-weight: bold !important;
             margin: 2mm 0 0 0 !important;
             text-transform: uppercase !important;
+            line-height: 1.2 !important;
+          }
+          .sisa-antrian {
+            font-size: 10pt !important;
+            font-weight: bold !important;
+            margin: 2mm 0 0 0 !important;
             line-height: 1.2 !important;
           }
           .ticket-footer {
