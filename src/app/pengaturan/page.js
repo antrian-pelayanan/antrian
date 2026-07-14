@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { db } from '../../lib/firebase';
-import { collection, doc, setDoc, deleteDoc, onSnapshot, query, where, orderBy, getDocs, Timestamp } from 'firebase/firestore';
+import { collection, doc, setDoc, deleteDoc, onSnapshot, query, where, orderBy, getDocs, Timestamp, addDoc } from 'firebase/firestore';
 import Link from 'next/link';
 
 export default function Pengaturan() {
@@ -342,8 +342,7 @@ export default function Pengaturan() {
         });
         showAlert('Operator berhasil diperbarui.');
       } else {
-        const newDocRef = doc(collection(db, 'operators'));
-        await setDoc(newDocRef, {
+        await addDoc(collection(db, 'operators'), {
           nama: operatorForm.nama,
           username: operatorForm.username,
           password: operatorForm.password
@@ -1006,7 +1005,7 @@ export default function Pengaturan() {
                     {isEditingOperator ? 'Edit Operator' : 'Tambah Operator Baru'}
                   </h4>
                   <form onSubmit={handleSaveOperator} className="row g-3 mb-5 align-items-end p-3 rounded-3" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)' }}>
-                    <div className="col-md-4">
+                    <div className="col-md-3">
                       <label className="form-label fw-bold text-white-50">Nama Lengkap</label>
                       <input 
                         type="text" 
@@ -1039,10 +1038,22 @@ export default function Pengaturan() {
                         onChange={e => setOperatorForm({ ...operatorForm, password: e.target.value })}
                       />
                     </div>
-                    <div className="col-md-2">
+                    <div className="col-md-3 d-flex gap-2">
                       <button type="submit" className="btn btn-info fw-bold w-100 py-2 text-dark">
                         {isEditingOperator ? 'Perbarui' : 'Tambah'}
                       </button>
+                      {isEditingOperator && (
+                        <button 
+                          type="button" 
+                          className="btn btn-outline-danger w-100 py-2" 
+                          onClick={() => {
+                            setOperatorForm({ id: '', nama: '', username: '', password: '' });
+                            setIsEditingOperator(false);
+                          }}
+                        >
+                          Batal
+                        </button>
+                      )}
                     </div>
                   </form>
 

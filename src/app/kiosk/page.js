@@ -62,6 +62,16 @@ export default function Kiosk() {
   // Keyboard shortcut listener
   useEffect(() => {
     const handleKeyDown = (e) => {
+      // Don't trigger shortcuts if form is open, or if typing in input/textarea/select
+      if (selectedLayananForForm) return;
+      if (
+        e.target.tagName === 'INPUT' || 
+        e.target.tagName === 'TEXTAREA' || 
+        e.target.tagName === 'SELECT'
+      ) {
+        return;
+      }
+
       const key = e.key.toLowerCase();
       const p = pelayanan.find(item => item.kode.toLowerCase() === key);
       if (p) {
@@ -70,7 +80,7 @@ export default function Kiosk() {
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [pelayanan]);
+  }, [pelayanan, selectedLayananForForm]);
 
   const handleAmbilAntrian = async (layanan, dataWarga) => {
     setLoading(true);
