@@ -49,40 +49,32 @@ export default function Display() {
 
   // Speak Queue Voice function
   const speakQueue = (nomorLengkap, loketText) => {
-    const bell = document.getElementById('bellSound');
-    if (bell) {
-      bell.volume = parseFloat(settings.bell_sound_volume) || 0.8;
-      bell.play().catch(e => console.log("Audio prevent:", e));
-    }
-
-    setTimeout(() => {
-      const parts = nomorLengkap.split('-');
-      const prefix = parts[0];
-      const num = parseInt(parts[1] || '1', 10);
-      const text = `Nomor antrian, ${prefix}, ${num}, silakan menuju ke, ${loketText}`;
-      
-      const url = `https://translate.google.com/translate_tts?ie=UTF-8&tl=id-ID&client=tw-ob&q=${encodeURIComponent(text)}`;
-      const ttsAudio = new Audio(url);
-      ttsAudio.volume = 1.0;
-      ttsAudio.play().catch(err => {
-        console.error("Google TTS failed:", err);
-        // Fallback lokal
-        if (window.speechSynthesis) {
-          const speech = new SpeechSynthesisUtterance(text);
-          speech.lang = "id-ID";
-          const voices = window.speechSynthesis.getVoices();
-          const idVoices = voices.filter(v => v.lang.replace('_', '-').toLowerCase().includes('id'));
-          let female = idVoices.find(v => {
-            const n = v.name.toLowerCase();
-            return n.includes('gadis') || n.includes('female') || n.includes('perempuan') || n.includes('google');
-          });
-          if (!female && idVoices.length > 1) female = idVoices[idVoices.length - 1];
-          if (female) speech.voice = female;
-          speech.rate = 0.85;
-          window.speechSynthesis.speak(speech);
-        }
-      });
-    }, 1800);
+    const parts = nomorLengkap.split('-');
+    const prefix = parts[0];
+    const num = parseInt(parts[1] || '1', 10);
+    const text = `Nomor antrian, ${prefix}, ${num}, silakan menuju ke, ${loketText}`;
+    
+    const url = `https://translate.google.com/translate_tts?ie=UTF-8&tl=id-ID&client=tw-ob&q=${encodeURIComponent(text)}`;
+    const ttsAudio = new Audio(url);
+    ttsAudio.volume = 1.0;
+    ttsAudio.play().catch(err => {
+      console.error("Google TTS failed:", err);
+      // Fallback lokal
+      if (window.speechSynthesis) {
+        const speech = new SpeechSynthesisUtterance(text);
+        speech.lang = "id-ID";
+        const voices = window.speechSynthesis.getVoices();
+        const idVoices = voices.filter(v => v.lang.replace('_', '-').toLowerCase().includes('id'));
+        let female = idVoices.find(v => {
+          const n = v.name.toLowerCase();
+          return n.includes('gadis') || n.includes('female') || n.includes('perempuan') || n.includes('google');
+        });
+        if (!female && idVoices.length > 1) female = idVoices[idVoices.length - 1];
+        if (female) speech.voice = female;
+        speech.rate = 0.85;
+        window.speechSynthesis.speak(speech);
+      }
+    });
   };
 
   // Settings Snapshot
@@ -276,8 +268,6 @@ export default function Display() {
           100% { transform: translate(-100%, 0); }
         }
       `}} />
-
-      <audio id="bellSound" src="/audio/bell.wav" preload="auto"></audio>
     </div>
   );
 }
