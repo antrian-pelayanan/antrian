@@ -20,6 +20,7 @@ export default function Display() {
   const [mounted, setMounted] = useState(false);
 
   const lastProcessedCall = useRef(null);
+  const maxProcessedPanggilAt = useRef(0);
 
   // Clock
   useEffect(() => {
@@ -136,8 +137,14 @@ export default function Display() {
 
       // Trigger Voice
       if (latest && latest.status === 'dipanggil') {
-        const callSig = `${latest.id}-${latest.panggil_at.toMillis()}-${latest.panggil_ulang}`;
-        if (lastProcessedCall.current !== callSig) {
+        const panggilTime = latest.panggil_at.toMillis();
+        const callSig = `${latest.id}-${panggilTime}-${latest.panggil_ulang}`;
+        
+        if (panggilTime > maxProcessedPanggilAt.current) {
+          maxProcessedPanggilAt.current = panggilTime;
+          lastProcessedCall.current = callSig;
+          speakQueue(latest.nomor_lengkap, latest.loket);
+        } else if (panggilTime === maxProcessedPanggilAt.current && lastProcessedCall.current !== callSig) {
           lastProcessedCall.current = callSig;
           speakQueue(latest.nomor_lengkap, latest.loket);
         }
