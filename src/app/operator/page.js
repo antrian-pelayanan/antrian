@@ -264,28 +264,28 @@ export default function Operator() {
 
   if (!isLogged) {
     return (
-      <div style={{ background: 'radial-gradient(circle at 50% 50%, #1a233a 0%, #0d111b 100%)', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
-        <div className="card text-white p-5 shadow" style={{ maxWidth: '520px', width: '100%', background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(15px)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '20px' }}>
+      <div style={{ background: 'linear-gradient(135deg, #e0f2fe 0%, #38bdf8 45%, #0284c7 100%)', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
+        <div className="card text-dark p-5 shadow-lg" style={{ maxWidth: '520px', width: '100%', background: '#ffffff', borderRadius: '24px', border: '1px solid #bae6fd', boxShadow: '0 25px 60px rgba(2, 132, 199, 0.25)' }}>
           <div className="text-center mb-4">
-            <img src="/img/Logo.png" alt="Logo" style={{ height: '80px', objectFit: 'contain', marginBottom: '15px' }} />
-            <h3 className="fw-bold text-white">Konsol Operator</h3>
-            <p className="text-info small">Sistem Antrian Kecamatan Gandrungmangu</p>
+            <img src="/img/Logo.png" alt="Logo" style={{ height: '85px', objectFit: 'contain', marginBottom: '15px' }} />
+            <h3 className="fw-bold text-dark mb-1">Konsol Operator</h3>
+            <p className="text-primary small fw-bold">Sistem Antrian Kecamatan Gandrungmangu</p>
           </div>
 
           {loginError && (
-            <div className="alert alert-danger border-0 text-white p-3 mb-3 text-center rounded-3 small" style={{ background: '#dc3545' }}>
+            <div className="alert alert-danger border-0 text-white p-3 mb-3 text-center rounded-3 small fw-semibold" style={{ background: '#ef4444' }}>
               {loginError}
             </div>
           )}
 
           <form onSubmit={handleLogin}>
             <div className="mb-3">
-              <label className="form-label text-white-50 small fw-bold">Username Operator</label>
+              <label className="form-label text-secondary small fw-bold">Username Operator</label>
               <div className="input-group">
-                <span className="input-group-text bg-dark border-secondary text-info"><i className="bi bi-person"></i></span>
+                <span className="input-group-text bg-light border-primary-subtle text-primary"><i className="bi bi-person"></i></span>
                 <input 
                   type="text" 
-                  className="form-control bg-dark text-white border-secondary" 
+                  className="form-control bg-light text-dark border-primary-subtle" 
                   placeholder="Username" 
                   required
                   value={username}
@@ -295,12 +295,12 @@ export default function Operator() {
             </div>
 
             <div className="mb-3">
-              <label className="form-label text-white-50 small fw-bold">Password</label>
+              <label className="form-label text-secondary small fw-bold">Password</label>
               <div className="input-group">
-                <span className="input-group-text bg-dark border-secondary text-info"><i className="bi bi-lock"></i></span>
+                <span className="input-group-text bg-light border-primary-subtle text-primary"><i className="bi bi-lock"></i></span>
                 <input 
                   type="password" 
-                  className="form-control bg-dark text-white border-secondary" 
+                  className="form-control bg-light text-dark border-primary-subtle" 
                   placeholder="Password" 
                   required
                   value={password}
@@ -311,9 +311,9 @@ export default function Operator() {
 
             <div className="row g-2 mb-4">
               <div className="col-md-6">
-                <label className="form-label text-white-50 small fw-bold">Pilih Loket</label>
+                <label className="form-label text-secondary small fw-bold">Pilih Loket</label>
                 <select 
-                  className="form-select bg-dark text-white border-secondary" 
+                  className="form-select bg-light text-dark border-primary-subtle" 
                   required 
                   value={selectedLoket} 
                   onChange={e => {
@@ -334,9 +334,9 @@ export default function Operator() {
                 </select>
               </div>
               <div className="col-md-6">
-                <label className="form-label text-white-50 small fw-bold">Pilih Layanan</label>
+                <label className="form-label text-secondary small fw-bold">Pilih Layanan</label>
                 <select 
-                  className="form-select bg-dark text-white border-secondary" 
+                  className="form-select bg-light text-dark border-primary-subtle" 
                   required 
                   value={selectedLayanan} 
                   onChange={e => {
@@ -365,11 +365,11 @@ export default function Operator() {
               </div>
             </div>
 
-            <button type="submit" className="btn btn-info w-100 py-3 fw-bold text-dark rounded-pill mb-3" style={{ transition: 'all 0.3s' }}>
+            <button type="submit" className="btn btn-primary w-100 py-3 fw-bold rounded-pill mb-3" style={{ background: 'linear-gradient(135deg, #0284c7, #2563eb)', border: 'none', boxShadow: '0 8px 20px rgba(2, 132, 199, 0.35)', transition: 'all 0.3s' }}>
               Masuk Konsol Operator
             </button>
 
-            <Link href="/" className="btn btn-outline-light w-100 py-2 rounded-pill text-white-50 small text-decoration-none text-center d-block">
+            <Link href="/" className="btn btn-outline-secondary w-100 py-2 rounded-pill text-secondary small text-decoration-none text-center d-block">
               <i className="bi bi-arrow-left"></i> Kembali ke Portal
             </Link>
           </form>
@@ -379,11 +379,11 @@ export default function Operator() {
   }
 
   return (
-    <div className="container-fluid py-4" style={{ backgroundColor: '#f8f9fa', minHeight: '100vh' }}>
-      <div className="d-flex justify-content-between align-items-center mb-4 bg-white p-3 rounded shadow-sm">
+    <div className="container-fluid py-4" style={{ backgroundColor: '#f0f7ff', minHeight: '100vh' }}>
+      <div className="d-flex justify-content-between align-items-center mb-4 p-3 rounded-4 shadow-sm" style={{ background: '#ffffff', border: '1px solid #bae6fd' }}>
         <div>
-          <h4 className="fw-bold m-0 text-dark">Konsol Operator: {selectedLoket}</h4>
-          <small className="text-secondary">Petugas: <strong>{operatorNama || 'Operator'}</strong></small>
+          <h4 className="fw-bold m-0" style={{ color: '#0284c7' }}>Konsol Operator: {selectedLoket}</h4>
+          <small className="text-secondary">Petugas: <strong className="text-dark">{operatorNama || 'Operator'}</strong></small>
         </div>
         <button className="btn btn-danger btn-sm px-3 rounded-pill fw-bold" onClick={handleLogout}>
           <i className="bi bi-box-arrow-right"></i> Keluar
@@ -393,30 +393,30 @@ export default function Operator() {
       <div className="row g-4">
         {/* Main Calling Panel */}
         <div className="col-lg-8">
-          <div className="card p-4 text-center mb-4 shadow-sm border-0">
+          <div className="card p-4 text-center mb-4 shadow-sm rounded-4" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #f0f9ff 100%)', border: '2px solid #38bdf8', boxShadow: '0 10px 25px rgba(2, 132, 199, 0.08)' }}>
             <div className="d-flex justify-content-between align-items-center border-bottom pb-3 mb-4">
               <div className="text-start">
-                <h5 className="fw-bold m-0 text-primary">
+                <h5 className="fw-bold m-0" style={{ color: '#0284c7' }}>
                   {isMultiService 
                     ? 'Kependudukan (B) & Perekaman E-KTP (C)' 
                     : pelayananList.find(p => p.id === selectedLayanan)?.nama}
                 </h5>
                 <small className="text-muted">Melayani: <strong>{selectedLoket}</strong></small>
               </div>
-              <span className="badge bg-success py-2 px-3 fs-6">Aktif Tersinkronisasi</span>
+              <span className="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25 py-2 px-3 fs-6">Aktif Tersinkronisasi</span>
             </div>
 
             <div className="py-4">
-              <span className="text-muted small text-uppercase fw-bold">Nomor Antrian Sekarang</span>
-              <h1 className="display-1 fw-bold text-primary my-2" style={{ fontSize: '8rem' }}>
+              <span className="small text-uppercase fw-bold tracking-wider" style={{ color: '#0284c7' }}>Nomor Antrian Sekarang</span>
+              <h1 className="display-1 fw-bold my-2" style={{ fontSize: '8rem', color: '#0284c7', textShadow: '0 6px 20px rgba(2, 132, 199, 0.18)' }}>
                 {currentQueue ? currentQueue.nomor_lengkap : '---'}
               </h1>
               <p className="text-muted">
                 {currentQueue ? `Diulang: ${currentQueue.panggil_ulang}x` : 'Tidak ada antrian aktif.'}
               </p>
               {currentQueue && currentQueue.warga_nama && (
-                <div className="mt-4 p-3 bg-light rounded-3 border text-start d-inline-block" style={{ minWidth: '320px' }}>
-                  <div className="fw-bold text-dark border-bottom pb-1 mb-2"><i className="bi bi-person-fill"></i> Data Warga</div>
+                <div className="mt-4 p-3 rounded-3 border text-start d-inline-block shadow-sm" style={{ minWidth: '320px', background: '#ffffff', borderColor: '#bae6fd' }}>
+                  <div className="fw-bold border-bottom pb-1 mb-2" style={{ color: '#0284c7' }}><i className="bi bi-person-fill"></i> Data Warga</div>
                   <div className="text-secondary small">Nama: <strong className="text-dark">{currentQueue.warga_nama}</strong></div>
                   <div className="text-secondary small">Alamat: <span className="text-dark">{currentQueue.warga_alamat}</span></div>
                   <div className="text-secondary small">No. HP: <span className="text-dark">{currentQueue.warga_hp}</span></div>
@@ -428,19 +428,19 @@ export default function Operator() {
               {isMultiService ? (
                 <>
                   <div className="col-sm-6">
-                    <button onClick={panggilBerikutnyaB} className="btn btn-primary btn-lg w-100 py-3 fw-bold">
+                    <button onClick={panggilBerikutnyaB} className="btn btn-lg w-100 py-3 fw-bold text-white shadow-sm" style={{ background: 'linear-gradient(135deg, #0284c7, #2563eb)', border: 'none' }}>
                       <i className="bi bi-chevron-double-right"></i> Panggil Antrian B
                     </button>
                   </div>
                   <div className="col-sm-6">
-                    <button onClick={panggilBerikutnyaC} className="btn btn-success btn-lg w-100 py-3 fw-bold text-white">
+                    <button onClick={panggilBerikutnyaC} className="btn btn-lg w-100 py-3 fw-bold text-white shadow-sm" style={{ background: 'linear-gradient(135deg, #10b981, #059669)', border: 'none' }}>
                       <i className="bi bi-chevron-double-right"></i> Panggil Antrian C
                     </button>
                   </div>
                 </>
               ) : (
                 <div className="col-sm-6">
-                  <button onClick={panggilBerikutnya} className="btn btn-primary btn-lg w-100 py-3 fw-bold">
+                  <button onClick={panggilBerikutnya} className="btn btn-lg w-100 py-3 fw-bold text-white shadow-sm" style={{ background: 'linear-gradient(135deg, #0284c7, #2563eb)', border: 'none' }}>
                     <i className="bi bi-chevron-double-right"></i> Panggil Berikutnya
                   </button>
                 </div>
@@ -449,7 +449,7 @@ export default function Operator() {
               {currentQueue && (
                 <>
                   <div className="col-sm-6">
-                    <button onClick={panggilUlang} className="btn btn-warning btn-lg w-100 py-3 fw-bold text-white">
+                    <button onClick={panggilUlang} className="btn btn-lg w-100 py-3 fw-bold text-white shadow-sm" style={{ background: 'linear-gradient(135deg, #f59e0b, #d97706)', border: 'none' }}>
                       <i className="bi bi-volume-up-fill"></i> Panggil Ulang
                     </button>
                   </div>
@@ -459,7 +459,7 @@ export default function Operator() {
                     </button>
                   </div>
                   <div className="col-sm-6">
-                    <button onClick={selesaikan} className="btn btn-success btn-lg w-100 py-3 fw-bold">
+                    <button onClick={selesaikan} className="btn btn-lg w-100 py-3 fw-bold text-white shadow-sm" style={{ background: 'linear-gradient(135deg, #10b981, #059669)', border: 'none' }}>
                       <i className="bi bi-check-circle-fill"></i> Selesai
                     </button>
                   </div>
@@ -469,12 +469,12 @@ export default function Operator() {
           </div>
 
           {/* Waiting Queue List */}
-          <div className="card p-4 shadow-sm border-0">
+          <div className="card p-4 shadow-sm border-0 rounded-4" style={{ background: '#ffffff' }}>
             {isMultiService ? (
               <div className="row g-4">
                 {/* Column for Antrian B */}
                 <div className="col-md-6 border-end">
-                  <h5 className="fw-bold mb-3 d-flex align-items-center gap-2 text-primary">
+                  <h5 className="fw-bold mb-3 d-flex align-items-center gap-2" style={{ color: '#0284c7' }}>
                     <i className="bi bi-people-fill"></i> Antrian B ({stats.waitingB})
                   </h5>
                   <div className="table-responsive">
@@ -489,7 +489,7 @@ export default function Operator() {
                       <tbody>
                         {waitingQueuesB.map(q => (
                           <tr key={q.id}>
-                            <td><span className="badge bg-primary p-2 fs-6">{q.nomor_lengkap}</span></td>
+                            <td><span className="badge p-2 fs-6 text-white" style={{ background: '#0284c7' }}>{q.nomor_lengkap}</span></td>
                             <td>
                               <strong className="text-dark d-block">{q.warga_nama}</strong>
                               <span className="text-muted small">{q.warga_alamat}</span>
@@ -548,8 +548,8 @@ export default function Operator() {
               </div>
             ) : (
               <>
-                <h5 className="fw-bold mb-3 d-flex align-items-center gap-2">
-                  <i className="bi bi-people-fill text-muted"></i> Daftar Tunggu ({stats.waiting})
+                <h5 className="fw-bold mb-3 d-flex align-items-center gap-2" style={{ color: '#0284c7' }}>
+                  <i className="bi bi-people-fill"></i> Daftar Tunggu ({stats.waiting})
                 </h5>
                 <div className="table-responsive">
                   <table className="table table-hover align-middle">
@@ -596,14 +596,14 @@ export default function Operator() {
 
         {/* Stats Sidebar */}
         <div className="col-lg-4">
-          <div className="card p-4 mb-4 shadow-sm border-0">
-            <h5 className="fw-bold mb-4">Statistik {selectedLoket}</h5>
+          <div className="card p-4 mb-4 shadow-sm border-0 rounded-4" style={{ background: '#ffffff' }}>
+            <h5 className="fw-bold mb-4 text-dark">Statistik {selectedLoket}</h5>
             
             {isMultiService ? (
               <>
                 <div className="d-flex align-items-center justify-content-between mb-3 border-bottom pb-2">
                   <span className="text-muted"><i className="bi bi-person-clock me-2"></i> Menunggu B</span>
-                  <span className="fs-4 fw-bold text-primary">{stats.waitingB}</span>
+                  <span className="fs-4 fw-bold" style={{ color: '#0284c7' }}>{stats.waitingB}</span>
                 </div>
                 <div className="d-flex align-items-center justify-content-between mb-3 border-bottom pb-2">
                   <span className="text-muted"><i className="bi bi-person-clock me-2"></i> Menunggu C</span>
@@ -623,10 +623,10 @@ export default function Operator() {
             </div>
           </div>
 
-          <div className="card p-4 mb-4 shadow-sm border-0">
-            <h5 className="fw-bold mb-3">Antrian Selesai Terakhir</h5>
+          <div className="card p-4 mb-4 shadow-sm border-0 rounded-4" style={{ background: '#ffffff' }}>
+            <h5 className="fw-bold mb-3 text-dark">Antrian Selesai Terakhir</h5>
             {lastCompleted ? (
-              <div className="p-3 bg-light rounded text-center border">
+              <div className="p-3 rounded text-center border" style={{ background: '#f8fafc', borderColor: '#e2e8f0' }}>
                 <span className="badge bg-success p-2 fs-6 mb-2">{lastCompleted.nomor_lengkap}</span>
               </div>
             ) : (

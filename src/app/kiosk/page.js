@@ -136,11 +136,12 @@ export default function Kiosk() {
         nomorLengkap,
         pelayananNama: layanan.nama,
         loketNama: layanan.loket_nama || '',
+        kode: layanan.kode,
         waktu: new Date().toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' }),
         sisaAntrian: sisaAntrian
       });
 
-      setSuccessMessage(`Berhasil mengambil nomor: ${nomorLengkap}${layanan.loket_nama ? ' (Menuju ke ' + layanan.loket_nama + ')' : ''}`);
+      setSuccessMessage(`Berhasil mengambil nomor: ${nomorLengkap}${layanan.loket_nama && layanan.kode !== 'C' ? ' (Menuju ke ' + layanan.loket_nama + ')' : ''}`);
       setTimeout(() => setSuccessMessage(''), 4000);
     } catch (err) {
       console.error(err);
@@ -186,26 +187,26 @@ export default function Kiosk() {
   return (
     <>
       {!isKioskLogged ? (
-        <div style={{ background: 'radial-gradient(circle at 50% 50%, #1a233a 0%, #0d111b 100%)', minHeight: '100vh', display: 'flex', alignItems: 'center', justifycontent: 'center', padding: '30px' }}>
-          <div className="card text-white p-5 border-0 w-100 shadow-lg align-self-center mx-auto" style={{ maxWidth: '450px', background: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255, 255, 255, 0.1)', borderRadius: '25px', backdropFilter: 'blur(15px)' }}>
+        <div style={{ background: '#ffffff', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '30px' }}>
+          <div className="card text-dark p-5 border-0 w-100 shadow-lg align-self-center mx-auto" style={{ maxWidth: '450px', background: '#ffffff', border: '1px solid #fee2e2', borderRadius: '25px', boxShadow: '0 20px 50px rgba(220, 38, 38, 0.12)' }}>
             <div className="text-center mb-5">
               <img src="/img/Logo.png" alt="Logo" style={{ height: '90px', objectFit: 'contain', marginBottom: '20px' }} />
-              <h2 className="fw-bold mb-1">LOGIN KIOSK</h2>
-              <p className="text-info small mb-0">{instansiNama}</p>
+              <h2 className="fw-bold mb-1 text-danger">LOGIN KIOSK</h2>
+              <p className="text-secondary small mb-0">{instansiNama}</p>
             </div>
 
             {loginError && (
-              <div className="alert alert-danger bg-danger border-0 text-white p-3 mb-4 rounded-3 text-center small">
+              <div className="alert alert-danger bg-danger border-0 text-white p-3 mb-4 rounded-3 text-center small fw-semibold">
                 {loginError}
               </div>
             )}
 
             <form onSubmit={handleKioskLogin}>
               <div className="mb-3">
-                <label className="form-label text-white-50 fw-semibold">Username Operator</label>
+                <label className="form-label text-secondary fw-semibold">Username Operator</label>
                 <input 
                   type="text" 
-                  className="form-control bg-dark text-white border-secondary py-2" 
+                  className="form-control bg-light text-dark border-secondary py-2" 
                   placeholder="Masukkan username" 
                   required
                   value={kioskUsername}
@@ -214,10 +215,10 @@ export default function Kiosk() {
               </div>
 
               <div className="mb-4">
-                <label className="form-label text-white-50 fw-semibold">Password</label>
+                <label className="form-label text-secondary fw-semibold">Password</label>
                 <input 
                   type="password" 
-                  className="form-control bg-dark text-white border-secondary py-2" 
+                  className="form-control bg-light text-dark border-secondary py-2" 
                   placeholder="Masukkan password" 
                   required
                   value={kioskPassword}
@@ -225,18 +226,18 @@ export default function Kiosk() {
                 />
               </div>
 
-              <button type="submit" className="btn btn-info w-100 py-3 rounded-pill fw-bold text-dark mb-3">
+              <button type="submit" className="btn btn-danger w-100 py-3 rounded-pill fw-bold text-white mb-3 shadow-sm" style={{ background: '#dc3545', border: 'none' }}>
                 Masuk Kiosk
               </button>
 
-              <Link href="/" className="btn btn-outline-light border-secondary w-100 py-3 rounded-pill fw-bold">
+              <Link href="/" className="btn btn-outline-secondary border-secondary w-100 py-3 rounded-pill fw-bold">
                 Kembali ke Portal
               </Link>
             </form>
           </div>
         </div>
       ) : (
-        <div id="kiosk-main-container" style={{ background: 'radial-gradient(circle at 50% 50%, #1a233a 0%, #0d111b 100%)', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '30px' }}>
+        <div id="kiosk-main-container" style={{ background: '#ffffff', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '30px' }}>
           <div className="container" style={{ maxWidth: '1100px' }}>
             <div className="text-center mb-5 position-relative">
               <button 
@@ -249,9 +250,9 @@ export default function Kiosk() {
                 <i className="bi bi-box-arrow-right"></i> Keluar Kiosk
               </button>
               <img src="/img/Logo.png" alt="Logo" style={{ height: '100px', objectFit: 'contain', marginBottom: '15px' }} />
-              <h1 className="fw-bold mb-1 text-white">AMBIL NOMOR ANTRIAN</h1>
-              <h3 className="text-info fw-normal mb-2">{instansiNama}</h3>
-              <p className="text-white-50">{instansiAlamat}</p>
+              <h1 className="fw-bold mb-1" style={{ color: '#dc3545', fontSize: '2.8rem' }}>AMBIL NOMOR ANTRIAN</h1>
+              <h3 className="text-secondary fw-normal mb-2">{instansiNama}</h3>
+              <p className="text-muted">{instansiAlamat}</p>
             </div>
 
             {successMessage && (
@@ -261,8 +262,8 @@ export default function Kiosk() {
             )}
 
             {loading && !pelayanan.length ? (
-              <div className="text-center text-white py-5">
-                <div className="spinner-border text-info" role="status"></div>
+              <div className="text-center text-dark py-5">
+                <div className="spinner-border text-danger" role="status"></div>
                 <p className="mt-3">Memuat sistem antrian...</p>
               </div>
             ) : (
@@ -271,30 +272,29 @@ export default function Kiosk() {
                   <div className="col-md-4" key={p.id}>
                     <div 
                       onClick={() => setSelectedLayananForForm(p)}
-                      className="card text-white text-decoration-none h-100"
+                      className="card text-decoration-none h-100 shadow-sm"
                       style={{
-                        background: 'rgba(255, 255, 255, 0.05)',
-                        backdropFilter: 'blur(15px)',
-                        border: '1px solid rgba(255, 255, 255, 0.1)',
+                        background: '#ffffff',
+                        border: '2px solid #fecdd3',
                         borderRadius: '20px',
                         padding: '30px',
                         cursor: 'pointer',
                         transition: 'all 0.3s'
                       }}
-                      onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-5px)'; e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)'; }}
-                      onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)'; }}
+                      onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-5px)'; e.currentTarget.style.boxShadow = '0 15px 30px rgba(220, 38, 38, 0.15)'; e.currentTarget.style.borderColor = '#dc3545'; }}
+                      onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 0.125rem 0.25rem rgba(0, 0, 0, 0.075)'; e.currentTarget.style.borderColor = '#fecdd3'; }}
                     >
                       <div className="d-flex justify-content-between align-items-start mb-4">
-                        <span style={{ fontSize: '4.2rem', fontWeight: 800, background: 'linear-gradient(135deg, #0dcaf0, #0d6efd)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+                        <span style={{ fontSize: '4.2rem', fontWeight: 800, color: '#dc3545' }}>
                           {p.kode}
                         </span>
-                        <span className="badge bg-info bg-opacity-25 text-info px-3 py-2 rounded-pill fs-6">
+                        <span className="badge bg-danger bg-opacity-10 text-danger px-3 py-2 rounded-pill fs-6 border border-danger border-opacity-25">
                           Estimasi: {p.estimasi_waktu} mnt
                         </span>
                       </div>
                       <div>
-                        <h2 className="fw-bold mb-3" style={{ fontSize: '1.8rem', lineHeight: 1.2 }}>{p.nama}</h2>
-                        <p className="m-0 text-white-50" style={{ fontSize: '1rem' }}>Tekan tombol ({p.kode}) atau sentuh layar.</p>
+                        <h2 className="fw-bold mb-3" style={{ fontSize: '1.8rem', lineHeight: 1.2, color: '#dc3545' }}>{p.nama}</h2>
+                        <p className="m-0 text-muted" style={{ fontSize: '1rem' }}>Tekan tombol ({p.kode}) atau sentuh layar.</p>
                       </div>
                     </div>
                   </div>
@@ -303,7 +303,7 @@ export default function Kiosk() {
             )}
 
             <div className="text-center mt-5">
-              <Link href="/" className="text-info text-decoration-none small">
+              <Link href="/" className="text-danger text-decoration-none small fw-semibold">
                 <i className="bi bi-arrow-left"></i> Kembali ke Portal Utama
               </Link>
             </div>
@@ -313,20 +313,20 @@ export default function Kiosk() {
 
       {/* Form Dialog for Personal Info */}
       {selectedLayananForForm && (
-        <div className="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center px-3" style={{ background: 'rgba(10, 15, 30, 0.85)', backdropFilter: 'blur(8px)', zIndex: 1050 }}>
-          <div className="card text-white p-5 border-0 w-100" style={{ maxWidth: '600px', background: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255, 255, 255, 0.1)', borderRadius: '25px', boxShadow: '0 20px 50px rgba(0,0,0,0.3)' }}>
+        <div className="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center px-3" style={{ background: 'rgba(0, 0, 0, 0.5)', backdropFilter: 'blur(5px)', zIndex: 1050 }}>
+          <div className="card text-dark p-5 border-0 w-100 shadow-lg" style={{ maxWidth: '600px', background: '#ffffff', border: '2px solid #fecdd3', borderRadius: '25px', boxShadow: '0 20px 50px rgba(0,0,0,0.2)' }}>
             <div className="text-center mb-4">
-              <span className="badge bg-info bg-opacity-25 text-info px-4 py-2 rounded-pill mb-3 fs-6">Kategori {selectedLayananForForm.kode}</span>
-              <h2 className="fw-bold">{selectedLayananForForm.nama}</h2>
-              <p className="text-white-50 m-0">Silakan lengkapi data diri Anda sebelum mengambil antrian.</p>
+              <span className="badge bg-danger bg-opacity-10 text-danger px-4 py-2 rounded-pill mb-3 fs-6 border border-danger border-opacity-25">Kategori {selectedLayananForForm.kode}</span>
+              <h2 className="fw-bold" style={{ color: '#dc3545' }}>{selectedLayananForForm.nama}</h2>
+              <p className="text-muted m-0">Silakan lengkapi data diri Anda sebelum mengambil antrian.</p>
             </div>
             
             <form onSubmit={handleSubmitForm}>
               <div className="mb-3">
-                <label className="form-label text-white-50 fw-semibold">Nama Lengkap</label>
+                <label className="form-label text-secondary fw-semibold">Nama Lengkap</label>
                 <input 
                   type="text" 
-                  className="form-control bg-dark text-white border-secondary py-2" 
+                  className="form-control bg-light text-dark border-secondary py-2" 
                   placeholder="Masukkan nama lengkap" 
                   required
                   value={wargaForm.nama}
@@ -335,10 +335,10 @@ export default function Kiosk() {
               </div>
               
               <div className="mb-3">
-                <label className="form-label text-white-50 fw-semibold">Alamat Rumah</label>
+                <label className="form-label text-secondary fw-semibold">Alamat Rumah</label>
                 <input 
                   type="text" 
-                  className="form-control bg-dark text-white border-secondary py-2" 
+                  className="form-control bg-light text-dark border-secondary py-2" 
                   placeholder="Masukkan alamat lengkap" 
                   required
                   value={wargaForm.alamat}
@@ -347,10 +347,10 @@ export default function Kiosk() {
               </div>
 
               <div className="mb-4">
-                <label className="form-label text-white-50 fw-semibold">Nomor HP / WhatsApp</label>
+                <label className="form-label text-secondary fw-semibold">Nomor HP / WhatsApp</label>
                 <input 
                   type="tel" 
-                  className="form-control bg-dark text-white border-secondary py-2" 
+                  className="form-control bg-light text-dark border-secondary py-2" 
                   placeholder="Contoh: 0812xxxxxxxx" 
                   required
                   value={wargaForm.hp}
@@ -362,7 +362,7 @@ export default function Kiosk() {
                 <div className="col-6">
                   <button 
                     type="button" 
-                    className="btn btn-outline-light w-100 py-3 rounded-pill fw-bold border-secondary"
+                    className="btn btn-outline-secondary w-100 py-3 rounded-pill fw-bold"
                     onClick={() => {
                       setSelectedLayananForForm(null);
                       setWargaForm({ nama: '', alamat: '', hp: '' });
@@ -372,7 +372,7 @@ export default function Kiosk() {
                   </button>
                 </div>
                 <div className="col-6">
-                  <button type="submit" className="btn btn-info w-100 py-3 rounded-pill fw-bold text-dark">
+                  <button type="submit" className="btn btn-danger w-100 py-3 rounded-pill fw-bold text-white shadow-sm" style={{ background: '#dc3545', border: 'none' }}>
                     Ambil & Cetak
                   </button>
                 </div>
@@ -394,7 +394,7 @@ export default function Kiosk() {
             <div className="title">NOMOR ANTRIAN</div>
             <div className="nomor">{ticketToPrint.nomorLengkap}</div>
             <div className="layanan">{ticketToPrint.pelayananNama}</div>
-            {ticketToPrint.loketNama && (
+            {ticketToPrint.loketNama && ticketToPrint.kode !== 'C' && !ticketToPrint.nomorLengkap?.startsWith('C') && (
               <div className="loket" style={{ fontSize: '13pt', fontWeight: 'bold', marginTop: '2mm', textTransform: 'uppercase', border: '1px dashed #000', padding: '1mm 0' }}>
                 MENUJU: {ticketToPrint.loketNama}
               </div>
