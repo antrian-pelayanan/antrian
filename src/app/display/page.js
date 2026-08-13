@@ -230,11 +230,6 @@ export default function Display() {
                   <span className="badge bg-primary bg-opacity-10 text-primary fs-5 px-4 py-2 rounded-pill border border-primary border-opacity-25 fw-bold">
                     {latestCalling.pelayanan_nama || 'Pelayanan Umum'}
                   </span>
-                  {latestCalling.warga_nama && (
-                    <div className="text-secondary fw-bold mt-2 fs-5">
-                      Warga: <span className="text-dark">{latestCalling.warga_nama}</span>
-                    </div>
-                  )}
                 </div>
               )}
             </div>

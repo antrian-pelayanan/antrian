@@ -290,11 +290,11 @@ export default function Kiosk() {
                       onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-5px)'; e.currentTarget.style.boxShadow = '0 15px 30px rgba(220, 38, 38, 0.15)'; e.currentTarget.style.borderColor = '#dc3545'; }}
                       onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 0.125rem 0.25rem rgba(0, 0, 0, 0.075)'; e.currentTarget.style.borderColor = '#fecdd3'; }}
                     >
-                      <div className="d-flex justify-content-between align-items-start mb-4">
-                        <span style={{ fontSize: '4.2rem', fontWeight: 800, color: '#dc3545' }}>
+                      <div className="d-flex justify-content-between align-items-center mb-3">
+                        <span style={{ fontSize: '7rem', fontWeight: 900, color: '#dc3545', lineHeight: 1, letterSpacing: '-1px' }}>
                           {p.kode}
                         </span>
-                        <span className="badge bg-danger bg-opacity-10 text-danger px-3 py-2 rounded-pill fs-6 border border-danger border-opacity-25">
+                        <span className="badge bg-danger bg-opacity-10 text-danger px-3 py-2 rounded-pill fs-6 border border-danger border-opacity-25 fw-bold">
                           Estimasi: {p.estimasi_waktu} mnt
                         </span>
                       </div>
