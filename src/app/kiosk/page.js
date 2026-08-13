@@ -109,6 +109,7 @@ export default function Kiosk() {
       }
 
       const nomorLengkap = `${layanan.kode}-${nextNumber}`;
+      const isKodeC = layanan.kode?.toUpperCase() === 'C' || layanan.nama?.toLowerCase().includes('perekaman');
 
       const sisaAntrian = todayLayananQueues.filter(item => item.status === 'menunggu').length + 1;
 
@@ -119,7 +120,7 @@ export default function Kiosk() {
         pelayanan_id: layanan.id,
         pelayanan_nama: layanan.nama,
         status: 'menunggu',
-        loket: layanan.loket_nama || null,
+        loket: isKodeC ? null : (layanan.loket_nama || null),
         panggil_at: null,
         panggil_ulang: 0,
         selesai_at: null,
@@ -129,19 +130,19 @@ export default function Kiosk() {
         warga_hp: dataWarga.hp
       });
 
-      // Set ticket values for printing
+      // Set ticket values for printing (Tanpa loket untuk Layanan C Perekaman)
       setTicketToPrint({
         instansiNama,
         instansiAlamat,
         nomorLengkap,
         pelayananNama: layanan.nama,
-        loketNama: layanan.loket_nama || '',
+        loketNama: isKodeC ? '' : (layanan.loket_nama || ''),
         kode: layanan.kode,
         waktu: new Date().toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' }),
         sisaAntrian: sisaAntrian
       });
 
-      setSuccessMessage(`Berhasil mengambil nomor: ${nomorLengkap}${layanan.loket_nama && layanan.kode !== 'C' ? ' (Menuju ke ' + layanan.loket_nama + ')' : ''}`);
+      setSuccessMessage(`Berhasil mengambil nomor: ${nomorLengkap}${layanan.loket_nama && !isKodeC ? ' (Menuju ke ' + layanan.loket_nama + ')' : ''}`);
       setTimeout(() => setSuccessMessage(''), 4000);
     } catch (err) {
       console.error(err);
@@ -184,11 +185,16 @@ export default function Kiosk() {
     }
   };
 
+  const isSelectedC = selectedLayananForForm && (
+    selectedLayananForForm.kode?.toUpperCase() === 'C' || 
+    selectedLayananForForm.nama?.toLowerCase().includes('perekaman')
+  );
+
   return (
     <>
       {!isKioskLogged ? (
         <div style={{ background: '#ffffff', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '30px' }}>
-          <div className="card text-dark p-5 border-0 w-100 shadow-lg align-self-center mx-auto" style={{ maxWidth: '450px', background: '#ffffff', border: '1px solid #fee2e2', borderRadius: '25px', boxShadow: '0 20px 50px rgba(220, 38, 38, 0.12)' }}>
+          <div className="card text-dark p-5 border-0 w-100 shadow-lg align-self-center mx-auto" style={{ maxWidth: '450px', background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '25px', boxShadow: '0 20px 40px rgba(0, 0, 0, 0.06)' }}>
             <div className="text-center mb-5">
               <img src="/img/Logo.png" alt="Logo" style={{ height: '90px', objectFit: 'contain', marginBottom: '20px' }} />
               <h2 className="fw-bold mb-1 text-danger">LOGIN KIOSK</h2>
@@ -206,7 +212,7 @@ export default function Kiosk() {
                 <label className="form-label text-secondary fw-semibold">Username Operator</label>
                 <input 
                   type="text" 
-                  className="form-control bg-light text-dark border-secondary py-2" 
+                  className="form-control bg-light text-dark border-secondary-subtle py-2" 
                   placeholder="Masukkan username" 
                   required
                   value={kioskUsername}
@@ -218,7 +224,7 @@ export default function Kiosk() {
                 <label className="form-label text-secondary fw-semibold">Password</label>
                 <input 
                   type="password" 
-                  className="form-control bg-light text-dark border-secondary py-2" 
+                  className="form-control bg-light text-dark border-secondary-subtle py-2" 
                   placeholder="Masukkan password" 
                   required
                   value={kioskPassword}
@@ -230,7 +236,7 @@ export default function Kiosk() {
                 Masuk Kiosk
               </button>
 
-              <Link href="/" className="btn btn-outline-secondary border-secondary w-100 py-3 rounded-pill fw-bold">
+              <Link href="/" className="btn btn-outline-secondary border-secondary-subtle w-100 py-3 rounded-pill fw-bold">
                 Kembali ke Portal
               </Link>
             </form>
@@ -313,8 +319,8 @@ export default function Kiosk() {
 
       {/* Form Dialog for Personal Info */}
       {selectedLayananForForm && (
-        <div className="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center px-3" style={{ background: 'rgba(0, 0, 0, 0.5)', backdropFilter: 'blur(5px)', zIndex: 1050 }}>
-          <div className="card text-dark p-5 border-0 w-100 shadow-lg" style={{ maxWidth: '600px', background: '#ffffff', border: '2px solid #fecdd3', borderRadius: '25px', boxShadow: '0 20px 50px rgba(0,0,0,0.2)' }}>
+        <div className="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center px-3" style={{ background: 'rgba(15, 23, 42, 0.45)', backdropFilter: 'blur(5px)', zIndex: 1050 }}>
+          <div className="card text-dark p-5 border-0 w-100 shadow-lg" style={{ maxWidth: '600px', background: '#ffffff', border: '2px solid #fecdd3', borderRadius: '25px', boxShadow: '0 25px 60px rgba(0,0,0,0.15)' }}>
             <div className="text-center mb-4">
               <span className="badge bg-danger bg-opacity-10 text-danger px-4 py-2 rounded-pill mb-3 fs-6 border border-danger border-opacity-25">Kategori {selectedLayananForForm.kode}</span>
               <h2 className="fw-bold" style={{ color: '#dc3545' }}>{selectedLayananForForm.nama}</h2>
@@ -326,7 +332,7 @@ export default function Kiosk() {
                 <label className="form-label text-secondary fw-semibold">Nama Lengkap</label>
                 <input 
                   type="text" 
-                  className="form-control bg-light text-dark border-secondary py-2" 
+                  className="form-control bg-light text-dark border-secondary-subtle py-2" 
                   placeholder="Masukkan nama lengkap" 
                   required
                   value={wargaForm.nama}
@@ -338,7 +344,7 @@ export default function Kiosk() {
                 <label className="form-label text-secondary fw-semibold">Alamat Rumah</label>
                 <input 
                   type="text" 
-                  className="form-control bg-light text-dark border-secondary py-2" 
+                  className="form-control bg-light text-dark border-secondary-subtle py-2" 
                   placeholder="Masukkan alamat lengkap" 
                   required
                   value={wargaForm.alamat}
@@ -350,7 +356,7 @@ export default function Kiosk() {
                 <label className="form-label text-secondary fw-semibold">Nomor HP / WhatsApp</label>
                 <input 
                   type="tel" 
-                  className="form-control bg-light text-dark border-secondary py-2" 
+                  className="form-control bg-light text-dark border-secondary-subtle py-2" 
                   placeholder="Contoh: 0812xxxxxxxx" 
                   required
                   value={wargaForm.hp}
@@ -394,7 +400,10 @@ export default function Kiosk() {
             <div className="title">NOMOR ANTRIAN</div>
             <div className="nomor">{ticketToPrint.nomorLengkap}</div>
             <div className="layanan">{ticketToPrint.pelayananNama}</div>
-            {ticketToPrint.loketNama && ticketToPrint.kode !== 'C' && !ticketToPrint.nomorLengkap?.startsWith('C') && (
+            {ticketToPrint.loketNama && 
+             ticketToPrint.kode?.toUpperCase() !== 'C' && 
+             !ticketToPrint.nomorLengkap?.toUpperCase()?.startsWith('C') && 
+             !ticketToPrint.pelayananNama?.toLowerCase()?.includes('perekaman') && (
               <div className="loket" style={{ fontSize: '13pt', fontWeight: 'bold', marginTop: '2mm', textTransform: 'uppercase', border: '1px dashed #000', padding: '1mm 0' }}>
                 MENUJU: {ticketToPrint.loketNama}
               </div>
@@ -509,3 +518,4 @@ export default function Kiosk() {
     </>
   );
 }
+

@@ -9,7 +9,6 @@ export default function Display() {
     instansi_nama: 'Kecamatan Gandrungmangu',
     instansi_alamat: 'Jl. Pertiwi Nomor 1',
     running_text: 'Selamat Datang di Kecamatan Gandrungmangu',
-    display_video_url: 'https://youtu.be/FkbZshiiS-k',
     bell_sound_volume: '0.8'
   });
   
@@ -154,116 +153,164 @@ export default function Display() {
     return () => unsub();
   }, [lokets]);
 
-  const getYoutubeId = (url) => {
-    try {
-      if (!url) return '';
-      if (url.includes('youtu.be/')) return url.split('youtu.be/')[1].split('?')[0];
-      if (url.includes('youtube.com/watch')) return new URL(url).searchParams.get('v');
-      return '';
-    } catch { return ''; }
-  };
-
-  const videoId = getYoutubeId(settings.display_video_url);
-
   return (
     <div style={{
-      background: `linear-gradient(rgba(255, 255, 255, 0.65), rgba(245, 247, 250, 0.8)), url('/img/bg-kecamatan.jpeg') no-repeat center center fixed`,
-      backgroundSize: 'cover',
+      background: `linear-gradient(135deg, #f0f7ff 0%, #e0f2fe 50%, #bae6fd 100%)`,
       minHeight: '100vh',
       display: 'flex',
       flexDirection: 'column',
-      padding: '25px 30px',
-      overflow: 'hidden'
+      padding: '20px 25px 90px 25px',
+      boxSizing: 'border-box'
     }}>
       
       {/* Header */}
-      <div className="d-flex justify-content-between align-items-center mb-4" style={{
-        background: 'rgba(255, 255, 255, 0.95)', backdropFilter: 'blur(12px)',
-        borderRadius: '16px', padding: '15px 30px', boxShadow: '0 4px 20px rgba(0,0,0,0.05)'
+      <div className="d-flex justify-content-between align-items-center mb-3" style={{
+        background: '#ffffff',
+        borderRadius: '20px', padding: '15px 30px',
+        boxShadow: '0 10px 25px rgba(2, 132, 199, 0.08)',
+        border: '1px solid #bae6fd'
       }}>
         <div className="d-flex align-items-center gap-3">
-          <img src="/img/Logo.png" alt="Logo" style={{ height: '70px', objectFit: 'contain' }} />
+          <img src="/img/Logo.png" alt="Logo" style={{ height: '75px', objectFit: 'contain' }} />
           <div>
-            <h2 className="fw-bold m-0 text-dark">{settings.instansi_nama}</h2>
-            <p className="m-0 text-secondary fw-semibold">{settings.instansi_alamat}</p>
+            <h2 className="fw-bold m-0" style={{ color: '#0284c7', fontSize: '2rem' }}>{settings.instansi_nama}</h2>
+            <p className="m-0 text-secondary fw-semibold fs-6">{settings.instansi_alamat}</p>
           </div>
         </div>
         <div className="text-end">
-          <div className="text-primary fw-bold" style={{ fontSize: '2.2rem' }}>
+          <div className="fw-bold" style={{ fontSize: '2.5rem', color: '#0284c7', lineHeight: 1.1 }}>
             {mounted ? currentTime.toLocaleTimeString('id-ID', { hour12: false }) : '--.--.--'}
           </div>
-          <div className="text-secondary fw-semibold">
+          <div className="text-secondary fw-bold small mt-1">
             {mounted ? currentTime.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : 'Memuat Tanggal...'}
           </div>
         </div>
       </div>
 
-      {/* Main Row */}
-      <div className="row g-4 flex-grow-1" style={{ height: 'calc(100vh - 245px)' }}>
+      {/* 2 Main Sections Row */}
+      <div className="row g-3 flex-grow-1">
         
-        {/* Video Left */}
-        <div className="col-lg-7 d-flex">
-          <div className="w-100 h-100 rounded-4 overflow-hidden" style={{ background: '#000', border: '2px solid rgba(255,255,255,0.4)', boxShadow: '0 10px 25px rgba(0,0,0,0.15)' }}>
-            {videoId && (
-              <iframe 
-                width="100%" height="100%" 
-                src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}`}
-                frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen>
-              </iframe>
-            )}
+        {/* Section 1 (Left Column): Layar Utama Panggilan Saat Ini */}
+        <div className="col-lg-6 d-flex">
+          <div className="w-100 rounded-4 p-4 d-flex flex-column align-items-center justify-content-between text-center shadow-lg" style={{
+            background: 'linear-gradient(180deg, #ffffff 0%, #f0f9ff 100%)',
+            border: '3px solid #38bdf8',
+            boxShadow: '0 15px 35px rgba(2, 132, 199, 0.12)'
+          }}>
+            <div className="w-100">
+              <div className="d-inline-flex align-items-center gap-2 px-4 py-2 rounded-pill mb-3" style={{ background: 'rgba(2, 132, 199, 0.1)', border: '1px solid #bae6fd' }}>
+                <span className="spinner-grow spinner-grow-sm text-danger" role="status"></span>
+                <span className="fw-bold text-uppercase tracking-wider" style={{ color: '#0284c7', fontSize: '1.2rem' }}>
+                  PANGGILAN SAAT INI
+                </span>
+              </div>
+              <p className="text-muted fw-semibold m-0">Nomor Antrian Yang Dipanggil</p>
+            </div>
+
+            <div className="my-auto py-3">
+              <div className="fw-extrabold text-danger" style={{ 
+                fontSize: '9.5rem', 
+                lineHeight: 0.95, 
+                fontWeight: 900,
+                letterSpacing: '-2px',
+                textShadow: '0 10px 30px rgba(220, 38, 38, 0.2)' 
+              }}>
+                {latestCalling ? latestCalling.nomor_lengkap : '---'}
+              </div>
+              
+              <div className="mt-4 py-2 px-4 rounded-4 d-inline-block" style={{ background: '#ffffff', border: '2px solid #bae6fd', boxShadow: '0 8px 20px rgba(0,0,0,0.04)' }}>
+                <span className="text-secondary fw-bold text-uppercase me-2" style={{ fontSize: '1.8rem' }}>MENUJU</span>
+                <span className="fw-black text-danger" style={{ fontSize: '3rem', fontWeight: 900 }}>
+                  {latestCalling ? latestCalling.loket : '---'}
+                </span>
+              </div>
+
+              {latestCalling && (
+                <div className="mt-3">
+                  <span className="badge bg-primary bg-opacity-10 text-primary fs-5 px-4 py-2 rounded-pill border border-primary border-opacity-25 fw-bold">
+                    {latestCalling.pelayanan_nama || 'Pelayanan Umum'}
+                  </span>
+                  {latestCalling.warga_nama && (
+                    <div className="text-secondary fw-bold mt-2 fs-5">
+                      Warga: <span className="text-dark">{latestCalling.warga_nama}</span>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+
+            <div className="w-100 pt-3 border-top border-info border-opacity-25">
+              <small className="text-secondary fw-semibold">
+                <i className="bi bi-info-circle me-1"></i> Silakan menuju ke loket pelayanan yang tertera di atas.
+              </small>
+            </div>
           </div>
         </div>
 
-        {/* Right Area */}
-        <div className="col-lg-5 d-flex flex-column gap-2" style={{ height: '100%' }}>
-          
-          {/* Giant Call Box */}
-          <div className="text-center w-100 rounded-4" style={{
-            background: 'rgba(255,255,255,0.95)', border: '3px solid rgba(13,110,253,0.35)', 
-            padding: '12px 20px', boxShadow: '0 8px 24px rgba(0,0,0,0.08)'
+        {/* Section 2 (Right Column): Layar Antrian Berlangsung */}
+        <div className="col-lg-6 d-flex">
+          <div className="w-100 rounded-4 p-4 d-flex flex-column shadow-lg" style={{
+            background: '#ffffff',
+            border: '2px solid #bae6fd',
+            boxShadow: '0 15px 35px rgba(2, 132, 199, 0.08)'
           }}>
-            <h3 className="text-primary fw-bold text-uppercase mb-1" style={{ fontSize: '1.8rem', letterSpacing: '0.5px' }}>Panggilan Saat Ini</h3>
-            <div className="fw-bold text-danger" style={{ fontSize: '8.5rem', lineHeight: 1.0, textShadow: '0 0 20px rgba(220,53,69,0.25)' }}>
-              {latestCalling ? latestCalling.nomor_lengkap : '---'}
+            <div className="d-flex justify-content-between align-items-center border-bottom pb-3 mb-3">
+              <h3 className="fw-bold m-0 d-flex align-items-center gap-2" style={{ color: '#0284c7', fontSize: '1.7rem' }}>
+                <i className="bi bi-card-checklist"></i> ANTRIAN BERLANGSUNG
+              </h3>
+              <span className="badge bg-primary px-3 py-2 rounded-pill fs-6 fw-bold">
+                {lokets.length} Loket Pelayanan
+              </span>
             </div>
-            <div className="mt-1 fw-bold text-dark text-uppercase" style={{ fontSize: '1.8rem' }}>
-              MENUJU <span className="text-danger fw-black" style={{ fontSize: '2.4rem', fontWeight: 900 }}>{latestCalling ? latestCalling.loket : '---'}</span>
-            </div>
-          </div>
 
-          {/* Active Queues */}
-          <div className="flex-grow-1 p-3 d-flex flex-column rounded-4" style={{ background: 'rgba(255,255,255,0.9)', overflowY: 'auto' }}>
-            <h4 className="text-center fw-bold border-bottom pb-2 mb-2 text-dark text-uppercase" style={{ fontSize: '1.9rem', letterSpacing: '0.5px' }}>ANTRIAN BERLANGSUNG</h4>
-            <div className="row g-2 flex-grow-1 justify-content-center">
-              {lokets.map(lok => (
-                <div className="col-12" key={lok}>
-                  <div className="d-flex align-items-center justify-content-between py-2 px-3 bg-white rounded-3" style={{ borderLeft: '8px solid #0d6efd', boxShadow: '0 3px 8px rgba(0,0,0,0.03)' }}>
-                    <div className="text-start">
-                      <h4 className="fw-bold text-primary m-0" style={{ fontSize: '1.9rem' }}>{lok}</h4>
-                      <div className="text-secondary fw-semibold mt-1" style={{ fontSize: '1.05rem' }}>
-                        Status: <span className={`badge ${activeCalls[lok] ? 'bg-success' : 'bg-secondary'} px-2 py-0.5 rounded-pill`} style={{ fontSize: '0.9rem' }}>{activeCalls[lok] ? 'Melayani' : 'Kosong'}</span>
+            <div className="row g-3 flex-grow-1 align-content-start overflow-y-auto">
+              {lokets.map(lok => {
+                const active = activeCalls[lok];
+                return (
+                  <div className="col-12" key={lok}>
+                    <div className="d-flex align-items-center justify-content-between p-3 rounded-4 shadow-sm" style={{
+                      background: active ? 'linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%)' : '#f8fafc',
+                      borderLeft: `10px solid ${active ? '#10b981' : '#cbd5e1'}`,
+                      border: '1px solid #e2e8f0',
+                      borderLeftWidth: '10px'
+                    }}>
+                      <div>
+                        <h4 className="fw-bold m-0" style={{ color: '#0284c7', fontSize: '1.8rem' }}>{lok}</h4>
+                        <div className="d-flex align-items-center gap-2 mt-1">
+                          <span className={`badge ${active ? 'bg-success text-white' : 'bg-secondary text-white'} px-3 py-1 rounded-pill fs-6`}>
+                            {active ? 'MELAYANI' : 'KOSONG'}
+                          </span>
+                          {active && active.pelayanan_nama && (
+                            <span className="text-secondary small fw-semibold">
+                              ({active.pelayanan_nama})
+                            </span>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="text-end">
+                        <div className={`fw-extrabold ${active ? 'text-success' : 'text-muted'}`} style={{ fontSize: '4.2rem', lineHeight: 1, fontWeight: 900 }}>
+                          {active ? active.nomor_lengkap : '---'}
+                        </div>
                       </div>
                     </div>
-                    <div className="fw-bold text-dark" style={{ fontSize: '4rem', lineHeight: 1 }}>
-                      {activeCalls[lok] ? activeCalls[lok].nomor_lengkap : '---'}
-                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
-
         </div>
+
       </div>
 
-      {/* Running Text */}
+      {/* Running Text Marquee Footer */}
       <div style={{
-        position: 'fixed', bottom: '30px', left: '30px', right: '30px',
-        background: '#fff', border: '2.5px solid #0d6efd', borderRadius: '12px',
-        boxShadow: '0 8px 32px rgba(0,0,0,0.15)', padding: '10px 0', zIndex: 1000, overflow: 'hidden'
+        position: 'fixed', bottom: '20px', left: '25px', right: '25px',
+        background: '#ffffff', border: '2.5px solid #0284c7', borderRadius: '14px',
+        boxShadow: '0 8px 30px rgba(2, 132, 199, 0.2)', padding: '10px 0', zIndex: 1000, overflow: 'hidden'
       }}>
         <div style={{ whiteSpace: 'nowrap' }}>
-          <p style={{ display: 'inline-block', paddingLeft: '100%', margin: 0, animation: 'scroll-text 25s linear infinite', fontSize: '1.3rem', fontWeight: 700, color: '#0f172a' }}>
+          <p style={{ display: 'inline-block', paddingLeft: '100%', margin: 0, animation: 'scroll-text 25s linear infinite', fontSize: '1.35rem', fontWeight: 700, color: '#0369a1' }}>
             {settings.running_text}
           </p>
         </div>
@@ -278,3 +325,4 @@ export default function Display() {
     </div>
   );
 }
+
