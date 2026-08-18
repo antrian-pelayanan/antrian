@@ -171,11 +171,14 @@ export default function Display() {
         border: '1px solid #bae6fd'
       }}>
         <div className="d-flex align-items-center gap-3">
-          <img src="/img/Logo.png" alt="Logo" style={{ height: '75px', objectFit: 'contain' }} />
+          <img src="/img/Logo.png" alt="Logo Cilacap" style={{ height: '75px', objectFit: 'contain' }} />
           <div>
             <h2 className="fw-bold m-0" style={{ color: '#0284c7', fontSize: '2rem' }}>{settings.instansi_nama}</h2>
             <p className="m-0 text-secondary fw-semibold fs-6">{settings.instansi_alamat}</p>
           </div>
+        </div>
+        <div className="d-flex align-items-center justify-content-center px-3">
+          <img src="/img/logo-semringah.png" alt="Logo Gandrung Mangu Semringah" style={{ height: '80px', objectFit: 'contain' }} />
         </div>
         <div className="text-end">
           <div className="fw-bold" style={{ fontSize: '2.5rem', color: '#0284c7', lineHeight: 1.1 }}>

@@ -6,7 +6,10 @@ export default function Home() {
   return (
     <div style={{ background: 'radial-gradient(circle at 50% 50%, #1a233a 0%, #0d111b 100%)', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <div className="container py-5 text-center" style={{ maxWidth: '900px' }}>
-        <img src="/img/Logo.png" alt="Logo" style={{ height: '110px', objectFit: 'contain', marginBottom: '20px' }} />
+        <div className="d-flex align-items-center justify-content-center gap-4 mb-4">
+          <img src="/img/Logo.png" alt="Logo Cilacap" style={{ height: '100px', objectFit: 'contain' }} />
+          <img src="/img/logo-semringah.png" alt="Logo Gandrung Mangu Semringah" style={{ height: '100px', objectFit: 'contain' }} />
+        </div>
         <h1 className="display-4 fw-bold text-white mb-2">Portal Sistem Antrian</h1>
         <h4 className="text-info fw-normal mb-5">Kecamatan Gandrungmangu - Berbasis Real-time Cloud</h4>
 

@@ -255,7 +255,10 @@ export default function Kiosk() {
               >
                 <i className="bi bi-box-arrow-right"></i> Keluar Kiosk
               </button>
-              <img src="/img/Logo.png" alt="Logo" style={{ height: '100px', objectFit: 'contain', marginBottom: '15px' }} />
+              <div className="d-flex align-items-center justify-content-center gap-4 mb-3">
+                <img src="/img/Logo.png" alt="Logo Cilacap" style={{ height: '90px', objectFit: 'contain' }} />
+                <img src="/img/logo-semringah.png" alt="Logo Gandrung Mangu Semringah" style={{ height: '90px', objectFit: 'contain' }} />
+              </div>
               <h1 className="fw-bold mb-1" style={{ color: '#dc3545', fontSize: '2.8rem' }}>AMBIL NOMOR ANTRIAN</h1>
               <h3 className="text-secondary fw-normal mb-2">{instansiNama}</h3>
               <p className="text-muted">{instansiAlamat}</p>
