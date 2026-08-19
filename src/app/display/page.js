@@ -155,7 +155,11 @@ export default function Display() {
 
   return (
     <div style={{
-      background: `linear-gradient(135deg, #f0f7ff 0%, #e0f2fe 50%, #bae6fd 100%)`,
+      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.15)), url('/img/bg-kecamatan.jpeg')`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      backgroundAttachment: 'fixed',
       minHeight: '100vh',
       display: 'flex',
       flexDirection: 'column',
@@ -165,10 +169,11 @@ export default function Display() {
       
       {/* Header */}
       <div className="d-flex justify-content-between align-items-center mb-3" style={{
-        background: '#ffffff',
+        background: 'rgba(255, 255, 255, 0.75)',
+        backdropFilter: 'blur(12px)',
         borderRadius: '20px', padding: '15px 30px',
-        boxShadow: '0 10px 25px rgba(2, 132, 199, 0.08)',
-        border: '1px solid #bae6fd'
+        boxShadow: '0 10px 30px rgba(0, 0, 0, 0.15)',
+        border: '1px solid rgba(255, 255, 255, 0.8)'
       }}>
         <div className="d-flex align-items-center gap-3">
           <img src="/img/Logo.png" alt="Logo Cilacap" style={{ height: '75px', objectFit: 'contain' }} />
@@ -177,15 +182,17 @@ export default function Display() {
             <p className="m-0 text-secondary fw-semibold fs-6">{settings.instansi_alamat}</p>
           </div>
         </div>
-        <div className="d-flex align-items-center justify-content-center px-3">
-          <img src="/img/logo-semringah.png" alt="Logo Gandrung Mangu Semringah" style={{ height: '80px', objectFit: 'contain' }} />
-        </div>
-        <div className="text-end">
-          <div className="fw-bold" style={{ fontSize: '2.5rem', color: '#0284c7', lineHeight: 1.1 }}>
-            {mounted ? currentTime.toLocaleTimeString('id-ID', { hour12: false }) : '--.--.--'}
+        <div className="d-flex align-items-center gap-4">
+          <div className="text-end">
+            <div className="fw-bold" style={{ fontSize: '2.5rem', color: '#0284c7', lineHeight: 1.1 }}>
+              {mounted ? currentTime.toLocaleTimeString('id-ID', { hour12: false }) : '--.--.--'}
+            </div>
+            <div className="text-secondary fw-bold small mt-1">
+              {mounted ? currentTime.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : 'Memuat Tanggal...'}
+            </div>
           </div>
-          <div className="text-secondary fw-bold small mt-1">
-            {mounted ? currentTime.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : 'Memuat Tanggal...'}
+          <div className="ps-3 border-start border-2 border-info border-opacity-25 d-flex align-items-center">
+            <img src="/img/logo-semringah.png" alt="Logo Gandrung Mangu Semringah" style={{ height: '85px', objectFit: 'contain' }} />
           </div>
         </div>
       </div>
@@ -196,12 +203,13 @@ export default function Display() {
         {/* Section 1 (Left Column): Layar Utama Panggilan Saat Ini */}
         <div className="col-lg-6 d-flex">
           <div className="w-100 rounded-4 p-4 d-flex flex-column align-items-center justify-content-between text-center shadow-lg" style={{
-            background: 'linear-gradient(180deg, #ffffff 0%, #f0f9ff 100%)',
-            border: '3px solid #38bdf8',
-            boxShadow: '0 15px 35px rgba(2, 132, 199, 0.12)'
+            background: 'rgba(255, 255, 255, 0.65)',
+            backdropFilter: 'blur(12px)',
+            border: '2px solid rgba(56, 189, 248, 0.8)',
+            boxShadow: '0 15px 35px rgba(0, 0, 0, 0.2)'
           }}>
             <div className="w-100">
-              <div className="d-inline-flex align-items-center gap-2 px-4 py-2 rounded-pill mb-3" style={{ background: 'rgba(2, 132, 199, 0.1)', border: '1px solid #bae6fd' }}>
+              <div className="d-inline-flex align-items-center gap-2 px-4 py-2 rounded-pill mb-3" style={{ background: 'rgba(2, 132, 199, 0.15)', border: '1px solid #bae6fd' }}>
                 <span className="spinner-grow spinner-grow-sm text-danger" role="status"></span>
                 <span className="fw-bold text-uppercase tracking-wider" style={{ color: '#0284c7', fontSize: '1.2rem' }}>
                   PANGGILAN SAAT INI
@@ -216,12 +224,12 @@ export default function Display() {
                 lineHeight: 0.95, 
                 fontWeight: 900,
                 letterSpacing: '-2px',
-                textShadow: '0 10px 30px rgba(220, 38, 38, 0.2)' 
+                textShadow: '0 10px 30px rgba(220, 38, 38, 0.3)' 
               }}>
                 {latestCalling ? latestCalling.nomor_lengkap : '---'}
               </div>
               
-              <div className="mt-4 py-2 px-4 rounded-4 d-inline-block" style={{ background: '#ffffff', border: '2px solid #bae6fd', boxShadow: '0 8px 20px rgba(0,0,0,0.04)' }}>
+              <div className="mt-4 py-2 px-4 rounded-4 d-inline-block" style={{ background: 'rgba(255, 255, 255, 0.85)', border: '2px solid #bae6fd', boxShadow: '0 8px 20px rgba(0,0,0,0.06)' }}>
                 <span className="text-secondary fw-bold text-uppercase me-2" style={{ fontSize: '1.8rem' }}>MENUJU</span>
                 <span className="fw-black text-danger" style={{ fontSize: '3rem', fontWeight: 900 }}>
                   {latestCalling ? latestCalling.loket : '---'}
@@ -248,9 +256,10 @@ export default function Display() {
         {/* Section 2 (Right Column): Layar Antrian Berlangsung */}
         <div className="col-lg-6 d-flex">
           <div className="w-100 rounded-4 p-4 d-flex flex-column shadow-lg" style={{
-            background: '#ffffff',
-            border: '2px solid #bae6fd',
-            boxShadow: '0 15px 35px rgba(2, 132, 199, 0.08)'
+            background: 'rgba(255, 255, 255, 0.65)',
+            backdropFilter: 'blur(12px)',
+            border: '2px solid rgba(186, 230, 253, 0.8)',
+            boxShadow: '0 15px 35px rgba(0, 0, 0, 0.18)'
           }}>
             <div className="d-flex justify-content-between align-items-center border-bottom pb-3 mb-3">
               <h3 className="fw-bold m-0 d-flex align-items-center gap-2" style={{ color: '#0284c7', fontSize: '1.7rem' }}>
@@ -267,9 +276,9 @@ export default function Display() {
                 return (
                   <div className="col-12" key={lok}>
                     <div className="d-flex align-items-center justify-content-between p-3 rounded-4 shadow-sm" style={{
-                      background: active ? 'linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%)' : '#f8fafc',
+                      background: active ? 'rgba(255, 255, 255, 0.85)' : 'rgba(255, 255, 255, 0.70)',
                       borderLeft: `10px solid ${active ? '#10b981' : '#cbd5e1'}`,
-                      border: '1px solid #e2e8f0',
+                      border: '1px solid rgba(226, 232, 240, 0.8)',
                       borderLeftWidth: '10px'
                     }}>
                       <div>
@@ -304,8 +313,9 @@ export default function Display() {
       {/* Running Text Marquee Footer */}
       <div style={{
         position: 'fixed', bottom: '20px', left: '25px', right: '25px',
-        background: '#ffffff', border: '2.5px solid #0284c7', borderRadius: '14px',
-        boxShadow: '0 8px 30px rgba(2, 132, 199, 0.2)', padding: '10px 0', zIndex: 1000, overflow: 'hidden'
+        background: 'rgba(255, 255, 255, 0.75)', backdropFilter: 'blur(12px)',
+        border: '2.5px solid #0284c7', borderRadius: '14px',
+        boxShadow: '0 8px 30px rgba(0, 0, 0, 0.2)', padding: '10px 0', zIndex: 1000, overflow: 'hidden'
       }}>
         <div style={{ whiteSpace: 'nowrap' }}>
           <p style={{ display: 'inline-block', paddingLeft: '100%', margin: 0, animation: 'scroll-text 25s linear infinite', fontSize: '1.35rem', fontWeight: 700, color: '#0369a1' }}>

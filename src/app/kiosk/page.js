@@ -193,8 +193,19 @@ export default function Kiosk() {
   return (
     <>
       {!isKioskLogged ? (
-        <div style={{ background: '#ffffff', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '30px' }}>
-          <div className="card text-dark p-5 border-0 w-100 shadow-lg align-self-center mx-auto" style={{ maxWidth: '450px', background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '25px', boxShadow: '0 20px 40px rgba(0, 0, 0, 0.06)' }}>
+        <div style={{
+          backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.15), rgba(15, 23, 42, 0.25)), url('/img/bg-kecamatan.jpeg')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed',
+          minHeight: '100vh',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '30px'
+        }}>
+          <div className="card text-dark p-5 border-0 w-100 shadow-lg align-self-center mx-auto" style={{ maxWidth: '450px', background: 'rgba(255, 255, 255, 0.94)', backdropFilter: 'blur(12px)', border: '1px solid #e2e8f0', borderRadius: '25px', boxShadow: '0 20px 40px rgba(0, 0, 0, 0.12)' }}>
             <div className="text-center mb-5">
               <img src="/img/Logo.png" alt="Logo" style={{ height: '90px', objectFit: 'contain', marginBottom: '20px' }} />
               <h2 className="fw-bold mb-1 text-danger">LOGIN KIOSK</h2>
@@ -243,15 +254,26 @@ export default function Kiosk() {
           </div>
         </div>
       ) : (
-        <div id="kiosk-main-container" style={{ background: '#ffffff', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '30px' }}>
+        <div id="kiosk-main-container" style={{
+          backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.15), rgba(15, 23, 42, 0.25)), url('/img/bg-kecamatan.jpeg')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed',
+          minHeight: '100vh',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '30px'
+        }}>
           <div className="container" style={{ maxWidth: '1100px' }}>
-            <div className="text-center mb-5 position-relative">
+            <div className="text-center mb-5 position-relative p-4 rounded-4" style={{ background: 'rgba(255, 255, 255, 0.92)', backdropFilter: 'blur(10px)', boxShadow: '0 10px 30px rgba(0,0,0,0.06)', border: '1px solid rgba(254, 205, 211, 0.8)' }}>
               <button 
                 onClick={() => {
                   setIsKioskLogged(false);
                   sessionStorage.removeItem('kiosk_logged');
                 }} 
-                className="btn btn-outline-danger btn-sm position-absolute top-0 end-0 rounded-pill px-3"
+                className="btn btn-outline-danger btn-sm position-absolute top-0 end-0 m-3 rounded-pill px-3"
               >
                 <i className="bi bi-box-arrow-right"></i> Keluar Kiosk
               </button>
@@ -261,7 +283,7 @@ export default function Kiosk() {
               </div>
               <h1 className="fw-bold mb-1" style={{ color: '#dc3545', fontSize: '2.8rem' }}>AMBIL NOMOR ANTRIAN</h1>
               <h3 className="text-secondary fw-normal mb-2">{instansiNama}</h3>
-              <p className="text-muted">{instansiAlamat}</p>
+              <p className="text-muted mb-0">{instansiAlamat}</p>
             </div>
 
             {successMessage && (
@@ -283,7 +305,8 @@ export default function Kiosk() {
                       onClick={() => setSelectedLayananForForm(p)}
                       className="card text-decoration-none h-100 shadow-sm"
                       style={{
-                        background: '#ffffff',
+                        background: 'rgba(255, 255, 255, 0.93)',
+                        backdropFilter: 'blur(10px)',
                         border: '2px solid #fecdd3',
                         borderRadius: '20px',
                         padding: '30px',
@@ -312,8 +335,8 @@ export default function Kiosk() {
             )}
 
             <div className="text-center mt-5">
-              <Link href="/" className="text-danger text-decoration-none small fw-semibold">
-                <i className="bi bi-arrow-left"></i> Kembali ke Portal Utama
+              <Link href="/" className="btn btn-light bg-white border border-danger border-opacity-25 text-danger rounded-pill px-4 py-2 small fw-bold shadow-sm">
+                <i className="bi bi-arrow-left me-1"></i> Kembali ke Portal Utama
               </Link>
             </div>
           </div>
