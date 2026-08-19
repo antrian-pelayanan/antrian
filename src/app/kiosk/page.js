@@ -267,13 +267,13 @@ export default function Kiosk() {
           padding: '30px'
         }}>
           <div className="container" style={{ maxWidth: '1100px' }}>
-            <div className="text-center mb-5 position-relative p-4 rounded-4" style={{ background: 'rgba(255, 255, 255, 0.78)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', boxShadow: '0 10px 30px rgba(0,0,0,0.1)', border: '1px solid rgba(254, 205, 211, 0.8)' }}>
+            <div className="text-center mb-5 position-relative p-4 rounded-4 shadow-lg" style={{ background: 'rgba(255, 255, 255, 0.90)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', boxShadow: '0 10px 30px rgba(0,0,0,0.18)', border: '2px solid rgba(254, 205, 211, 0.9)' }}>
               <button 
                 onClick={() => {
                   setIsKioskLogged(false);
                   sessionStorage.removeItem('kiosk_logged');
                 }} 
-                className="btn btn-outline-danger btn-sm position-absolute top-0 end-0 m-3 rounded-pill px-3"
+                className="btn btn-outline-danger btn-sm position-absolute top-0 end-0 m-3 rounded-pill px-3 fw-bold"
               >
                 <i className="bi bi-box-arrow-right"></i> Keluar Kiosk
               </button>
@@ -281,13 +281,13 @@ export default function Kiosk() {
                 <img src="/img/Logo.png" alt="Logo Cilacap" style={{ height: '90px', objectFit: 'contain' }} />
                 <img src="/img/logo-semringah.png" alt="Logo Gandrung Mangu Semringah" style={{ height: '90px', objectFit: 'contain' }} />
               </div>
-              <h1 className="fw-bold mb-1" style={{ color: '#dc3545', fontSize: '2.8rem' }}>AMBIL NOMOR ANTRIAN</h1>
-              <h3 className="text-secondary fw-normal mb-2">{instansiNama}</h3>
-              <p className="text-muted mb-0">{instansiAlamat}</p>
+              <h1 className="fw-bold mb-1" style={{ color: '#dc2626', fontSize: '2.8rem' }}>AMBIL NOMOR ANTRIAN</h1>
+              <h3 className="text-dark fw-bold mb-2">{instansiNama}</h3>
+              <p className="text-dark fw-semibold mb-0">{instansiAlamat}</p>
             </div>
 
             {successMessage && (
-              <div className="alert alert-success bg-success border-0 text-white p-3 mb-4 text-center rounded-3 shadow fs-5">
+              <div className="alert alert-success bg-success border-0 text-white p-3 mb-4 text-center rounded-3 shadow fs-5 fw-bold">
                 {successMessage}
               </div>
             )}
@@ -295,7 +295,7 @@ export default function Kiosk() {
             {loading && !pelayanan.length ? (
               <div className="text-center text-dark py-5">
                 <div className="spinner-border text-danger" role="status"></div>
-                <p className="mt-3">Memuat sistem antrian...</p>
+                <p className="mt-3 fs-5 fw-bold">Memuat sistem antrian...</p>
               </div>
             ) : (
               <div className="row g-4 justify-content-center">
@@ -303,31 +303,31 @@ export default function Kiosk() {
                   <div className="col-md-4" key={p.id}>
                     <div 
                       onClick={() => setSelectedLayananForForm(p)}
-                      className="card text-decoration-none h-100 shadow-sm"
+                      className="card text-decoration-none h-100 shadow-lg"
                       style={{
-                        background: 'rgba(255, 255, 255, 0.78)',
-                        backdropFilter: 'blur(16px)',
-                        WebkitBackdropFilter: 'blur(16px)',
-                        border: '2px solid #fecdd3',
+                        background: 'rgba(255, 255, 255, 0.90)',
+                        backdropFilter: 'blur(12px)',
+                        WebkitBackdropFilter: 'blur(12px)',
+                        border: '3px solid #fecdd3',
                         borderRadius: '20px',
                         padding: '30px',
                         cursor: 'pointer',
                         transition: 'all 0.3s'
                       }}
-                      onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-5px)'; e.currentTarget.style.boxShadow = '0 15px 30px rgba(220, 38, 38, 0.15)'; e.currentTarget.style.borderColor = '#dc3545'; }}
-                      onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 0.125rem 0.25rem rgba(0, 0, 0, 0.075)'; e.currentTarget.style.borderColor = '#fecdd3'; }}
+                      onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-5px)'; e.currentTarget.style.boxShadow = '0 18px 35px rgba(220, 38, 38, 0.2)'; e.currentTarget.style.borderColor = '#dc2626'; }}
+                      onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.1)'; e.currentTarget.style.borderColor = '#fecdd3'; }}
                     >
                       <div className="d-flex justify-content-between align-items-center mb-3">
-                        <span style={{ fontSize: '7rem', fontWeight: 900, color: '#dc3545', lineHeight: 1, letterSpacing: '-1px' }}>
+                        <span style={{ fontSize: '7rem', fontWeight: 900, color: '#dc2626', lineHeight: 1, letterSpacing: '-1px', textShadow: '0 4px 15px rgba(220, 38, 38, 0.15)' }}>
                           {p.kode}
                         </span>
-                        <span className="badge bg-danger bg-opacity-10 text-danger px-3 py-2 rounded-pill fs-6 border border-danger border-opacity-25 fw-bold">
+                        <span className="badge bg-danger text-white px-3 py-2 rounded-pill fs-6 shadow-sm fw-bold">
                           Estimasi: {p.estimasi_waktu} mnt
                         </span>
                       </div>
                       <div>
-                        <h2 className="fw-bold mb-3" style={{ fontSize: '1.8rem', lineHeight: 1.2, color: '#dc3545' }}>{p.nama}</h2>
-                        <p className="m-0 text-muted" style={{ fontSize: '1rem' }}>Tekan tombol ({p.kode}) atau sentuh layar.</p>
+                        <h2 className="fw-bold mb-3" style={{ fontSize: '1.8rem', lineHeight: 1.2, color: '#991b1b' }}>{p.nama}</h2>
+                        <p className="m-0 text-dark fw-bold" style={{ fontSize: '1.05rem' }}>Tekan tombol ({p.kode}) atau sentuh layar.</p>
                       </div>
                     </div>
                   </div>
