@@ -267,27 +267,27 @@ export default function Kiosk() {
           padding: '30px'
         }}>
           <div className="container" style={{ maxWidth: '1100px' }}>
-            <div className="text-center mb-5 position-relative p-4 rounded-4 shadow-lg" style={{ background: 'rgba(255, 255, 255, 0.55)', backdropFilter: 'blur(24px)', WebkitBackdropFilter: 'blur(24px)', boxShadow: '0 15px 35px rgba(0,0,0,0.25)', border: '2px solid rgba(255, 255, 255, 0.8)' }}>
+            <div className="text-center mb-5 position-relative p-4 rounded-4 shadow-lg" style={{ background: 'rgba(255, 255, 255, 0.12)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', boxShadow: '0 20px 50px rgba(0,0,0,0.4)', border: '2px solid rgba(255, 255, 255, 0.3)' }}>
               <button 
                 onClick={() => {
                   setIsKioskLogged(false);
                   sessionStorage.removeItem('kiosk_logged');
                 }} 
-                className="btn btn-outline-danger btn-sm position-absolute top-0 end-0 m-3 rounded-pill px-3 fw-bold"
+                className="btn btn-outline-light btn-sm position-absolute top-0 end-0 m-3 rounded-pill px-3 fw-bold shadow"
               >
                 <i className="bi bi-box-arrow-right"></i> Keluar Kiosk
               </button>
               <div className="d-flex align-items-center justify-content-center gap-4 mb-3">
-                <img src="/img/Logo.png" alt="Logo Cilacap" style={{ height: '90px', objectFit: 'contain' }} />
-                <img src="/img/logo-semringah.png" alt="Logo Gandrung Mangu Semringah" style={{ height: '90px', objectFit: 'contain' }} />
+                <img src="/img/Logo.png" alt="Logo Cilacap" style={{ height: '90px', objectFit: 'contain', filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.5))' }} />
+                <img src="/img/logo-semringah.png" alt="Logo Gandrung Mangu Semringah" style={{ height: '90px', objectFit: 'contain', filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.5))' }} />
               </div>
-              <h1 className="fw-bold mb-1" style={{ color: '#dc2626', fontSize: '2.8rem', textShadow: '0 2px 4px rgba(255,255,255,0.8)' }}>AMBIL NOMOR ANTRIAN</h1>
-              <h3 className="text-dark fw-extrabold mb-2" style={{ textShadow: '0 1px 2px rgba(255,255,255,0.9)' }}>{instansiNama}</h3>
-              <p className="text-dark fw-extrabold mb-0">{instansiAlamat}</p>
+              <h1 className="fw-bold mb-1" style={{ color: '#ffffff', fontSize: '2.8rem', textShadow: '0 2px 0 #0284c7, 0 4px 0 #0369a1, 0 6px 15px rgba(0,0,0,0.9)' }}>AMBIL NOMOR ANTRIAN</h1>
+              <h3 className="text-white fw-bold mb-2" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.9)' }}>{instansiNama}</h3>
+              <p className="text-white fw-bold mb-0" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.9)' }}>{instansiAlamat}</p>
             </div>
 
             {successMessage && (
-              <div className="alert alert-success bg-success border-0 text-white p-3 mb-4 text-center rounded-3 shadow fs-5 fw-bold">
+              <div className="alert alert-success bg-success border-0 text-white p-3 mb-4 text-center rounded-3 shadow fs-5 fw-bold" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>
                 {successMessage}
               </div>
             )}
@@ -305,29 +305,36 @@ export default function Kiosk() {
                       onClick={() => setSelectedLayananForForm(p)}
                       className="card text-decoration-none h-100 shadow-lg"
                       style={{
-                        background: 'rgba(255, 255, 255, 0.55)',
-                        backdropFilter: 'blur(24px)',
-                        WebkitBackdropFilter: 'blur(24px)',
-                        border: '2.5px solid rgba(255, 255, 255, 0.8)',
+                        background: 'rgba(255, 255, 255, 0.12)',
+                        backdropFilter: 'blur(16px)',
+                        WebkitBackdropFilter: 'blur(16px)',
+                        border: '2px solid rgba(255, 255, 255, 0.3)',
                         borderRadius: '20px',
                         padding: '30px',
                         cursor: 'pointer',
                         transition: 'all 0.3s'
                       }}
-                      onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-5px)'; e.currentTarget.style.boxShadow = '0 20px 40px rgba(220, 38, 38, 0.3)'; e.currentTarget.style.borderColor = '#dc2626'; }}
-                      onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.15)'; e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.8)'; }}
+                      onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-5px)'; e.currentTarget.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.5)'; e.currentTarget.style.borderColor = '#ffffff'; }}
+                      onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.3)'; e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.3)'; }}
                     >
                       <div className="d-flex justify-content-between align-items-center mb-3">
-                        <span style={{ fontSize: '7.2rem', fontWeight: 900, color: '#dc2626', lineHeight: 1, letterSpacing: '-1px', textShadow: '0 4px 15px rgba(0,0,0,0.3)' }}>
+                        <span style={{ 
+                          fontSize: '7.5rem', 
+                          fontWeight: 900, 
+                          color: '#ff3333', 
+                          lineHeight: 1, 
+                          letterSpacing: '-1px', 
+                          textShadow: '0 2px 0 #dc2626, 0 4px 0 #b91c1c, 0 6px 0 #991b1b, 0 8px 15px rgba(0,0,0,0.9)' 
+                        }}>
                           {p.kode}
                         </span>
-                        <span className="badge bg-danger text-white px-3 py-2 rounded-pill fs-6 shadow-sm fw-bold">
+                        <span className="badge bg-danger text-white px-3 py-2 rounded-pill fs-6 shadow fw-bold" style={{ border: '1px solid rgba(255,255,255,0.4)', textShadow: '0 1px 3px rgba(0,0,0,0.5)' }}>
                           Estimasi: {p.estimasi_waktu} mnt
                         </span>
                       </div>
                       <div>
-                        <h2 className="fw-bold mb-3" style={{ fontSize: '1.85rem', lineHeight: 1.2, color: '#991b1b', textShadow: '0 1px 2px rgba(255,255,255,0.8)' }}>{p.nama}</h2>
-                        <p className="m-0 text-dark fw-extrabold" style={{ fontSize: '1.05rem' }}>Tekan tombol ({p.kode}) atau sentuh layar.</p>
+                        <h2 className="fw-bold mb-3" style={{ fontSize: '1.85rem', lineHeight: 1.2, color: '#ffffff', textShadow: '0 2px 4px rgba(0,0,0,0.9), 0 4px 10px rgba(0,0,0,0.7)' }}>{p.nama}</h2>
+                        <p className="m-0 text-white fw-bold" style={{ fontSize: '1.05rem', textShadow: '0 2px 4px rgba(0,0,0,0.9)' }}>Tekan tombol ({p.kode}) atau sentuh layar.</p>
                       </div>
                     </div>
                   </div>
