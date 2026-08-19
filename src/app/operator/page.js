@@ -264,28 +264,48 @@ export default function Operator() {
 
   if (!isLogged) {
     return (
-      <div style={{ background: 'linear-gradient(135deg, #e0f2fe 0%, #38bdf8 45%, #0284c7 100%)', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
-        <div className="card text-dark p-5 shadow-lg" style={{ maxWidth: '520px', width: '100%', background: '#ffffff', borderRadius: '24px', border: '1px solid #bae6fd', boxShadow: '0 25px 60px rgba(2, 132, 199, 0.25)' }}>
+      <div style={{
+        backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.35), rgba(15, 23, 42, 0.45)), url('/img/bg-kecamatan.jpeg')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        backgroundAttachment: 'fixed',
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '20px'
+      }}>
+        <div className="card text-white p-5 shadow-lg" style={{
+          maxWidth: '520px',
+          width: '100%',
+          background: 'rgba(255, 255, 255, 0.10)',
+          backdropFilter: 'blur(8px)',
+          WebkitBackdropFilter: 'blur(8px)',
+          borderRadius: '24px',
+          border: '2px solid rgba(255, 255, 255, 0.45)',
+          boxShadow: '0 20px 50px rgba(0, 0, 0, 0.4)'
+        }}>
           <div className="text-center mb-4">
-            <img src="/img/Logo.png" alt="Logo" style={{ height: '85px', objectFit: 'contain', marginBottom: '15px' }} />
-            <h3 className="fw-bold text-dark mb-1">Konsol Operator</h3>
-            <p className="text-primary small fw-bold">Sistem Antrian Kecamatan Gandrungmangu</p>
+            <img src="/img/Logo.png" alt="Logo" style={{ height: '85px', objectFit: 'contain', marginBottom: '15px', filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.6))' }} />
+            <h3 className="fw-bold text-white mb-1" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.9)' }}>Konsol Operator</h3>
+            <p className="text-info small fw-bold" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.9)' }}>Sistem Antrian Kecamatan Gandrungmangu</p>
           </div>
 
           {loginError && (
-            <div className="alert alert-danger border-0 text-white p-3 mb-3 text-center rounded-3 small fw-semibold" style={{ background: '#ef4444' }}>
+            <div className="alert alert-danger border-0 text-white p-3 mb-3 text-center rounded-3 small fw-semibold" style={{ background: '#ef4444', textShadow: '0 1px 2px rgba(0,0,0,0.5)' }}>
               {loginError}
             </div>
           )}
 
           <form onSubmit={handleLogin}>
             <div className="mb-3">
-              <label className="form-label text-secondary small fw-bold">Username Operator</label>
+              <label className="form-label text-white small fw-bold" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.9)' }}>Username Operator</label>
               <div className="input-group">
-                <span className="input-group-text bg-light border-primary-subtle text-primary"><i className="bi bi-person"></i></span>
+                <span className="input-group-text bg-white bg-opacity-25 border-white border-opacity-50 text-white"><i className="bi bi-person"></i></span>
                 <input 
                   type="text" 
-                  className="form-control bg-light text-dark border-primary-subtle" 
+                  className="form-control bg-white bg-opacity-75 text-dark fw-bold border-white" 
                   placeholder="Username" 
                   required
                   value={username}
@@ -295,12 +315,12 @@ export default function Operator() {
             </div>
 
             <div className="mb-3">
-              <label className="form-label text-secondary small fw-bold">Password</label>
+              <label className="form-label text-white small fw-bold" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.9)' }}>Password</label>
               <div className="input-group">
-                <span className="input-group-text bg-light border-primary-subtle text-primary"><i className="bi bi-lock"></i></span>
+                <span className="input-group-text bg-white bg-opacity-25 border-white border-opacity-50 text-white"><i className="bi bi-lock"></i></span>
                 <input 
                   type="password" 
-                  className="form-control bg-light text-dark border-primary-subtle" 
+                  className="form-control bg-white bg-opacity-75 text-dark fw-bold border-white" 
                   placeholder="Password" 
                   required
                   value={password}
@@ -311,9 +331,9 @@ export default function Operator() {
 
             <div className="row g-2 mb-4">
               <div className="col-md-6">
-                <label className="form-label text-secondary small fw-bold">Pilih Loket</label>
+                <label className="form-label text-white small fw-bold" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.9)' }}>Pilih Loket</label>
                 <select 
-                  className="form-select bg-light text-dark border-primary-subtle" 
+                  className="form-select bg-white bg-opacity-75 text-dark fw-bold border-white" 
                   required 
                   value={selectedLoket} 
                   onChange={e => {
@@ -334,9 +354,9 @@ export default function Operator() {
                 </select>
               </div>
               <div className="col-md-6">
-                <label className="form-label text-secondary small fw-bold">Pilih Layanan</label>
+                <label className="form-label text-white small fw-bold" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.9)' }}>Pilih Layanan</label>
                 <select 
-                  className="form-select bg-light text-dark border-primary-subtle" 
+                  className="form-select bg-white bg-opacity-75 text-dark fw-bold border-white" 
                   required 
                   value={selectedLayanan} 
                   onChange={e => {
@@ -365,11 +385,11 @@ export default function Operator() {
               </div>
             </div>
 
-            <button type="submit" className="btn btn-primary w-100 py-3 fw-bold rounded-pill mb-3" style={{ background: 'linear-gradient(135deg, #0284c7, #2563eb)', border: 'none', boxShadow: '0 8px 20px rgba(2, 132, 199, 0.35)', transition: 'all 0.3s' }}>
+            <button type="submit" className="btn btn-primary w-100 py-3 fw-bold rounded-pill mb-3 shadow-lg" style={{ background: 'linear-gradient(135deg, #0284c7, #2563eb)', border: '1px solid rgba(255,255,255,0.4)', textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>
               Masuk Konsol Operator
             </button>
 
-            <Link href="/" className="btn btn-outline-secondary w-100 py-2 rounded-pill text-secondary small text-decoration-none text-center d-block">
+            <Link href="/" className="btn btn-outline-light w-100 py-2 rounded-pill text-white small text-decoration-none text-center d-block fw-bold shadow-sm">
               <i className="bi bi-arrow-left"></i> Kembali ke Portal
             </Link>
           </form>
@@ -379,184 +399,270 @@ export default function Operator() {
   }
 
   return (
-    <div className="container-fluid py-4" style={{ backgroundColor: '#f0f7ff', minHeight: '100vh' }}>
-      <div className="d-flex justify-content-between align-items-center mb-4 p-3 rounded-4 shadow-sm" style={{ background: '#ffffff', border: '1px solid #bae6fd' }}>
-        <div>
-          <h4 className="fw-bold m-0" style={{ color: '#0284c7' }}>Konsol Operator: {selectedLoket}</h4>
-          <small className="text-secondary">Petugas: <strong className="text-dark">{operatorNama || 'Operator'}</strong></small>
+    <div style={{
+      backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.35), rgba(15, 23, 42, 0.45)), url('/img/bg-kecamatan.jpeg')`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      backgroundAttachment: 'fixed',
+      minHeight: '100vh',
+      maxHeight: '100vh',
+      display: 'flex',
+      flexDirection: 'column',
+      padding: '15px 25px',
+      boxSizing: 'border-box',
+      overflow: 'hidden'
+    }}>
+      {/* Header Bar (Compact) */}
+      <div className="d-flex justify-content-between align-items-center mb-3 px-4 py-2 rounded-4 shadow-lg" style={{
+        background: 'rgba(255, 255, 255, 0.08)',
+        backdropFilter: 'blur(6px)',
+        WebkitBackdropFilter: 'blur(6px)',
+        border: '2px solid rgba(255, 255, 255, 0.45)',
+        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 0 15px rgba(255, 255, 255, 0.15)'
+      }}>
+        <div className="d-flex align-items-center gap-3">
+          <img src="/img/Logo.png" alt="Logo" style={{ height: '45px', objectFit: 'contain', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.6))' }} />
+          <div>
+            <h4 className="fw-bold m-0 text-white" style={{ fontSize: '1.4rem', textShadow: '0 2px 4px rgba(0,0,0,0.9)' }}>
+              Konsol Operator: <span className="text-info">{selectedLoket}</span>
+            </h4>
+            <small className="text-white fw-bold" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.9)' }}>
+              Petugas: <strong className="text-warning">{operatorNama || 'Operator'}</strong>
+            </small>
+          </div>
         </div>
-        <button className="btn btn-danger btn-sm px-3 rounded-pill fw-bold" onClick={handleLogout}>
-          <i className="bi bi-box-arrow-right"></i> Keluar
-        </button>
+
+        <div className="d-flex align-items-center gap-3">
+          <img src="/img/logo-semringah.png" alt="Semringah" style={{ height: '50px', objectFit: 'contain', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.6))' }} />
+          <button className="btn btn-danger btn-sm px-3 rounded-pill fw-bold shadow" onClick={handleLogout}>
+            <i className="bi bi-box-arrow-right me-1"></i> Keluar
+          </button>
+        </div>
       </div>
 
-      <div className="row g-4">
-        {/* Main Calling Panel */}
-        <div className="col-lg-8">
-          <div className="card p-4 text-center mb-4 shadow-sm rounded-4" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #f0f9ff 100%)', border: '2px solid #38bdf8', boxShadow: '0 10px 25px rgba(2, 132, 199, 0.08)' }}>
-            <div className="d-flex justify-content-between align-items-center border-bottom pb-3 mb-4">
+      {/* Main Single-Viewport Layout */}
+      <div className="row g-3 flex-grow-1 overflow-hidden" style={{ minHeight: 0 }}>
+        
+        {/* Left Column (Calling Control Center) */}
+        <div className="col-lg-6 d-flex flex-column h-100">
+          <div className="w-100 h-100 rounded-4 p-4 d-flex flex-column justify-content-between text-center shadow-lg" style={{
+            background: 'rgba(255, 255, 255, 0.08)',
+            backdropFilter: 'blur(6px)',
+            WebkitBackdropFilter: 'blur(6px)',
+            border: '2px solid rgba(255, 255, 255, 0.45)',
+            boxShadow: '0 12px 40px rgba(0, 0, 0, 0.35), inset 0 0 20px rgba(255, 255, 255, 0.12)'
+          }}>
+            {/* Header Service Info */}
+            <div className="d-flex justify-content-between align-items-center border-bottom border-white border-opacity-25 pb-2">
               <div className="text-start">
-                <h5 className="fw-bold m-0" style={{ color: '#0284c7' }}>
+                <h5 className="fw-bold m-0 text-white" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.9)', fontSize: '1.25rem' }}>
                   {isMultiService 
-                    ? 'Kependudukan (B) & Perekaman E-KTP (C)' 
+                    ? 'Kependudukan (B) & E-KTP (C)' 
                     : pelayananList.find(p => p.id === selectedLayanan)?.nama}
                 </h5>
-                <small className="text-muted">Melayani: <strong>{selectedLoket}</strong></small>
+                <small className="text-info fw-bold" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.9)' }}>Melayani: {selectedLoket}</small>
               </div>
-              <span className="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25 py-2 px-3 fs-6">Aktif Tersinkronisasi</span>
+              <span className="badge bg-success text-white border border-white border-opacity-25 py-2 px-3 fs-6 shadow fw-bold">
+                Tersinkronisasi
+              </span>
             </div>
 
-            <div className="py-4">
-              <span className="small text-uppercase fw-bold tracking-wider" style={{ color: '#0284c7' }}>Nomor Antrian Sekarang</span>
-              <h1 className="display-1 fw-bold my-2" style={{ fontSize: '8rem', color: '#0284c7', textShadow: '0 6px 20px rgba(2, 132, 199, 0.18)' }}>
+            {/* 3D Embossed Called Number Display */}
+            <div className="my-auto py-2">
+              <span className="small text-uppercase fw-bold text-white tracking-wider" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.9)', fontSize: '1.1rem' }}>
+                Nomor Antrian Dipanggil
+              </span>
+              
+              <h1 className="fw-extrabold my-2" style={{
+                fontSize: '7.5rem',
+                lineHeight: 0.88,
+                fontWeight: 900,
+                color: '#ff3333',
+                textShadow: '0 3px 0 #dc2626, 0 6px 0 #b91c1c, 0 9px 0 #991b1b, 0 12px 25px rgba(0, 0, 0, 0.9)'
+              }}>
                 {currentQueue ? currentQueue.nomor_lengkap : '---'}
               </h1>
-              <p className="text-muted">
-                {currentQueue ? `Diulang: ${currentQueue.panggil_ulang}x` : 'Tidak ada antrian aktif.'}
+
+              <p className="text-white fw-bold mb-2 small" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.9)' }}>
+                {currentQueue ? `Diulang: ${currentQueue.panggil_ulang}x` : 'Tidak ada antrian aktif saat ini.'}
               </p>
+
               {currentQueue && currentQueue.warga_nama && (
-                <div className="mt-4 p-3 rounded-3 border text-start d-inline-block shadow-sm" style={{ minWidth: '320px', background: '#ffffff', borderColor: '#bae6fd' }}>
-                  <div className="fw-bold border-bottom pb-1 mb-2" style={{ color: '#0284c7' }}><i className="bi bi-person-fill"></i> Data Warga</div>
-                  <div className="text-secondary small">Nama: <strong className="text-dark">{currentQueue.warga_nama}</strong></div>
-                  <div className="text-secondary small">Alamat: <span className="text-dark">{currentQueue.warga_alamat}</span></div>
-                  <div className="text-secondary small">No. HP: <span className="text-dark">{currentQueue.warga_hp}</span></div>
+                <div className="p-2 rounded-3 text-start d-inline-block shadow" style={{ background: 'rgba(255, 255, 255, 0.12)', border: '1px solid rgba(255, 255, 255, 0.3)', backdropFilter: 'blur(8px)', minWidth: '280px' }}>
+                  <div className="fw-bold border-bottom border-white border-opacity-25 pb-1 mb-1 text-info small"><i className="bi bi-person-fill me-1"></i> Data Warga</div>
+                  <div className="text-white small">Nama: <strong className="text-white">{currentQueue.warga_nama}</strong></div>
+                  <div className="text-white small">Alamat: <span>{currentQueue.warga_alamat}</span> | HP: <span>{currentQueue.warga_hp}</span></div>
                 </div>
               )}
             </div>
 
-            <div className="row g-3 mt-2">
+            {/* Action Buttons Grid (Fits right on screen) */}
+            <div className="row g-2">
               {isMultiService ? (
                 <>
-                  <div className="col-sm-6">
-                    <button onClick={panggilBerikutnyaB} className="btn btn-lg w-100 py-3 fw-bold text-white shadow-sm" style={{ background: 'linear-gradient(135deg, #0284c7, #2563eb)', border: 'none' }}>
-                      <i className="bi bi-chevron-double-right"></i> Panggil Antrian B
+                  <div className="col-6">
+                    <button onClick={panggilBerikutnyaB} className="btn btn-lg w-100 py-3 fw-bold text-white shadow" style={{ background: 'linear-gradient(135deg, #0284c7, #2563eb)', border: '1px solid rgba(255,255,255,0.4)', fontSize: '1.1rem', textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>
+                      <i className="bi bi-chevron-double-right me-1"></i> Panggil Next (B)
                     </button>
                   </div>
-                  <div className="col-sm-6">
-                    <button onClick={panggilBerikutnyaC} className="btn btn-lg w-100 py-3 fw-bold text-white shadow-sm" style={{ background: 'linear-gradient(135deg, #10b981, #059669)', border: 'none' }}>
-                      <i className="bi bi-chevron-double-right"></i> Panggil Antrian C
+                  <div className="col-6">
+                    <button onClick={panggilBerikutnyaC} className="btn btn-lg w-100 py-3 fw-bold text-white shadow" style={{ background: 'linear-gradient(135deg, #10b981, #059669)', border: '1px solid rgba(255,255,255,0.4)', fontSize: '1.1rem', textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>
+                      <i className="bi bi-chevron-double-right me-1"></i> Panggil Next (C)
                     </button>
                   </div>
                 </>
               ) : (
-                <div className="col-sm-6">
-                  <button onClick={panggilBerikutnya} className="btn btn-lg w-100 py-3 fw-bold text-white shadow-sm" style={{ background: 'linear-gradient(135deg, #0284c7, #2563eb)', border: 'none' }}>
-                    <i className="bi bi-chevron-double-right"></i> Panggil Berikutnya
+                <div className="col-12">
+                  <button onClick={panggilBerikutnya} className="btn btn-lg w-100 py-3 fw-bold text-white shadow" style={{ background: 'linear-gradient(135deg, #0284c7, #2563eb)', border: '1px solid rgba(255,255,255,0.4)', fontSize: '1.2rem', textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>
+                    <i className="bi bi-chevron-double-right me-1"></i> Panggil Berikutnya
                   </button>
                 </div>
               )}
-              
+
               {currentQueue && (
                 <>
-                  <div className="col-sm-6">
-                    <button onClick={panggilUlang} className="btn btn-lg w-100 py-3 fw-bold text-white shadow-sm" style={{ background: 'linear-gradient(135deg, #f59e0b, #d97706)', border: 'none' }}>
-                      <i className="bi bi-volume-up-fill"></i> Panggil Ulang
+                  <div className="col-4">
+                    <button onClick={panggilUlang} className="btn btn-warning btn-lg w-100 py-2 fw-bold text-dark shadow" style={{ border: '1px solid rgba(255,255,255,0.4)' }}>
+                      <i className="bi bi-volume-up-fill me-1"></i> Ulang
                     </button>
                   </div>
-                  <div className="col-sm-6">
-                    <button onClick={lewatkan} className="btn btn-outline-danger btn-lg w-100 py-3 fw-bold">
-                      <i className="bi bi-x-circle"></i> Lewatkan
+                  <div className="col-4">
+                    <button onClick={lewatkan} className="btn btn-outline-light btn-lg w-100 py-2 fw-bold shadow">
+                      <i className="bi bi-x-circle me-1"></i> Lewat
                     </button>
                   </div>
-                  <div className="col-sm-6">
-                    <button onClick={selesaikan} className="btn btn-lg w-100 py-3 fw-bold text-white shadow-sm" style={{ background: 'linear-gradient(135deg, #10b981, #059669)', border: 'none' }}>
-                      <i className="bi bi-check-circle-fill"></i> Selesai
+                  <div className="col-4">
+                    <button onClick={selesaikan} className="btn btn-success btn-lg w-100 py-2 fw-bold text-white shadow" style={{ border: '1px solid rgba(255,255,255,0.4)' }}>
+                      <i className="bi bi-check-circle-fill me-1"></i> Selesai
                     </button>
                   </div>
                 </>
               )}
             </div>
           </div>
+        </div>
 
-          {/* Waiting Queue List */}
-          <div className="card p-4 shadow-sm border-0 rounded-4" style={{ background: '#ffffff' }}>
-            {isMultiService ? (
-              <div className="row g-4">
-                {/* Column for Antrian B */}
-                <div className="col-md-6 border-end">
-                  <h5 className="fw-bold mb-3 d-flex align-items-center gap-2" style={{ color: '#0284c7' }}>
-                    <i className="bi bi-people-fill"></i> Antrian B ({stats.waitingB})
-                  </h5>
-                  <div className="table-responsive">
-                    <table className="table table-hover align-middle">
-                      <thead className="table-light">
-                        <tr>
-                          <th>Nomor</th>
-                          <th>Nama Warga</th>
-                          <th>Aksi</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {waitingQueuesB.map(q => (
-                          <tr key={q.id}>
-                            <td><span className="badge p-2 fs-6 text-white" style={{ background: '#0284c7' }}>{q.nomor_lengkap}</span></td>
-                            <td>
-                              <strong className="text-dark d-block">{q.warga_nama}</strong>
-                              <span className="text-muted small">{q.warga_alamat}</span>
-                            </td>
-                            <td>
-                              <button onClick={() => layaniSekarang(q)} className="btn btn-sm btn-outline-primary fw-semibold">Panggil</button>
-                            </td>
-                          </tr>
-                        ))}
-                        {waitingQueuesB.length === 0 && (
-                          <tr>
-                            <td colSpan="3" className="text-center text-muted py-4">Kosong</td>
-                          </tr>
-                        )}
-                      </tbody>
-                    </table>
+        {/* Right Column (Queue List & Stats) */}
+        <div className="col-lg-6 d-flex flex-column h-100">
+          <div className="w-100 h-100 rounded-4 p-3 d-flex flex-column justify-content-start shadow-lg" style={{
+            background: 'rgba(255, 255, 255, 0.08)',
+            backdropFilter: 'blur(6px)',
+            WebkitBackdropFilter: 'blur(6px)',
+            border: '2px solid rgba(255, 255, 255, 0.45)',
+            boxShadow: '0 12px 40px rgba(0, 0, 0, 0.35), inset 0 0 20px rgba(255, 255, 255, 0.12)'
+          }}>
+            {/* Horizontal Stats Row */}
+            <div className="d-flex align-items-center justify-content-between gap-2 mb-3 pb-2 border-bottom border-white border-opacity-25">
+              {isMultiService ? (
+                <>
+                  <div className="px-3 py-2 rounded-3 text-center flex-fill" style={{ background: 'rgba(255, 255, 255, 0.12)', border: '1px solid rgba(255, 255, 255, 0.3)' }}>
+                    <span className="text-white small fw-bold d-block" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.8)' }}>Menunggu B</span>
+                    <span className="fs-3 fw-black text-info" style={{ textShadow: '0 2px 0 #0284c7, 0 4px 8px rgba(0,0,0,0.8)' }}>{stats.waitingB}</span>
                   </div>
+                  <div className="px-3 py-2 rounded-3 text-center flex-fill" style={{ background: 'rgba(255, 255, 255, 0.12)', border: '1px solid rgba(255, 255, 255, 0.3)' }}>
+                    <span className="text-white small fw-bold d-block" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.8)' }}>Menunggu C</span>
+                    <span className="fs-3 fw-black text-success" style={{ textShadow: '0 2px 0 #047857, 0 4px 8px rgba(0,0,0,0.8)' }}>{stats.waitingC}</span>
+                  </div>
+                </>
+              ) : (
+                <div className="px-3 py-2 rounded-3 text-center flex-fill" style={{ background: 'rgba(255, 255, 255, 0.12)', border: '1px solid rgba(255, 255, 255, 0.3)' }}>
+                  <span className="text-white small fw-bold d-block" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.8)' }}>Menunggu</span>
+                  <span className="fs-3 fw-black text-danger" style={{ textShadow: '0 2px 0 #b91c1c, 0 4px 8px rgba(0,0,0,0.8)' }}>{stats.waiting}</span>
                 </div>
+              )}
 
-                {/* Column for Antrian C */}
-                <div className="col-md-6">
-                  <h5 className="fw-bold mb-3 d-flex align-items-center gap-2 text-success">
-                    <i className="bi bi-people-fill"></i> Antrian C ({stats.waitingC})
-                  </h5>
-                  <div className="table-responsive">
-                    <table className="table table-hover align-middle">
-                      <thead className="table-light">
-                        <tr>
-                          <th>Nomor</th>
-                          <th>Nama Warga</th>
-                          <th>Aksi</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {waitingQueuesC.map(q => (
-                          <tr key={q.id}>
-                            <td><span className="badge bg-success p-2 fs-6">{q.nomor_lengkap}</span></td>
-                            <td>
-                              <strong className="text-dark d-block">{q.warga_nama}</strong>
-                              <span className="text-muted small">{q.warga_alamat}</span>
-                            </td>
-                            <td>
-                              <button onClick={() => layaniSekarang(q)} className="btn btn-sm btn-outline-success fw-semibold">Panggil</button>
-                            </td>
-                          </tr>
-                        ))}
-                        {waitingQueuesC.length === 0 && (
-                          <tr>
-                            <td colSpan="3" className="text-center text-muted py-4">Kosong</td>
-                          </tr>
-                        )}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
+              <div className="px-3 py-2 rounded-3 text-center flex-fill" style={{ background: 'rgba(255, 255, 255, 0.12)', border: '1px solid rgba(255, 255, 255, 0.3)' }}>
+                <span className="text-white small fw-bold d-block" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.8)' }}>Selesai</span>
+                <span className="fs-3 fw-black text-success" style={{ textShadow: '0 2px 0 #047857, 0 4px 8px rgba(0,0,0,0.8)' }}>{stats.served}</span>
               </div>
-            ) : (
-              <>
-                <h5 className="fw-bold mb-3 d-flex align-items-center gap-2" style={{ color: '#0284c7' }}>
-                  <i className="bi bi-people-fill"></i> Daftar Tunggu ({stats.waiting})
-                </h5>
+            </div>
+
+            {/* Waiting Queue List Scrollable Container */}
+            <div className="flex-grow-1 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 210px)' }}>
+              {isMultiService ? (
+                <div className="row g-2">
+                  {/* Column for Antrian B */}
+                  <div className="col-md-6 border-end border-white border-opacity-25 pe-2">
+                    <h6 className="fw-bold mb-2 text-info d-flex align-items-center gap-1" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.8)' }}>
+                      <i className="bi bi-people-fill"></i> Antrian B ({stats.waitingB})
+                    </h6>
+                    <div className="table-responsive">
+                      <table className="table table-dark table-hover align-middle mb-0" style={{ background: 'transparent' }}>
+                        <thead>
+                          <tr>
+                            <th>Nomor</th>
+                            <th>Nama</th>
+                            <th>Aksi</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {waitingQueuesB.map(q => (
+                            <tr key={q.id}>
+                              <td><span className="badge bg-primary fs-6 fw-bold shadow">{q.nomor_lengkap}</span></td>
+                              <td>
+                                <strong className="text-white d-block small">{q.warga_nama || '-'}</strong>
+                                <span className="text-light opacity-75 small">{q.warga_alamat}</span>
+                              </td>
+                              <td>
+                                <button onClick={() => layaniSekarang(q)} className="btn btn-sm btn-outline-info fw-bold py-0 px-2">Panggil</button>
+                              </td>
+                            </tr>
+                          ))}
+                          {waitingQueuesB.length === 0 && (
+                            <tr>
+                              <td colSpan="3" className="text-center text-light opacity-75 py-3 small">Kosong</td>
+                            </tr>
+                          )}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  {/* Column for Antrian C */}
+                  <div className="col-md-6 ps-2">
+                    <h6 className="fw-bold mb-2 text-success d-flex align-items-center gap-1" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.8)' }}>
+                      <i className="bi bi-people-fill"></i> Antrian C ({stats.waitingC})
+                    </h6>
+                    <div className="table-responsive">
+                      <table className="table table-dark table-hover align-middle mb-0" style={{ background: 'transparent' }}>
+                        <thead>
+                          <tr>
+                            <th>Nomor</th>
+                            <th>Nama</th>
+                            <th>Aksi</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {waitingQueuesC.map(q => (
+                            <tr key={q.id}>
+                              <td><span className="badge bg-success fs-6 fw-bold shadow">{q.nomor_lengkap}</span></td>
+                              <td>
+                                <strong className="text-white d-block small">{q.warga_nama || '-'}</strong>
+                                <span className="text-light opacity-75 small">{q.warga_alamat}</span>
+                              </td>
+                              <td>
+                                <button onClick={() => layaniSekarang(q)} className="btn btn-sm btn-outline-success fw-bold py-0 px-2">Panggil</button>
+                              </td>
+                            </tr>
+                          ))}
+                          {waitingQueuesC.length === 0 && (
+                            <tr>
+                              <td colSpan="3" className="text-center text-light opacity-75 py-3 small">Kosong</td>
+                            </tr>
+                          )}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              ) : (
                 <div className="table-responsive">
-                  <table className="table table-hover align-middle">
-                    <thead className="table-light">
+                  <table className="table table-dark table-hover align-middle mb-0" style={{ background: 'transparent' }}>
+                    <thead>
                       <tr>
                         <th>Nomor</th>
-                        <th>Detail Warga</th>
+                        <th>Warga</th>
                         <th>Status</th>
                         <th>Aksi</th>
                       </tr>
@@ -564,76 +670,36 @@ export default function Operator() {
                     <tbody>
                       {waitingQueues.map(q => (
                         <tr key={q.id}>
-                          <td><span className="badge bg-secondary p-2 fs-6">{q.nomor_lengkap}</span></td>
+                          <td><span className="badge bg-primary fs-6 fw-bold shadow">{q.nomor_lengkap}</span></td>
                           <td>
                             {q.warga_nama ? (
                               <div>
-                                <strong className="text-dark d-block">{q.warga_nama}</strong>
-                                <span className="text-muted small">{q.warga_alamat} | {q.warga_hp}</span>
+                                <strong className="text-white d-block small">{q.warga_nama}</strong>
+                                <span className="text-light opacity-75 small">{q.warga_alamat}</span>
                               </div>
                             ) : (
-                              <span className="text-muted small">-</span>
+                              <span className="text-light opacity-75 small">-</span>
                             )}
                           </td>
                           <td><span className="badge bg-info text-white">Menunggu</span></td>
                           <td>
-                            <button onClick={() => layaniSekarang(q)} className="btn btn-sm btn-outline-primary fw-semibold">Panggil</button>
+                            <button onClick={() => layaniSekarang(q)} className="btn btn-sm btn-outline-primary fw-bold py-0 px-2">Panggil</button>
                           </td>
                         </tr>
                       ))}
                       {waitingQueues.length === 0 && (
                         <tr>
-                          <td colSpan="4" className="text-center text-muted py-4">Tidak ada antrian yang menunggu.</td>
+                          <td colSpan="4" className="text-center text-light opacity-75 py-4 small">Tidak ada antrian yang menunggu.</td>
                         </tr>
                       )}
                     </tbody>
                   </table>
                 </div>
-              </>
-            )}
-          </div>
-        </div>
-
-        {/* Stats Sidebar */}
-        <div className="col-lg-4">
-          <div className="card p-4 mb-4 shadow-sm border-0 rounded-4" style={{ background: '#ffffff' }}>
-            <h5 className="fw-bold mb-4 text-dark">Statistik {selectedLoket}</h5>
-            
-            {isMultiService ? (
-              <>
-                <div className="d-flex align-items-center justify-content-between mb-3 border-bottom pb-2">
-                  <span className="text-muted"><i className="bi bi-person-clock me-2"></i> Menunggu B</span>
-                  <span className="fs-4 fw-bold" style={{ color: '#0284c7' }}>{stats.waitingB}</span>
-                </div>
-                <div className="d-flex align-items-center justify-content-between mb-3 border-bottom pb-2">
-                  <span className="text-muted"><i className="bi bi-person-clock me-2"></i> Menunggu C</span>
-                  <span className="fs-4 fw-bold text-success">{stats.waitingC}</span>
-                </div>
-              </>
-            ) : (
-              <div className="d-flex align-items-center justify-content-between mb-3 border-bottom pb-2">
-                <span className="text-muted"><i className="bi bi-person-clock me-2"></i> Menunggu</span>
-                <span className="fs-4 fw-bold text-danger">{stats.waiting}</span>
-              </div>
-            )}
-            
-            <div className="d-flex align-items-center justify-content-between mb-3 border-bottom pb-2">
-              <span className="text-muted"><i className="bi bi-check-all me-2"></i> Selesai</span>
-              <span className="fs-4 fw-bold text-success">{stats.served}</span>
+              )}
             </div>
           </div>
-
-          <div className="card p-4 mb-4 shadow-sm border-0 rounded-4" style={{ background: '#ffffff' }}>
-            <h5 className="fw-bold mb-3 text-dark">Antrian Selesai Terakhir</h5>
-            {lastCompleted ? (
-              <div className="p-3 rounded text-center border" style={{ background: '#f8fafc', borderColor: '#e2e8f0' }}>
-                <span className="badge bg-success p-2 fs-6 mb-2">{lastCompleted.nomor_lengkap}</span>
-              </div>
-            ) : (
-              <div className="text-center text-muted py-3">Belum ada antrian.</div>
-            )}
-          </div>
         </div>
+
       </div>
     </div>
   );
