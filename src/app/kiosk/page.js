@@ -267,7 +267,7 @@ export default function Kiosk() {
           padding: '30px'
         }}>
           <div className="container" style={{ maxWidth: '1100px' }}>
-            <div className="text-center mb-5 position-relative p-4 rounded-4" style={{ background: 'rgba(255, 255, 255, 0.92)', backdropFilter: 'blur(10px)', boxShadow: '0 10px 30px rgba(0,0,0,0.06)', border: '1px solid rgba(254, 205, 211, 0.8)' }}>
+            <div className="text-center mb-5 position-relative p-4 rounded-4" style={{ background: 'rgba(255, 255, 255, 0.78)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', boxShadow: '0 10px 30px rgba(0,0,0,0.1)', border: '1px solid rgba(254, 205, 211, 0.8)' }}>
               <button 
                 onClick={() => {
                   setIsKioskLogged(false);
@@ -305,8 +305,9 @@ export default function Kiosk() {
                       onClick={() => setSelectedLayananForForm(p)}
                       className="card text-decoration-none h-100 shadow-sm"
                       style={{
-                        background: 'rgba(255, 255, 255, 0.93)',
-                        backdropFilter: 'blur(10px)',
+                        background: 'rgba(255, 255, 255, 0.78)',
+                        backdropFilter: 'blur(16px)',
+                        WebkitBackdropFilter: 'blur(16px)',
                         border: '2px solid #fecdd3',
                         borderRadius: '20px',
                         padding: '30px',

@@ -155,7 +155,7 @@ export default function Display() {
 
   return (
     <div style={{
-      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.15)), url('/img/bg-kecamatan.jpeg')`,
+      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.18)), url('/img/bg-kecamatan.jpeg')`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat',
@@ -170,7 +170,8 @@ export default function Display() {
       {/* Header */}
       <div className="d-flex justify-content-between align-items-center mb-3" style={{
         background: 'rgba(255, 255, 255, 0.75)',
-        backdropFilter: 'blur(12px)',
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
         borderRadius: '20px', padding: '15px 30px',
         boxShadow: '0 10px 30px rgba(0, 0, 0, 0.15)',
         border: '1px solid rgba(255, 255, 255, 0.8)'
@@ -203,42 +204,43 @@ export default function Display() {
         {/* Section 1 (Left Column): Layar Utama Panggilan Saat Ini */}
         <div className="col-lg-6 d-flex">
           <div className="w-100 rounded-4 p-4 d-flex flex-column align-items-center justify-content-between text-center shadow-lg" style={{
-            background: 'rgba(255, 255, 255, 0.65)',
-            backdropFilter: 'blur(12px)',
+            background: 'rgba(255, 255, 255, 0.72)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
             border: '2px solid rgba(56, 189, 248, 0.8)',
             boxShadow: '0 15px 35px rgba(0, 0, 0, 0.2)'
           }}>
             <div className="w-100">
-              <div className="d-inline-flex align-items-center gap-2 px-4 py-2 rounded-pill mb-3" style={{ background: 'rgba(2, 132, 199, 0.15)', border: '1px solid #bae6fd' }}>
+              <div className="d-inline-flex align-items-center gap-2 px-4 py-2 rounded-pill mb-2" style={{ background: 'rgba(2, 132, 199, 0.15)', border: '1px solid #bae6fd' }}>
                 <span className="spinner-grow spinner-grow-sm text-danger" role="status"></span>
-                <span className="fw-bold text-uppercase tracking-wider" style={{ color: '#0284c7', fontSize: '1.2rem' }}>
+                <span className="fw-bold text-uppercase tracking-wider" style={{ color: '#0284c7', fontSize: '1.3rem' }}>
                   PANGGILAN SAAT INI
                 </span>
               </div>
-              <p className="text-muted fw-semibold m-0">Nomor Antrian Yang Dipanggil</p>
+              <p className="text-muted fw-semibold fs-5 m-0">Nomor Antrian Yang Dipanggil</p>
             </div>
 
-            <div className="my-auto py-3">
+            <div className="my-auto py-2">
               <div className="fw-extrabold text-danger" style={{ 
-                fontSize: '9.5rem', 
-                lineHeight: 0.95, 
+                fontSize: '13.5rem', 
+                lineHeight: 0.88, 
                 fontWeight: 900,
-                letterSpacing: '-2px',
-                textShadow: '0 10px 30px rgba(220, 38, 38, 0.3)' 
+                letterSpacing: '-3px',
+                textShadow: '0 12px 35px rgba(220, 38, 38, 0.35)' 
               }}>
                 {latestCalling ? latestCalling.nomor_lengkap : '---'}
               </div>
               
-              <div className="mt-4 py-2 px-4 rounded-4 d-inline-block" style={{ background: 'rgba(255, 255, 255, 0.85)', border: '2px solid #bae6fd', boxShadow: '0 8px 20px rgba(0,0,0,0.06)' }}>
-                <span className="text-secondary fw-bold text-uppercase me-2" style={{ fontSize: '1.8rem' }}>MENUJU</span>
-                <span className="fw-black text-danger" style={{ fontSize: '3rem', fontWeight: 900 }}>
+              <div className="mt-3 py-3 px-5 rounded-4 d-inline-block shadow-sm" style={{ background: 'rgba(255, 255, 255, 0.92)', border: '3px solid #38bdf8', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)' }}>
+                <span className="text-secondary fw-bold text-uppercase me-3" style={{ fontSize: '2.5rem', letterSpacing: '1px' }}>MENUJU</span>
+                <span className="fw-black text-danger" style={{ fontSize: '4.8rem', fontWeight: 900, lineHeight: 1 }}>
                   {latestCalling ? latestCalling.loket : '---'}
                 </span>
               </div>
 
               {latestCalling && (
                 <div className="mt-3">
-                  <span className="badge bg-primary bg-opacity-10 text-primary fs-5 px-4 py-2 rounded-pill border border-primary border-opacity-25 fw-bold">
+                  <span className="badge bg-primary bg-opacity-10 text-primary fs-4 px-4 py-2 rounded-pill border border-primary border-opacity-25 fw-bold">
                     {latestCalling.pelayanan_nama || 'Pelayanan Umum'}
                   </span>
                 </div>
@@ -246,7 +248,7 @@ export default function Display() {
             </div>
 
             <div className="w-100 pt-3 border-top border-info border-opacity-25">
-              <small className="text-secondary fw-semibold">
+              <small className="text-secondary fw-semibold fs-6">
                 <i className="bi bi-info-circle me-1"></i> Silakan menuju ke loket pelayanan yang tertera di atas.
               </small>
             </div>
@@ -256,13 +258,14 @@ export default function Display() {
         {/* Section 2 (Right Column): Layar Antrian Berlangsung */}
         <div className="col-lg-6 d-flex">
           <div className="w-100 rounded-4 p-4 d-flex flex-column shadow-lg" style={{
-            background: 'rgba(255, 255, 255, 0.65)',
-            backdropFilter: 'blur(12px)',
+            background: 'rgba(255, 255, 255, 0.72)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
             border: '2px solid rgba(186, 230, 253, 0.8)',
             boxShadow: '0 15px 35px rgba(0, 0, 0, 0.18)'
           }}>
             <div className="d-flex justify-content-between align-items-center border-bottom pb-3 mb-3">
-              <h3 className="fw-bold m-0 d-flex align-items-center gap-2" style={{ color: '#0284c7', fontSize: '1.7rem' }}>
+              <h3 className="fw-bold m-0 d-flex align-items-center gap-2" style={{ color: '#0284c7', fontSize: '1.8rem' }}>
                 <i className="bi bi-card-checklist"></i> ANTRIAN BERLANGSUNG
               </h3>
               <span className="badge bg-primary px-3 py-2 rounded-pill fs-6 fw-bold">
@@ -276,19 +279,21 @@ export default function Display() {
                 return (
                   <div className="col-12" key={lok}>
                     <div className="d-flex align-items-center justify-content-between p-3 rounded-4 shadow-sm" style={{
-                      background: active ? 'rgba(255, 255, 255, 0.85)' : 'rgba(255, 255, 255, 0.70)',
+                      background: active ? 'rgba(255, 255, 255, 0.88)' : 'rgba(255, 255, 255, 0.75)',
+                      backdropFilter: 'blur(10px)',
+                      WebkitBackdropFilter: 'blur(10px)',
                       borderLeft: `10px solid ${active ? '#10b981' : '#cbd5e1'}`,
                       border: '1px solid rgba(226, 232, 240, 0.8)',
                       borderLeftWidth: '10px'
                     }}>
                       <div>
-                        <h4 className="fw-bold m-0" style={{ color: '#0284c7', fontSize: '1.8rem' }}>{lok}</h4>
+                        <h4 className="fw-bold m-0" style={{ color: '#0284c7', fontSize: '1.9rem' }}>{lok}</h4>
                         <div className="d-flex align-items-center gap-2 mt-1">
                           <span className={`badge ${active ? 'bg-success text-white' : 'bg-secondary text-white'} px-3 py-1 rounded-pill fs-6`}>
                             {active ? 'MELAYANI' : 'KOSONG'}
                           </span>
                           {active && active.pelayanan_nama && (
-                            <span className="text-secondary small fw-semibold">
+                            <span className="text-secondary small fw-semibold fs-6">
                               ({active.pelayanan_nama})
                             </span>
                           )}
@@ -296,7 +301,7 @@ export default function Display() {
                       </div>
 
                       <div className="text-end">
-                        <div className={`fw-extrabold ${active ? 'text-success' : 'text-muted'}`} style={{ fontSize: '4.2rem', lineHeight: 1, fontWeight: 900 }}>
+                        <div className={`fw-extrabold ${active ? 'text-success' : 'text-muted'}`} style={{ fontSize: '4.6rem', lineHeight: 1, fontWeight: 900 }}>
                           {active ? active.nomor_lengkap : '---'}
                         </div>
                       </div>
@@ -313,7 +318,8 @@ export default function Display() {
       {/* Running Text Marquee Footer */}
       <div style={{
         position: 'fixed', bottom: '20px', left: '25px', right: '25px',
-        background: 'rgba(255, 255, 255, 0.75)', backdropFilter: 'blur(12px)',
+        background: 'rgba(255, 255, 255, 0.78)', backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
         border: '2.5px solid #0284c7', borderRadius: '14px',
         boxShadow: '0 8px 30px rgba(0, 0, 0, 0.2)', padding: '10px 0', zIndex: 1000, overflow: 'hidden'
       }}>
