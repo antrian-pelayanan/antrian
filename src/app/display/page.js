@@ -155,7 +155,7 @@ export default function Display() {
 
   return (
     <div style={{
-      backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.45), rgba(15, 23, 42, 0.60)), url('/img/bg-kecamatan.jpeg')`,
+      backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.35), rgba(15, 23, 42, 0.45)), url('/img/bg-kecamatan.jpeg')`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat',
@@ -169,15 +169,15 @@ export default function Display() {
       
       {/* Header */}
       <div className="d-flex justify-content-between align-items-center mb-3" style={{
-        background: 'rgba(255, 255, 255, 0.12)',
-        backdropFilter: 'blur(16px)',
-        WebkitBackdropFilter: 'blur(16px)',
+        background: 'rgba(255, 255, 255, 0.08)',
+        backdropFilter: 'blur(6px)',
+        WebkitBackdropFilter: 'blur(6px)',
         borderRadius: '20px', padding: '15px 30px',
-        boxShadow: '0 15px 35px rgba(0, 0, 0, 0.35)',
-        border: '2px solid rgba(255, 255, 255, 0.3)'
+        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 0 15px rgba(255, 255, 255, 0.15)',
+        border: '2px solid rgba(255, 255, 255, 0.45)'
       }}>
         <div className="d-flex align-items-center gap-3">
-          <img src="/img/Logo.png" alt="Logo Cilacap" style={{ height: '75px', objectFit: 'contain', filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.5))' }} />
+          <img src="/img/Logo.png" alt="Logo Cilacap" style={{ height: '75px', objectFit: 'contain', filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.6))' }} />
           <div>
             <h2 className="fw-bold m-0" style={{ color: '#ffffff', fontSize: '2.1rem', textShadow: '0 2px 4px rgba(0,0,0,0.9), 0 4px 10px rgba(0,0,0,0.7)' }}>{settings.instansi_nama}</h2>
             <p className="m-0 text-white fw-bold fs-6" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.9)' }}>{settings.instansi_alamat}</p>
@@ -193,7 +193,7 @@ export default function Display() {
             </div>
           </div>
           <div className="ps-3 border-start border-2 border-white border-opacity-25 d-flex align-items-center">
-            <img src="/img/logo-semringah.png" alt="Logo Gandrung Mangu Semringah" style={{ height: '85px', objectFit: 'contain', filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.5))' }} />
+            <img src="/img/logo-semringah.png" alt="Logo Gandrung Mangu Semringah" style={{ height: '85px', objectFit: 'contain', filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.6))' }} />
           </div>
         </div>
       </div>
@@ -204,11 +204,11 @@ export default function Display() {
         {/* Section 1 (Left Column): Layar Utama Panggilan Saat Ini */}
         <div className="col-lg-6 d-flex">
           <div className="w-100 rounded-4 p-4 d-flex flex-column align-items-center justify-content-between text-center shadow-lg" style={{
-            background: 'rgba(255, 255, 255, 0.12)',
-            backdropFilter: 'blur(16px)',
-            WebkitBackdropFilter: 'blur(16px)',
-            border: '2px solid rgba(255, 255, 255, 0.3)',
-            boxShadow: '0 20px 50px rgba(0, 0, 0, 0.4)'
+            background: 'rgba(255, 255, 255, 0.08)',
+            backdropFilter: 'blur(6px)',
+            WebkitBackdropFilter: 'blur(6px)',
+            border: '2px solid rgba(255, 255, 255, 0.45)',
+            boxShadow: '0 12px 40px rgba(0, 0, 0, 0.35), inset 0 0 20px rgba(255, 255, 255, 0.12)'
           }}>
             <div className="w-100">
               <div className="d-inline-flex align-items-center gap-2 px-4 py-2 rounded-pill mb-2 shadow" style={{ background: '#0284c7', border: '1px solid rgba(255,255,255,0.4)' }}>
@@ -232,7 +232,7 @@ export default function Display() {
                 {latestCalling ? latestCalling.nomor_lengkap : '---'}
               </div>
               
-              <div className="mt-3 py-3 px-5 rounded-4 d-inline-block shadow-lg" style={{ background: 'rgba(15, 23, 42, 0.4)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', border: '2px solid rgba(255, 255, 255, 0.4)', boxShadow: '0 15px 35px rgba(0, 0, 0, 0.5)' }}>
+              <div className="mt-3 py-3 px-5 rounded-4 d-inline-block shadow-lg" style={{ background: 'rgba(255, 255, 255, 0.12)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', border: '2px solid rgba(255, 255, 255, 0.55)', boxShadow: '0 10px 30px rgba(0, 0, 0, 0.4), inset 0 0 15px rgba(255, 255, 255, 0.15)' }}>
                 <span className="text-white fw-extrabold text-uppercase me-3" style={{ fontSize: '2.5rem', letterSpacing: '2px', fontWeight: 900, textShadow: '0 2px 0 #000, 0 4px 10px rgba(0,0,0,0.9)' }}>MENUJU</span>
                 <span className="fw-black" style={{ fontSize: '4.8rem', fontWeight: 900, lineHeight: 1, color: '#ff3333', textShadow: '0 2px 0 #dc2626, 0 4px 0 #b91c1c, 0 6px 0 #991b1b, 0 8px 15px rgba(0,0,0,0.9)' }}>
                   {latestCalling ? latestCalling.loket : '---'}
@@ -259,11 +259,11 @@ export default function Display() {
         {/* Section 2 (Right Column): Layar Antrian Berlangsung */}
         <div className="col-lg-6 d-flex">
           <div className="w-100 rounded-4 p-4 d-flex flex-column shadow-lg" style={{
-            background: 'rgba(255, 255, 255, 0.12)',
-            backdropFilter: 'blur(16px)',
-            WebkitBackdropFilter: 'blur(16px)',
-            border: '2px solid rgba(255, 255, 255, 0.3)',
-            boxShadow: '0 20px 50px rgba(0, 0, 0, 0.4)'
+            background: 'rgba(255, 255, 255, 0.08)',
+            backdropFilter: 'blur(6px)',
+            WebkitBackdropFilter: 'blur(6px)',
+            border: '2px solid rgba(255, 255, 255, 0.45)',
+            boxShadow: '0 12px 40px rgba(0, 0, 0, 0.35), inset 0 0 20px rgba(255, 255, 255, 0.12)'
           }}>
             <div className="d-flex justify-content-between align-items-center border-bottom border-white border-opacity-25 pb-3 mb-3">
               <h3 className="fw-bold m-0 d-flex align-items-center gap-2" style={{ color: '#ffffff', fontSize: '1.8rem', textShadow: '0 2px 4px rgba(0,0,0,0.9), 0 0 10px rgba(56, 189, 248, 0.6)' }}>
@@ -280,11 +280,11 @@ export default function Display() {
                 return (
                   <div className="col-12" key={lok}>
                     <div className="d-flex align-items-center justify-content-between p-3 rounded-4 shadow" style={{
-                      background: active ? 'rgba(255, 255, 255, 0.18)' : 'rgba(255, 255, 255, 0.08)',
-                      backdropFilter: 'blur(12px)',
-                      WebkitBackdropFilter: 'blur(12px)',
+                      background: active ? 'rgba(255, 255, 255, 0.14)' : 'rgba(255, 255, 255, 0.05)',
+                      backdropFilter: 'blur(6px)',
+                      WebkitBackdropFilter: 'blur(6px)',
                       borderLeft: `12px solid ${active ? '#10b981' : '#64748b'}`,
-                      border: active ? '2px solid rgba(16, 185, 129, 0.6)' : '1px solid rgba(255, 255, 255, 0.2)',
+                      border: active ? '2px solid rgba(16, 185, 129, 0.6)' : '1px solid rgba(255, 255, 255, 0.25)',
                       borderLeftWidth: '12px'
                     }}>
                       <div>
@@ -327,10 +327,10 @@ export default function Display() {
       {/* Running Text Marquee Footer */}
       <div style={{
         position: 'fixed', bottom: '20px', left: '25px', right: '25px',
-        background: 'rgba(15, 23, 42, 0.65)', backdropFilter: 'blur(16px)',
-        WebkitBackdropFilter: 'blur(16px)',
-        border: '2px solid rgba(255, 255, 255, 0.4)', borderRadius: '14px',
-        boxShadow: '0 10px 35px rgba(0, 0, 0, 0.5)', padding: '10px 0', zIndex: 1000, overflow: 'hidden'
+        background: 'rgba(255, 255, 255, 0.10)', backdropFilter: 'blur(8px)',
+        WebkitBackdropFilter: 'blur(8px)',
+        border: '2px solid rgba(255, 255, 255, 0.45)', borderRadius: '14px',
+        boxShadow: '0 10px 35px rgba(0, 0, 0, 0.4)', padding: '10px 0', zIndex: 1000, overflow: 'hidden'
       }}>
         <div style={{ whiteSpace: 'nowrap' }}>
           <p style={{ display: 'inline-block', paddingLeft: '100%', margin: 0, animation: 'scroll-text 25s linear infinite', fontSize: '1.35rem', fontWeight: 800, color: '#38bdf8', textShadow: '0 2px 4px rgba(0,0,0,0.9)' }}>

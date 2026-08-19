@@ -267,7 +267,7 @@ export default function Kiosk() {
           padding: '30px'
         }}>
           <div className="container" style={{ maxWidth: '1100px' }}>
-            <div className="text-center mb-5 position-relative p-4 rounded-4 shadow-lg" style={{ background: 'rgba(255, 255, 255, 0.12)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', boxShadow: '0 20px 50px rgba(0,0,0,0.4)', border: '2px solid rgba(255, 255, 255, 0.3)' }}>
+            <div className="text-center mb-5 position-relative p-4 rounded-4 shadow-lg" style={{ background: 'rgba(255, 255, 255, 0.08)', backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)', boxShadow: '0 12px 35px rgba(0,0,0,0.35), inset 0 0 15px rgba(255, 255, 255, 0.15)', border: '2px solid rgba(255, 255, 255, 0.45)' }}>
               <button 
                 onClick={() => {
                   setIsKioskLogged(false);
@@ -278,8 +278,8 @@ export default function Kiosk() {
                 <i className="bi bi-box-arrow-right"></i> Keluar Kiosk
               </button>
               <div className="d-flex align-items-center justify-content-center gap-4 mb-3">
-                <img src="/img/Logo.png" alt="Logo Cilacap" style={{ height: '90px', objectFit: 'contain', filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.5))' }} />
-                <img src="/img/logo-semringah.png" alt="Logo Gandrung Mangu Semringah" style={{ height: '90px', objectFit: 'contain', filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.5))' }} />
+                <img src="/img/Logo.png" alt="Logo Cilacap" style={{ height: '90px', objectFit: 'contain', filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.6))' }} />
+                <img src="/img/logo-semringah.png" alt="Logo Gandrung Mangu Semringah" style={{ height: '90px', objectFit: 'contain', filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.6))' }} />
               </div>
               <h1 className="fw-bold mb-1" style={{ color: '#ffffff', fontSize: '2.8rem', textShadow: '0 2px 0 #0284c7, 0 4px 0 #0369a1, 0 6px 15px rgba(0,0,0,0.9)' }}>AMBIL NOMOR ANTRIAN</h1>
               <h3 className="text-white fw-bold mb-2" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.9)' }}>{instansiNama}</h3>
@@ -305,17 +305,17 @@ export default function Kiosk() {
                       onClick={() => setSelectedLayananForForm(p)}
                       className="card text-decoration-none h-100 shadow-lg"
                       style={{
-                        background: 'rgba(255, 255, 255, 0.12)',
-                        backdropFilter: 'blur(16px)',
-                        WebkitBackdropFilter: 'blur(16px)',
-                        border: '2px solid rgba(255, 255, 255, 0.3)',
+                        background: 'rgba(255, 255, 255, 0.08)',
+                        backdropFilter: 'blur(6px)',
+                        WebkitBackdropFilter: 'blur(6px)',
+                        border: '2px solid rgba(255, 255, 255, 0.45)',
                         borderRadius: '20px',
                         padding: '30px',
                         cursor: 'pointer',
                         transition: 'all 0.3s'
                       }}
                       onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-5px)'; e.currentTarget.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.5)'; e.currentTarget.style.borderColor = '#ffffff'; }}
-                      onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.3)'; e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.3)'; }}
+                      onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.3)'; e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.45)'; }}
                     >
                       <div className="d-flex justify-content-between align-items-center mb-3">
                         <span style={{ 
