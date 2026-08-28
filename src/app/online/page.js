@@ -509,21 +509,78 @@ export default function AntrianOnline() {
             </button>
           </div>
         ) : (
-          <div className="d-flex gap-2 mb-4">
-            <button 
-              onClick={() => setActiveTab('login')}
-              className={`btn flex-grow-1 py-2.5 fw-bold rounded-pill text-nowrap small transition ${activeTab === 'login' ? 'shadow-lg' : 'btn-outline-light border-secondary text-white'}`}
-              style={activeTab === 'login' ? { background: 'linear-gradient(135deg, #fbbf24, #f59e0b)', color: '#0f172a', border: 'none', boxShadow: '0 6px 20px rgba(245,158,11,0.4)' } : {}}
-            >
-              <i className="bi bi-box-arrow-in-right me-1"></i> Masuk Akun Warga
-            </button>
-            <button 
-              onClick={() => setActiveTab('register')}
-              className={`btn flex-grow-1 py-2.5 fw-bold rounded-pill text-nowrap small transition ${activeTab === 'register' ? 'shadow-lg' : 'btn-outline-light border-secondary text-white'}`}
-              style={activeTab === 'register' ? { background: 'linear-gradient(135deg, #fbbf24, #f59e0b)', color: '#0f172a', border: 'none', boxShadow: '0 6px 20px rgba(245,158,11,0.4)' } : {}}
-            >
-              <i className="bi bi-person-plus-fill me-1"></i> Daftar Akun Baru
-            </button>
+          <div className="row g-3 mb-4">
+            <div className="col-6">
+              <button 
+                type="button"
+                onClick={() => setActiveTab('login')}
+                className={`btn w-100 p-3 p-md-3.5 rounded-4 text-start transition shadow-lg d-flex align-items-center gap-2 gap-md-3 ${activeTab === 'login' ? 'border-warning' : ''}`}
+                style={activeTab === 'login' ? { 
+                  background: 'linear-gradient(135deg, rgba(251, 191, 36, 0.25), rgba(245, 158, 11, 0.15))', 
+                  border: '2.5px solid #fbbf24', 
+                  boxShadow: '0 8px 25px rgba(251, 191, 36, 0.35)',
+                  transform: 'scale(1.02)'
+                } : { 
+                  background: 'rgba(15, 23, 42, 0.65)', 
+                  border: '1.5px solid rgba(255, 255, 255, 0.15)', 
+                  color: '#ffffff',
+                  opacity: 0.8
+                }}
+              >
+                <div className="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style={{ 
+                  width: '44px', 
+                  height: '44px', 
+                  background: activeTab === 'login' ? '#fbbf24' : 'rgba(255,255,255,0.1)', 
+                  color: activeTab === 'login' ? '#0f172a' : '#ffffff' 
+                }}>
+                  <i className="bi bi-box-arrow-in-right fs-4"></i>
+                </div>
+                <div className="overflow-hidden">
+                  <h5 className="fw-black m-0 text-truncate" style={{ color: activeTab === 'login' ? '#fbbf24' : '#ffffff', fontSize: '1.05rem' }}>
+                    MASUK AKUN WARGA
+                  </h5>
+                  <small className="text-white-50 d-block text-truncate" style={{ fontSize: '0.75rem' }}>
+                    Sudah Punya Akun
+                  </small>
+                </div>
+              </button>
+            </div>
+
+            <div className="col-6">
+              <button 
+                type="button"
+                onClick={() => setActiveTab('register')}
+                className={`btn w-100 p-3 p-md-3.5 rounded-4 text-start transition shadow-lg d-flex align-items-center gap-2 gap-md-3 ${activeTab === 'register' ? 'border-warning' : ''}`}
+                style={activeTab === 'register' ? { 
+                  background: 'linear-gradient(135deg, rgba(251, 191, 36, 0.25), rgba(245, 158, 11, 0.15))', 
+                  border: '2.5px solid #fbbf24', 
+                  boxShadow: '0 8px 25px rgba(251, 191, 36, 0.35)',
+                  transform: 'scale(1.02)'
+                } : { 
+                  background: 'rgba(15, 23, 42, 0.65)', 
+                  border: '1.5px solid rgba(255, 255, 255, 0.15)', 
+                  color: '#ffffff',
+                  opacity: 0.8
+                }}
+              >
+                <div className="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style={{ 
+                  width: '44px', 
+                  height: '44px', 
+                  background: activeTab === 'register' ? '#fbbf24' : 'rgba(255,255,255,0.1)', 
+                  color: activeTab === 'register' ? '#0f172a' : '#ffffff' 
+                }}>
+                  <i className="bi bi-person-plus-fill fs-4"></i>
+                </div>
+                <div className="overflow-hidden">
+                  <h5 className="fw-black m-0 text-truncate" style={{ color: activeTab === 'register' ? '#fbbf24' : '#ffffff', fontSize: '1.05rem' }}>
+                    DAFTAR AKUN BARU
+                  </h5>
+                  <small className="text-white-50 d-block text-truncate" style={{ fontSize: '0.75rem' }}>
+                    Warga Baru Mendaftar
+                  </small>
+                </div>
+              </button>
+            </div>
           </div>
         )}
 
