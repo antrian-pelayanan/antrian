@@ -6,7 +6,7 @@ import { collection, getDocs, query, where, addDoc, Timestamp, updateDoc, doc } 
 import Link from 'next/link';
 
 export default function AntrianOnline() {
-  const [activeTab, setActiveTab] = useState('menu'); // 'menu', 'login', 'register', 'reset', 'antrian', 'tiket'
+  const [activeTab, setActiveTab] = useState('login'); // 'login' is default for unauthenticated citizens
   const [loading, setLoading] = useState(true);
   const [instansiNama, setInstansiNama] = useState('Kecamatan Gandrungmangu');
   const [instansiAlamat, setInstansiAlamat] = useState('Jl. Pertiwi Nomor 1');
@@ -16,7 +16,7 @@ export default function AntrianOnline() {
   const [currentUser, setCurrentUser] = useState(null);
 
   // Form States
-  const [loginForm, setLoginForm] = useState({ nikOrEmail: '', password: '' });
+  const [loginForm, setLoginForm] = useState({ nikOrEmail: '', password: '', passphrase: '' });
   const [loginError, setLoginError] = useState('');
   
   const [regForm, setRegForm] = useState({
@@ -27,7 +27,8 @@ export default function AntrianOnline() {
     hp: '',
     alamat: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    passphrase: ''
   });
   const [regError, setRegError] = useState('');
   const [regSuccess, setRegSuccess] = useState('');
@@ -147,8 +148,8 @@ export default function AntrianOnline() {
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     setLoginError('');
-    if (!loginForm.nikOrEmail || !loginForm.password) {
-      setLoginError('Harap isi NIK/Email dan Password.');
+    if (!loginForm.nikOrEmail || !loginForm.password || !loginForm.passphrase) {
+      setLoginError('Harap lengkapi NIK/Email, Password, dan Passphrase Keamanan Anda.');
       return;
     }
 
@@ -156,6 +157,7 @@ export default function AntrianOnline() {
       const qUser = query(collection(db, 'warga_accounts'));
       const snap = await getDocs(qUser);
       let matched = null;
+      let passphraseFailed = false;
 
       snap.forEach(d => {
         const u = { id: d.id, ...d.data() };
@@ -163,7 +165,11 @@ export default function AntrianOnline() {
           (u.nik === loginForm.nikOrEmail.trim() || u.email?.toLowerCase() === loginForm.nikOrEmail.trim().toLowerCase() || u.hp === loginForm.nikOrEmail.trim()) &&
           u.password === loginForm.password
         ) {
-          matched = u;
+          if (u.passphrase && u.passphrase.trim().toLowerCase() !== loginForm.passphrase.trim().toLowerCase()) {
+            passphraseFailed = true;
+          } else {
+            matched = u;
+          }
         }
       });
 
@@ -171,9 +177,11 @@ export default function AntrianOnline() {
         setCurrentUser(matched);
         localStorage.setItem('warga_user', JSON.stringify(matched));
         setActiveTab('menu');
-        setLoginForm({ nikOrEmail: '', password: '' });
+        setLoginForm({ nikOrEmail: '', password: '', passphrase: '' });
+      } else if (passphraseFailed) {
+        setLoginError('Passphrase Keamanan tidak sesuai / salah. Periksa kembali frasa rahasia Anda.');
       } else {
-        setLoginError('NIK/Email atau Password tidak ditemukan / salah.');
+        setLoginError('NIK/Email, Password, atau Passphrase Keamanan tidak ditemukan / salah.');
       }
     } catch (err) {
       console.error(err);
@@ -185,7 +193,7 @@ export default function AntrianOnline() {
   const handleLogout = () => {
     setCurrentUser(null);
     localStorage.removeItem('warga_user');
-    setActiveTab('menu');
+    setActiveTab('login');
   };
 
   // Handle Register
@@ -194,8 +202,8 @@ export default function AntrianOnline() {
     setRegError('');
     setRegSuccess('');
 
-    if (!regForm.noKK || !regForm.nik || !regForm.nama || !regForm.email || !regForm.hp || !regForm.password) {
-      setRegError('Harap lengkapi semua kolom pendaftaran.');
+    if (!regForm.noKK || !regForm.nik || !regForm.nama || !regForm.email || !regForm.hp || !regForm.password || !regForm.passphrase) {
+      setRegError('Harap lengkapi semua kolom pendaftaran termasuk Passphrase Keamanan.');
       return;
     }
 
@@ -228,6 +236,7 @@ export default function AntrianOnline() {
         hp: regForm.hp.trim(),
         alamat: regForm.alamat.trim(),
         password: regForm.password,
+        passphrase: regForm.passphrase.trim(),
         created_at: Timestamp.now()
       };
 
@@ -574,7 +583,18 @@ export default function AntrianOnline() {
             {activeTab === 'login' && (
               <div className="card text-white p-4 shadow-lg" style={{ background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95))', backdropFilter: 'blur(14px)', border: '2px solid rgba(251, 191, 36, 0.4)', borderRadius: '24px' }}>
                 <h3 className="fw-bold mb-1 text-warning text-center">MASUK AKUN WARGA</h3>
-                <p className="text-center text-white-50 small mb-4">Gunakan NIK, Email, atau Nomor HP Anda</p>
+                <p className="text-center text-white-50 small mb-3">Gunakan NIK, Email, atau Nomor HP Anda</p>
+
+                {/* Info pendaftaran bagi warga yang belum terdaftar */}
+                <div className="p-3 mb-4 rounded-3 text-start shadow-sm" style={{ background: 'rgba(251, 191, 36, 0.15)', border: '1px solid rgba(251, 191, 36, 0.4)' }}>
+                  <div className="d-flex align-items-center gap-2 mb-1 text-warning fw-bold small">
+                    <i className="bi bi-info-circle-fill fs-6"></i>
+                    <span>INFORMASI BAGI WARGA BARU</span>
+                  </div>
+                  <p className="small text-white-50 m-0" style={{ lineHeight: '1.45', fontSize: '0.85rem' }}>
+                    Bagi warga yang <strong>belum memiliki akun</strong> antrian online, harap melakukan <strong>Pendaftaran Akun Terlebih Dahulu</strong> dengan menekan tombol <strong className="text-warning">"Daftar Baru"</strong> di bawah sebelum melakukan login.
+                  </p>
+                </div>
 
                 {loginError && (
                   <div className="alert alert-danger bg-danger border-0 text-white p-3 mb-3 rounded-3 text-center small fw-semibold">
@@ -621,18 +641,37 @@ export default function AntrianOnline() {
                     />
                   </div>
 
-                  <button type="submit" className="btn w-100 py-3 fw-bold rounded-pill my-3 shadow-lg" style={{ background: 'linear-gradient(135deg, #fbbf24, #f59e0b)', color: '#0f172a', border: 'none' }}>
-                    Masuk Sekarang
+                  {/* Passphrase Keamanan */}
+                  <div className="mb-4">
+                    <label className="form-label small fw-bold text-white-50 d-flex justify-content-between align-items-center">
+                      <span>Passphrase Keamanan <span className="text-warning">*</span></span>
+                      <span className="badge bg-warning text-dark font-monospace" style={{ fontSize: '0.7rem' }}>FITUR KEAMANAN</span>
+                    </label>
+                    <input 
+                      type="password" 
+                      className="form-control bg-dark text-white border-warning py-2" 
+                      placeholder="Masukkan Passphrase Keamanan Anda" 
+                      required 
+                      value={loginForm.passphrase}
+                      onChange={e => setLoginForm({ ...loginForm, passphrase: e.target.value })}
+                    />
+                    <small className="text-white-50 mt-1 d-block" style={{ fontSize: '0.75rem' }}>
+                      Frasa keamanan tambahan yang Anda buat saat pendaftaran akun.
+                    </small>
+                  </div>
+
+                  <button type="submit" className="btn w-100 py-3 fw-bold rounded-pill my-2 shadow-lg" style={{ background: 'linear-gradient(135deg, #fbbf24, #f59e0b)', color: '#0f172a', border: 'none' }}>
+                    <i className="bi bi-shield-lock-fill me-1"></i> Masuk Sekarang
                   </button>
 
-                  <div className="text-center border-top border-white border-opacity-10 pt-3">
-                    <span className="small text-white-50">Belum memiliki akun warga? </span>
+                  <div className="text-center border-top border-white border-opacity-10 pt-3 mt-3">
+                    <span className="small text-white-50">Belum mendaftar akun warga? </span>
                     <button 
                       type="button" 
                       onClick={() => setActiveTab('register')}
                       className="btn btn-link text-warning text-decoration-none p-0 small fw-bold ms-1"
                     >
-                      Daftar Baru
+                      Daftar Baru Di Sini
                     </button>
                   </div>
                 </form>
@@ -643,7 +682,18 @@ export default function AntrianOnline() {
             {activeTab === 'register' && (
               <div className="card text-white p-4 shadow-lg" style={{ background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95))', backdropFilter: 'blur(14px)', border: '2px solid rgba(251, 191, 36, 0.4)', borderRadius: '24px' }}>
                 <h3 className="fw-bold mb-1 text-warning text-center">PENDAFTARAN AKUN WARGA</h3>
-                <p className="text-center text-white-50 small mb-4">Lengkapi data diri Anda untuk membuat akun antrian online</p>
+                <p className="text-center text-white-50 small mb-3">Lengkapi data diri Anda untuk membuat akun antrian online baru</p>
+
+                {/* Info pendaftaran */}
+                <div className="p-3 mb-4 rounded-3 text-start shadow-sm" style={{ background: 'rgba(251, 191, 36, 0.15)', border: '1px solid rgba(251, 191, 36, 0.4)' }}>
+                  <div className="d-flex align-items-center gap-2 mb-1 text-warning fw-bold small">
+                    <i className="bi bi-person-plus-fill fs-6"></i>
+                    <span>PETUNJUK PENDAFTARAN</span>
+                  </div>
+                  <p className="small text-white-50 m-0" style={{ lineHeight: '1.45', fontSize: '0.85rem' }}>
+                    Silakan isi NIK, No. KK, Data Diri, serta <strong>Passphrase Keamanan</strong> di bawah ini untuk mengamankan akun Anda. Setelah pendaftaran selesai, Anda dapat langsung memilih layanan antrian.
+                  </p>
+                </div>
 
                 {regError && (
                   <div className="alert alert-danger bg-danger border-0 text-white p-3 mb-3 rounded-3 text-center small fw-semibold">
@@ -752,14 +802,33 @@ export default function AntrianOnline() {
                         onChange={e => setRegForm({ ...regForm, confirmPassword: e.target.value })}
                       />
                     </div>
+
+                    {/* Passphrase Keamanan */}
+                    <div className="col-12">
+                      <label className="form-label small fw-bold text-white-50 d-flex justify-content-between align-items-center">
+                        <span>Passphrase Keamanan (Frasa Rahasia) <span className="text-warning">*</span></span>
+                        <span className="badge bg-warning text-dark font-monospace" style={{ fontSize: '0.7rem' }}>KEAMANAN GANDA</span>
+                      </label>
+                      <input 
+                        type="password" 
+                        className="form-control bg-dark text-white border-warning py-2" 
+                        placeholder="Buat Passphrase Keamanan (Contoh: GandrungMangu2026)" 
+                        required 
+                        value={regForm.passphrase}
+                        onChange={e => setRegForm({ ...regForm, passphrase: e.target.value })}
+                      />
+                      <small className="text-white-50 mt-1 d-block" style={{ fontSize: '0.75rem' }}>
+                        Passphrase adalah kata/frasa rahasia kedua untuk mengamankan otentikasi login Anda.
+                      </small>
+                    </div>
                   </div>
 
                   <button type="submit" className="btn w-100 py-3 fw-bold rounded-pill mt-4 shadow-lg" style={{ background: 'linear-gradient(135deg, #fbbf24, #f59e0b)', color: '#0f172a', border: 'none' }}>
-                    Daftar Akun Baru
+                    <i className="bi bi-check-circle-fill me-1"></i> Daftar Akun Baru Sekarang
                   </button>
 
                   <div className="text-center border-top border-white border-opacity-10 pt-3 mt-3">
-                    <span className="small text-white-50">Sudah punya akun? </span>
+                    <span className="small text-white-50">Sudah memiliki akun terdaftar? </span>
                     <button 
                       type="button" 
                       onClick={() => setActiveTab('login')}
@@ -771,6 +840,8 @@ export default function AntrianOnline() {
                 </form>
               </div>
             )}
+
+
 
             {/* VIEW 4: RESET PASSWORD / LUPA PASSWORD */}
             {activeTab === 'reset' && (
