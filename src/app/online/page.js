@@ -6,7 +6,7 @@ import { collection, getDocs, query, where, addDoc, Timestamp, updateDoc, doc } 
 import Link from 'next/link';
 
 export default function AntrianOnline() {
-  const [activeTab, setActiveTab] = useState('menu'); // 'menu' is default main screen for Antrian Online
+  const [activeTab, setActiveTab] = useState('login'); // 'login' is default for unauthenticated citizens
   const [loading, setLoading] = useState(true);
   const [instansiNama, setInstansiNama] = useState('Kecamatan Gandrungmangu');
   const [instansiAlamat, setInstansiAlamat] = useState('Jl. Pertiwi Nomor 1');
@@ -511,13 +511,6 @@ export default function AntrianOnline() {
         ) : (
           <div className="d-flex gap-2 mb-4">
             <button 
-              onClick={() => setActiveTab('menu')}
-              className={`btn flex-grow-1 py-2.5 fw-bold rounded-pill text-nowrap small transition ${activeTab === 'menu' ? 'shadow-lg' : 'btn-outline-light border-secondary text-white'}`}
-              style={activeTab === 'menu' ? { background: 'linear-gradient(135deg, #fbbf24, #f59e0b)', color: '#0f172a', border: 'none', boxShadow: '0 6px 20px rgba(245,158,11,0.4)' } : {}}
-            >
-              <i className="bi bi-grid-fill me-1"></i> Layanan Antrian
-            </button>
-            <button 
               onClick={() => setActiveTab('login')}
               className={`btn flex-grow-1 py-2.5 fw-bold rounded-pill text-nowrap small transition ${activeTab === 'login' ? 'shadow-lg' : 'btn-outline-light border-secondary text-white'}`}
               style={activeTab === 'login' ? { background: 'linear-gradient(135deg, #fbbf24, #f59e0b)', color: '#0f172a', border: 'none', boxShadow: '0 6px 20px rgba(245,158,11,0.4)' } : {}}
@@ -529,7 +522,7 @@ export default function AntrianOnline() {
               className={`btn flex-grow-1 py-2.5 fw-bold rounded-pill text-nowrap small transition ${activeTab === 'register' ? 'shadow-lg' : 'btn-outline-light border-secondary text-white'}`}
               style={activeTab === 'register' ? { background: 'linear-gradient(135deg, #fbbf24, #f59e0b)', color: '#0f172a', border: 'none', boxShadow: '0 6px 20px rgba(245,158,11,0.4)' } : {}}
             >
-              <i className="bi bi-person-plus-fill me-1"></i> Daftar Baru
+              <i className="bi bi-person-plus-fill me-1"></i> Daftar Akun Baru
             </button>
           </div>
         )}
@@ -542,8 +535,8 @@ export default function AntrianOnline() {
           </div>
         ) : (
           <>
-            {/* VIEW 1: MENU LAYANAN */}
-            {activeTab === 'menu' && (
+            {/* VIEW 1: MENU LAYANAN (HANYA DITAMPILKAN SETELAH LOGIN AKUN WARGA) */}
+            {activeTab === 'menu' && currentUser && (
               <div>
                 <h4 className="fw-bold mb-3 d-flex align-items-center justify-content-between">
                   <span className="d-flex align-items-center gap-2"><i className="bi bi-hand-index-thumb text-warning"></i> Pilih Kategori Layanan</span>
