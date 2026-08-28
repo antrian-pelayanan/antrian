@@ -662,7 +662,7 @@ export default function AntrianOnline() {
                     <span>INFORMASI BAGI WARGA BARU</span>
                   </div>
                   <p className="small text-white-50 m-0" style={{ lineHeight: '1.45', fontSize: '0.85rem' }}>
-                    Bagi warga yang <strong>belum memiliki akun</strong> antrian online, harap melakukan <strong>Pendaftaran Akun Terlebih Dahulu</strong> dengan menekan tombol <strong className="text-warning">"Daftar Baru"</strong> di bawah sebelum melakukan login.
+                    Bagi warga yang <strong>belum memiliki akun</strong> antrian online, harap melakukan <strong>Pendaftaran Akun Terlebih Dahulu</strong> dengan menekan tombol <strong className="text-warning">"DAFTAR AKUN BARU"</strong> di atas sebelum melakukan login.
                   </p>
                 </div>
 
