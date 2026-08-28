@@ -465,8 +465,8 @@ export default function AntrianOnline() {
           <p className="small text-white-50 m-0">{instansiAlamat}</p>
         </div>
 
-        {/* User Session Bar */}
-        {currentUser ? (
+        {/* User Session Bar (Shown only when logged in) */}
+        {currentUser && (
           <div className="d-flex align-items-center justify-content-between p-3 rounded-4 mb-4 shadow-lg" style={{ background: 'rgba(16, 185, 129, 0.18)', border: '1.5px solid rgba(52, 211, 153, 0.5)', backdropFilter: 'blur(10px)' }}>
             <div className="d-flex align-items-center gap-3">
               <div className="rounded-circle d-flex align-items-center justify-content-center" style={{ width: '42px', height: '42px', background: 'rgba(52, 211, 153, 0.25)', border: '1px solid #34d399' }}>
@@ -481,26 +481,18 @@ export default function AntrianOnline() {
               <i className="bi bi-box-arrow-right me-1"></i> Keluar
             </button>
           </div>
-        ) : (
-          <div className="d-flex align-items-center justify-content-between p-3 rounded-4 mb-4 shadow-lg" style={{ background: 'rgba(255, 255, 255, 0.07)', border: '1px solid rgba(255, 255, 255, 0.2)', backdropFilter: 'blur(10px)' }}>
-            <span className="small text-white-50"><i className="bi bi-info-circle me-1 text-warning"></i> Silakan Masuk / Daftar Akun untuk mengambil antrian online.</span>
-            <div className="d-flex gap-2">
-              <button onClick={() => setActiveTab('login')} className="btn btn-sm rounded-pill px-3 fw-bold shadow-sm" style={{ background: '#fbbf24', color: '#0f172a', border: 'none' }}>Masuk</button>
-              <button onClick={() => setActiveTab('register')} className="btn btn-sm btn-outline-light rounded-pill px-3 fw-bold">Daftar</button>
-            </div>
-          </div>
         )}
 
         {/* TAB NAVIGATION */}
-        <div className="d-flex gap-2 mb-4">
-          <button 
-            onClick={() => setActiveTab('menu')}
-            className={`btn flex-grow-1 py-2.5 fw-bold rounded-pill text-nowrap small transition ${activeTab === 'menu' ? 'shadow-lg' : 'btn-outline-light border-secondary text-white'}`}
-            style={activeTab === 'menu' ? { background: 'linear-gradient(135deg, #fbbf24, #f59e0b)', color: '#0f172a', border: 'none', boxShadow: '0 6px 20px rgba(245,158,11,0.4)' } : {}}
-          >
-            <i className="bi bi-grid-fill me-1"></i> Menu Layanan
-          </button>
-          {currentUser && (
+        {currentUser ? (
+          <div className="d-flex gap-2 mb-4">
+            <button 
+              onClick={() => setActiveTab('menu')}
+              className={`btn flex-grow-1 py-2.5 fw-bold rounded-pill text-nowrap small transition ${activeTab === 'menu' ? 'shadow-lg' : 'btn-outline-light border-secondary text-white'}`}
+              style={activeTab === 'menu' ? { background: 'linear-gradient(135deg, #fbbf24, #f59e0b)', color: '#0f172a', border: 'none', boxShadow: '0 6px 20px rgba(245,158,11,0.4)' } : {}}
+            >
+              <i className="bi bi-grid-fill me-1"></i> Menu Layanan
+            </button>
             <button 
               onClick={() => setActiveTab('tiket')}
               className={`btn flex-grow-1 py-2.5 fw-bold rounded-pill text-nowrap small transition ${activeTab === 'tiket' ? 'shadow-lg' : 'btn-outline-light border-secondary text-white'}`}
@@ -508,22 +500,36 @@ export default function AntrianOnline() {
             >
               <i className="bi bi-ticket-perforated-fill me-1"></i> Tiket Saya ({myQueues.length})
             </button>
-          )}
-          <Link href="/" className="btn btn-outline-light border-secondary rounded-pill px-3 py-2 small fw-bold">
-            <i className="bi bi-house-door-fill me-1"></i> Portal
-          </Link>
-        </div>
+          </div>
+        ) : (
+          <div className="d-flex gap-2 mb-4">
+            <button 
+              onClick={() => setActiveTab('login')}
+              className={`btn flex-grow-1 py-2.5 fw-bold rounded-pill text-nowrap small transition ${activeTab === 'login' ? 'shadow-lg' : 'btn-outline-light border-secondary text-white'}`}
+              style={activeTab === 'login' ? { background: 'linear-gradient(135deg, #fbbf24, #f59e0b)', color: '#0f172a', border: 'none', boxShadow: '0 6px 20px rgba(245,158,11,0.4)' } : {}}
+            >
+              <i className="bi bi-box-arrow-in-right me-1"></i> Masuk Akun
+            </button>
+            <button 
+              onClick={() => setActiveTab('register')}
+              className={`btn flex-grow-1 py-2.5 fw-bold rounded-pill text-nowrap small transition ${activeTab === 'register' ? 'shadow-lg' : 'btn-outline-light border-secondary text-white'}`}
+              style={activeTab === 'register' ? { background: 'linear-gradient(135deg, #fbbf24, #f59e0b)', color: '#0f172a', border: 'none', boxShadow: '0 6px 20px rgba(245,158,11,0.4)' } : {}}
+            >
+              <i className="bi bi-person-plus-fill me-1"></i> Daftar Akun Baru
+            </button>
+          </div>
+        )}
 
         {/* CONTENT DISPLAY */}
         {loading ? (
           <div className="text-center py-5">
             <div className="spinner-border text-warning" role="status"></div>
-            <p className="mt-3 text-warning fw-bold">Memuat layanan antrian Semringah...</p>
+            <p className="mt-3 text-warning fw-bold">Memuat antrian mobile Semringah...</p>
           </div>
         ) : (
           <>
-            {/* VIEW 1: MENU LAYANAN (HOMEPAGE ONLINE) */}
-            {activeTab === 'menu' && (
+            {/* VIEW 1: MENU LAYANAN (HANYA DITAMPILKAN SETELAH LOGIN) */}
+            {activeTab === 'menu' && currentUser && (
               <div>
                 <h4 className="fw-bold mb-3 d-flex align-items-center justify-content-between">
                   <span className="d-flex align-items-center gap-2"><i className="bi bi-hand-index-thumb text-warning"></i> Pilih Kategori Layanan</span>
