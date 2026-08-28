@@ -45,6 +45,7 @@ export default function Operator() {
   const [currentQueue, setCurrentQueue] = useState(null);
   const [stats, setStats] = useState({ waiting: 0, waitingB: 0, waitingC: 0, served: 0 });
   const [lastCompleted, setLastCompleted] = useState(null);
+  const [selectedBerkasModal, setSelectedBerkasModal] = useState(null);
 
   useEffect(() => {
     // Fetch layanan
@@ -287,7 +288,10 @@ export default function Operator() {
           boxShadow: '0 20px 50px rgba(0, 0, 0, 0.4)'
         }}>
           <div className="text-center mb-4">
-            <img src="/img/Logo.png" alt="Logo" style={{ height: '85px', objectFit: 'contain', marginBottom: '15px', filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.6))' }} />
+            <div className="d-flex align-items-center justify-content-center gap-3 mb-3">
+              <img src="/img/Logo.png" alt="Logo" style={{ height: '75px', objectFit: 'contain', filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.6))' }} />
+              <img src="/img/cilacap-bercahaya.png" alt="Logo Cilacap Bercahaya" style={{ height: '65px', objectFit: 'contain', filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.6))' }} />
+            </div>
             <h3 className="fw-bold text-white mb-1" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.9)' }}>Konsol Operator</h3>
             <p className="text-info small fw-bold" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.9)' }}>Sistem Antrian Kecamatan Gandrungmangu</p>
           </div>
@@ -423,6 +427,7 @@ export default function Operator() {
       }}>
         <div className="d-flex align-items-center gap-3">
           <img src="/img/Logo.png" alt="Logo" style={{ height: '45px', objectFit: 'contain', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.6))' }} />
+          <img src="/img/cilacap-bercahaya.png" alt="Logo Cilacap Bercahaya" style={{ height: '40px', objectFit: 'contain', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.6))' }} />
           <div>
             <h4 className="fw-bold m-0 text-white" style={{ fontSize: '1.4rem', textShadow: '0 2px 4px rgba(0,0,0,0.9)' }}>
               Konsol Operator: <span className="text-info">{selectedLoket}</span>
@@ -490,9 +495,20 @@ export default function Operator() {
 
               {currentQueue && currentQueue.warga_nama && (
                 <div className="p-2 rounded-3 text-start d-inline-block shadow" style={{ background: 'rgba(255, 255, 255, 0.12)', border: '1px solid rgba(255, 255, 255, 0.3)', backdropFilter: 'blur(8px)', minWidth: '280px' }}>
-                  <div className="fw-bold border-bottom border-white border-opacity-25 pb-1 mb-1 text-info small"><i className="bi bi-person-fill me-1"></i> Data Warga</div>
+                  <div className="fw-bold border-bottom border-white border-opacity-25 pb-1 mb-1 text-info small d-flex justify-content-between align-items-center">
+                    <span><i className="bi bi-person-fill me-1"></i> Data Warga</span>
+                    {currentQueue.tipe === 'online' && <span className="badge bg-info text-dark font-monospace">ONLINE MOBILE</span>}
+                  </div>
                   <div className="text-white small">Nama: <strong className="text-white">{currentQueue.warga_nama}</strong></div>
                   <div className="text-white small">Alamat: <span>{currentQueue.warga_alamat}</span> | HP: <span>{currentQueue.warga_hp}</span></div>
+                  {(currentQueue.berkas_kk || currentQueue.berkas_ktp) && (
+                    <button 
+                      onClick={() => setSelectedBerkasModal(currentQueue)}
+                      className="btn btn-sm btn-info w-100 fw-bold mt-2 py-1"
+                    >
+                      <i className="bi bi-file-earmark-medical me-1"></i> Lihat Berkas KK / KTP Warga
+                    </button>
+                  )}
                 </div>
               )}
             </div>
@@ -599,13 +615,23 @@ export default function Operator() {
                         <tbody>
                           {waitingQueuesB.map(q => (
                             <tr key={q.id}>
-                              <td><span className="badge bg-primary fs-6 fw-bold shadow">{q.nomor_lengkap}</span></td>
+                              <td>
+                                <span className="badge bg-primary fs-6 fw-bold shadow me-1">{q.nomor_lengkap}</span>
+                                {q.tipe === 'online' && <span className="badge bg-info text-dark small">ONLINE</span>}
+                              </td>
                               <td>
                                 <strong className="text-white d-block small">{q.warga_nama || '-'}</strong>
                                 <span className="text-light opacity-75 small">{q.warga_alamat}</span>
                               </td>
                               <td>
-                                <button onClick={() => layaniSekarang(q)} className="btn btn-sm btn-outline-info fw-bold py-0 px-2">Panggil</button>
+                                <div className="d-flex gap-1">
+                                  <button onClick={() => layaniSekarang(q)} className="btn btn-sm btn-outline-info fw-bold py-0 px-2">Panggil</button>
+                                  {(q.berkas_kk || q.berkas_ktp) && (
+                                    <button onClick={() => setSelectedBerkasModal(q)} className="btn btn-sm btn-info text-dark fw-bold py-0 px-2" title="Lihat Berkas">
+                                      <i className="bi bi-file-earmark-image"></i>
+                                    </button>
+                                  )}
+                                </div>
                               </td>
                             </tr>
                           ))}
@@ -636,13 +662,23 @@ export default function Operator() {
                         <tbody>
                           {waitingQueuesC.map(q => (
                             <tr key={q.id}>
-                              <td><span className="badge bg-success fs-6 fw-bold shadow">{q.nomor_lengkap}</span></td>
+                              <td>
+                                <span className="badge bg-success fs-6 fw-bold shadow me-1">{q.nomor_lengkap}</span>
+                                {q.tipe === 'online' && <span className="badge bg-info text-dark small">ONLINE</span>}
+                              </td>
                               <td>
                                 <strong className="text-white d-block small">{q.warga_nama || '-'}</strong>
                                 <span className="text-light opacity-75 small">{q.warga_alamat}</span>
                               </td>
                               <td>
-                                <button onClick={() => layaniSekarang(q)} className="btn btn-sm btn-outline-success fw-bold py-0 px-2">Panggil</button>
+                                <div className="d-flex gap-1">
+                                  <button onClick={() => layaniSekarang(q)} className="btn btn-sm btn-outline-success fw-bold py-0 px-2">Panggil</button>
+                                  {(q.berkas_kk || q.berkas_ktp) && (
+                                    <button onClick={() => setSelectedBerkasModal(q)} className="btn btn-sm btn-info text-dark fw-bold py-0 px-2" title="Lihat Berkas">
+                                      <i className="bi bi-file-earmark-image"></i>
+                                    </button>
+                                  )}
+                                </div>
                               </td>
                             </tr>
                           ))}
@@ -670,7 +706,10 @@ export default function Operator() {
                     <tbody>
                       {waitingQueues.map(q => (
                         <tr key={q.id}>
-                          <td><span className="badge bg-primary fs-6 fw-bold shadow">{q.nomor_lengkap}</span></td>
+                          <td>
+                            <span className="badge bg-primary fs-6 fw-bold shadow me-1">{q.nomor_lengkap}</span>
+                            {q.tipe === 'online' && <span className="badge bg-info text-dark small">ONLINE</span>}
+                          </td>
                           <td>
                             {q.warga_nama ? (
                               <div>
@@ -683,7 +722,14 @@ export default function Operator() {
                           </td>
                           <td><span className="badge bg-info text-white">Menunggu</span></td>
                           <td>
-                            <button onClick={() => layaniSekarang(q)} className="btn btn-sm btn-outline-primary fw-bold py-0 px-2">Panggil</button>
+                            <div className="d-flex gap-1">
+                              <button onClick={() => layaniSekarang(q)} className="btn btn-sm btn-outline-primary fw-bold py-0 px-2">Panggil</button>
+                              {(q.berkas_kk || q.berkas_ktp) && (
+                                <button onClick={() => setSelectedBerkasModal(q)} className="btn btn-sm btn-info text-dark fw-bold py-0 px-2" title="Lihat Berkas">
+                                  <i className="bi bi-file-earmark-image"></i>
+                                </button>
+                              )}
+                            </div>
                           </td>
                         </tr>
                       ))}
@@ -701,6 +747,72 @@ export default function Operator() {
         </div>
 
       </div>
+
+      {/* Modal View Berkas KK / KTP */}
+      {selectedBerkasModal && (
+        <div className="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center px-3" style={{ background: 'rgba(15, 23, 42, 0.75)', backdropFilter: 'blur(6px)', zIndex: 2000 }}>
+          <div className="card text-dark p-4 border-0 w-100 shadow-lg" style={{ maxWidth: '800px', maxHeight: '90vh', overflowY: 'auto', background: '#ffffff', borderRadius: '20px' }}>
+            <div className="d-flex justify-content-between align-items-center border-bottom pb-3 mb-3">
+              <div>
+                <span className="badge bg-info text-dark mb-1">Pemeriksaan Berkas Antrian Online</span>
+                <h4 className="fw-bold m-0 text-primary">{selectedBerkasModal.nomor_lengkap} - {selectedBerkasModal.warga_nama}</h4>
+                <small className="text-muted">NIK: {selectedBerkasModal.warga_nik || '-'} | KK: {selectedBerkasModal.warga_kk || '-'} | HP: {selectedBerkasModal.warga_hp || '-'}</small>
+              </div>
+              <button onClick={() => setSelectedBerkasModal(null)} className="btn-close"></button>
+            </div>
+
+            <div className="row g-4">
+              {/* Berkas KK */}
+              <div className="col-md-6 border-end">
+                <h6 className="fw-bold text-dark mb-2"><i className="bi bi-file-earmark-pdf text-danger me-1"></i> Berkas Kartu Keluarga (KK)</h6>
+                {selectedBerkasModal.berkas_kk ? (
+                  <div>
+                    {selectedBerkasModal.berkas_kk.startsWith('data:image') ? (
+                      <img src={selectedBerkasModal.berkas_kk} alt="Berkas KK" className="img-fluid rounded border shadow-sm w-100" style={{ maxHeight: '350px', objectFit: 'contain', background: '#f8fafc' }} />
+                    ) : (
+                      <a href={selectedBerkasModal.berkas_kk} target="_blank" rel="noreferrer" className="btn btn-outline-primary btn-sm w-100 py-3">
+                        <i className="bi bi-download me-1"></i> Buka / Unduh Document KK ({selectedBerkasModal.berkas_kk_nama || 'File'})
+                      </a>
+                    )}
+                  </div>
+                ) : (
+                  <p className="text-muted small">Tidak ada lampiran berkas KK.</p>
+                )}
+              </div>
+
+              {/* Berkas KTP */}
+              <div className="col-md-6">
+                <h6 className="fw-bold text-dark mb-2"><i className="bi bi-person-badge text-primary me-1"></i> Berkas KTP Pemohon</h6>
+                {selectedBerkasModal.berkas_ktp ? (
+                  <div>
+                    {selectedBerkasModal.berkas_ktp.startsWith('data:image') ? (
+                      <img src={selectedBerkasModal.berkas_ktp} alt="Berkas KTP" className="img-fluid rounded border shadow-sm w-100" style={{ maxHeight: '350px', objectFit: 'contain', background: '#f8fafc' }} />
+                    ) : (
+                      <a href={selectedBerkasModal.berkas_ktp} target="_blank" rel="noreferrer" className="btn btn-outline-primary btn-sm w-100 py-3">
+                        <i className="bi bi-download me-1"></i> Buka / Unduh Document KTP ({selectedBerkasModal.berkas_ktp_nama || 'File'})
+                      </a>
+                    )}
+                  </div>
+                ) : (
+                  <p className="text-muted small">Tidak ada lampiran berkas KTP.</p>
+                )}
+              </div>
+            </div>
+
+            {selectedBerkasModal.catatan && (
+              <div className="alert alert-secondary mt-3 mb-0 small">
+                <strong>Catatan Pemohon:</strong> {selectedBerkasModal.catatan}
+              </div>
+            )}
+
+            <div className="text-end mt-4 pt-3 border-top">
+              <button onClick={() => setSelectedBerkasModal(null)} className="btn btn-secondary px-4 fw-bold rounded-pill">
+                Tutup Pemeriksaan
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
