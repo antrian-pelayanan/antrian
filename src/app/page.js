@@ -1,15 +1,42 @@
 "use client";
 
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 export default function Home() {
+  const router = useRouter();
+  const [isMobileRedirecting, setIsMobileRedirecting] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+      if (isMobile) {
+        setIsMobileRedirecting(true);
+        router.replace('/online');
+      }
+    }
+  }, [router]);
+
+  if (isMobileRedirecting) {
+    return (
+      <div style={{ background: 'radial-gradient(circle at 50% 50%, #0f172a 0%, #020617 100%)', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ffffff' }}>
+        <div className="text-center p-4">
+          <div className="spinner-border text-warning mb-3" role="status" style={{ width: '3rem', height: '3rem' }}></div>
+          <h4 className="fw-bold text-warning mb-1">MEMUAT ANTRIAN MOBILE WARGA...</h4>
+          <p className="text-white-50 small">Kecamatan Gandrungmangu Semringah</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div style={{ background: 'radial-gradient(circle at 50% 50%, #1a233a 0%, #0d111b 100%)', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <div className="container py-5 text-center" style={{ maxWidth: '900px' }}>
-        <div className="d-flex align-items-center justify-content-center gap-4 mb-4">
-          <img src="/img/Logo.png" alt="Logo Cilacap" style={{ height: '100px', objectFit: 'contain' }} />
-          <img src="/img/cilacap-bercahaya.png" alt="Logo Cilacap Bercahaya" style={{ height: '85px', objectFit: 'contain' }} />
-          <img src="/img/logo-semringah.png" alt="Logo Gandrung Mangu Semringah" style={{ height: '100px', objectFit: 'contain' }} />
+        <div className="d-flex align-items-center justify-content-center gap-4 mb-4 flex-wrap">
+          <img src="/img/cilacap-bercahaya.png" alt="Logo Cilacap Bercahaya" style={{ height: '90px', objectFit: 'contain', filter: 'drop-shadow(0 4px 10px rgba(0,0,0,0.5))' }} />
+          <div style={{ width: '2px', height: '60px', background: 'rgba(255,255,255,0.25)' }}></div>
+          <img src="/img/logo-semringah.png" alt="Logo Gandrung Mangu Semringah" style={{ height: '105px', objectFit: 'contain', filter: 'drop-shadow(0 4px 15px rgba(251,191,36,0.3))' }} />
         </div>
         <h1 className="display-4 fw-bold text-white mb-2">Portal Sistem Antrian</h1>
         <h4 className="text-info fw-normal mb-5">Kecamatan Gandrungmangu - Berbasis Real-time Cloud</h4>

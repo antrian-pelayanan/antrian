@@ -209,8 +209,7 @@ export default function Kiosk() {
           <div className="card text-dark p-5 border-0 w-100 shadow-lg align-self-center mx-auto" style={{ maxWidth: '450px', background: 'rgba(255, 255, 255, 0.94)', backdropFilter: 'blur(12px)', border: '1px solid #e2e8f0', borderRadius: '25px', boxShadow: '0 20px 40px rgba(0, 0, 0, 0.12)' }}>
             <div className="text-center mb-5">
               <div className="d-flex align-items-center justify-content-center gap-3 mb-3">
-                <img src="/img/Logo.png" alt="Logo" style={{ height: '80px', objectFit: 'contain' }} />
-                <img src="/img/cilacap-bercahaya.png" alt="Logo Cilacap Bercahaya" style={{ height: '70px', objectFit: 'contain' }} />
+                <img src="/img/cilacap-bercahaya.png" alt="Logo Cilacap Bercahaya" style={{ height: '75px', objectFit: 'contain' }} />
               </div>
               <h2 className="fw-bold mb-1 text-danger">LOGIN KIOSK</h2>
               <p className="text-secondary small mb-0">{instansiNama}</p>
@@ -281,10 +280,10 @@ export default function Kiosk() {
               >
                 <i className="bi bi-box-arrow-right"></i> Keluar Kiosk
               </button>
-              <div className="d-flex align-items-center justify-content-center gap-4 mb-3">
-                <img src="/img/Logo.png" alt="Logo Cilacap" style={{ height: '90px', objectFit: 'contain', filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.6))' }} />
-                <img src="/img/cilacap-bercahaya.png" alt="Logo Cilacap Bercahaya" style={{ height: '80px', objectFit: 'contain', filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.6))' }} />
-                <img src="/img/logo-semringah.png" alt="Logo Gandrung Mangu Semringah" style={{ height: '90px', objectFit: 'contain', filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.6))' }} />
+              <div className="d-flex align-items-center justify-content-center gap-4 mb-3 flex-wrap">
+                <img src="/img/cilacap-bercahaya.png" alt="Logo Cilacap Bercahaya" style={{ height: '85px', objectFit: 'contain', filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.6))' }} />
+                <div style={{ width: '2px', height: '50px', background: 'rgba(255,255,255,0.25)' }}></div>
+                <img src="/img/logo-semringah.png" alt="Logo Gandrung Mangu Semringah" style={{ height: '95px', objectFit: 'contain', filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.6))' }} />
               </div>
               <h1 className="fw-bold mb-1" style={{ color: '#ffffff', fontSize: '2.8rem', textShadow: '0 2px 0 #0284c7, 0 4px 0 #0369a1, 0 6px 15px rgba(0,0,0,0.9)' }}>AMBIL NOMOR ANTRIAN</h1>
               <h3 className="text-white fw-bold mb-2" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.9)' }}>{instansiNama}</h3>

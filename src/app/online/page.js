@@ -404,7 +404,7 @@ export default function AntrianOnline() {
 
   return (
     <div style={{
-      backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.55), rgba(15, 23, 42, 0.75)), url('/img/bg-kecamatan.jpeg')`,
+      backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.80), rgba(15, 23, 42, 0.92)), url('/img/bg-kecamatan.jpeg')`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat',
@@ -417,45 +417,64 @@ export default function AntrianOnline() {
       <div className="container" style={{ maxWidth: '650px' }}>
         
         {/* Header Branding */}
-        <div className="text-center mb-4 p-4 rounded-4 shadow-lg" style={{
-          background: 'rgba(255, 255, 255, 0.10)',
-          backdropFilter: 'blur(12px)',
-          WebkitBackdropFilter: 'blur(12px)',
-          border: '2px solid rgba(255, 255, 255, 0.35)',
-          boxShadow: '0 15px 35px rgba(0,0,0,0.4)'
+        <div className="text-center mb-4 p-4 rounded-4 shadow-lg position-relative overflow-hidden" style={{
+          background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(251, 191, 36, 0.08), rgba(0, 91, 112, 0.18))',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
+          border: '2px solid rgba(251, 191, 36, 0.4)',
+          boxShadow: '0 20px 40px rgba(0,0,0,0.5)'
         }}>
-          <div className="d-flex align-items-center justify-content-center gap-3 mb-3">
-            <img src="/img/Logo.png" alt="Logo Cilacap" style={{ height: '65px', objectFit: 'contain' }} />
-            <img src="/img/cilacap-bercahaya.png" alt="Logo Cilacap Bercahaya" style={{ height: '55px', objectFit: 'contain' }} />
-            <img src="/img/logo-semringah.png" alt="Logo Gandrung Mangu" style={{ height: '65px', objectFit: 'contain' }} />
+          {/* Top Logo Container */}
+          <div className="d-flex align-items-center justify-content-center gap-3 mb-3 flex-wrap">
+            <img src="/img/cilacap-bercahaya.png" alt="Logo Cilacap Bercahaya" style={{ height: '60px', objectFit: 'contain', filter: 'drop-shadow(0 4px 10px rgba(0,0,0,0.5))' }} />
+            <div style={{ width: '2px', height: '45px', background: 'rgba(255,255,255,0.25)' }}></div>
+            <img src="/img/logo-semringah.png" alt="Logo Gandrung Mangu Semringah" style={{ height: '75px', objectFit: 'contain', filter: 'drop-shadow(0 4px 12px rgba(251,191,36,0.3))' }} />
           </div>
-          <span className="badge bg-info text-dark px-3 py-1 rounded-pill mb-2 fw-bold text-uppercase" style={{ fontSize: '0.8rem', letterSpacing: '1px' }}>
-            <i className="bi bi-phone me-1"></i> Mobile Portal Android & iOS
-          </span>
-          <h2 className="fw-bold mb-1" style={{ fontSize: '1.8rem', textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>ANTRIAN ONLINE WARGA</h2>
-          <h5 className="text-info fw-bold mb-1" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.8)' }}>{instansiNama}</h5>
+
+          {/* Slogan Banner */}
+          <div className="mb-3">
+            <span className="badge px-3 py-2 rounded-pill fw-bold shadow-sm" style={{ 
+              background: 'linear-gradient(135deg, #fbbf24, #f59e0b)', 
+              color: '#0f172a', 
+              fontSize: '0.85rem', 
+              letterSpacing: '0.5px',
+              border: '1px solid #fef08a',
+              boxShadow: '0 4px 12px rgba(245, 158, 11, 0.4)'
+            }}>
+              <i className="bi bi-stars me-1"></i> "SEMAngat memberIkan pelayanan NGgawe bungAH"
+            </span>
+          </div>
+
+          <h2 className="fw-black mb-1" style={{ fontSize: '1.85rem', color: '#ffffff', textShadow: '0 2px 8px rgba(0,0,0,0.9), 0 0 15px rgba(251,191,36,0.3)', letterSpacing: '-0.5px' }}>
+            ANTRIAN MOBILE WARGA
+          </h2>
+          <h5 className="fw-bold mb-1" style={{ color: '#fbbf24', textShadow: '0 1px 4px rgba(0,0,0,0.9)' }}>
+            {instansiNama}
+          </h5>
           <p className="small text-white-50 m-0">{instansiAlamat}</p>
         </div>
 
         {/* User Session Bar */}
         {currentUser ? (
-          <div className="d-flex align-items-center justify-content-between p-3 rounded-4 mb-4 shadow" style={{ background: 'rgba(16, 185, 129, 0.2)', border: '1px solid rgba(16, 185, 129, 0.5)', backdropFilter: 'blur(8px)' }}>
-            <div className="d-flex align-items-center gap-2">
-              <i className="bi bi-person-check-fill fs-3 text-success"></i>
+          <div className="d-flex align-items-center justify-content-between p-3 rounded-4 mb-4 shadow-lg" style={{ background: 'rgba(16, 185, 129, 0.18)', border: '1.5px solid rgba(52, 211, 153, 0.5)', backdropFilter: 'blur(10px)' }}>
+            <div className="d-flex align-items-center gap-3">
+              <div className="rounded-circle d-flex align-items-center justify-content-center" style={{ width: '42px', height: '42px', background: 'rgba(52, 211, 153, 0.25)', border: '1px solid #34d399' }}>
+                <i className="bi bi-person-check-fill fs-4 text-emerald-400" style={{ color: '#34d399' }}></i>
+              </div>
               <div>
                 <strong className="d-block text-white" style={{ fontSize: '1rem' }}>{currentUser.nama}</strong>
                 <small className="text-white-50">NIK: {currentUser.nik} | KK: {currentUser.no_kk}</small>
               </div>
             </div>
-            <button onClick={handleLogout} className="btn btn-outline-danger btn-sm rounded-pill px-3 fw-bold bg-dark bg-opacity-50">
-              <i className="bi bi-box-arrow-right"></i> Keluar
+            <button onClick={handleLogout} className="btn btn-outline-danger btn-sm rounded-pill px-3 fw-bold bg-dark bg-opacity-60">
+              <i className="bi bi-box-arrow-right me-1"></i> Keluar
             </button>
           </div>
         ) : (
-          <div className="d-flex align-items-center justify-content-between p-3 rounded-4 mb-4 shadow" style={{ background: 'rgba(255, 255, 255, 0.08)', border: '1px solid rgba(255, 255, 255, 0.2)', backdropFilter: 'blur(8px)' }}>
-            <span className="small text-white-50"><i className="bi bi-info-circle me-1 text-info"></i> Silakan Masuk / Daftar Akun untuk mengambil antrian online.</span>
+          <div className="d-flex align-items-center justify-content-between p-3 rounded-4 mb-4 shadow-lg" style={{ background: 'rgba(255, 255, 255, 0.07)', border: '1px solid rgba(255, 255, 255, 0.2)', backdropFilter: 'blur(10px)' }}>
+            <span className="small text-white-50"><i className="bi bi-info-circle me-1 text-warning"></i> Silakan Masuk / Daftar Akun untuk mengambil antrian online.</span>
             <div className="d-flex gap-2">
-              <button onClick={() => setActiveTab('login')} className="btn btn-sm btn-info rounded-pill px-3 fw-bold">Masuk</button>
+              <button onClick={() => setActiveTab('login')} className="btn btn-sm rounded-pill px-3 fw-bold shadow-sm" style={{ background: '#fbbf24', color: '#0f172a', border: 'none' }}>Masuk</button>
               <button onClick={() => setActiveTab('register')} className="btn btn-sm btn-outline-light rounded-pill px-3 fw-bold">Daftar</button>
             </div>
           </div>
@@ -465,14 +484,16 @@ export default function AntrianOnline() {
         <div className="d-flex gap-2 mb-4">
           <button 
             onClick={() => setActiveTab('menu')}
-            className={`btn flex-grow-1 py-2 fw-bold rounded-pill text-nowrap small ${activeTab === 'menu' ? 'btn-info text-dark shadow-lg' : 'btn-outline-light border-secondary text-white'}`}
+            className={`btn flex-grow-1 py-2.5 fw-bold rounded-pill text-nowrap small transition ${activeTab === 'menu' ? 'shadow-lg' : 'btn-outline-light border-secondary text-white'}`}
+            style={activeTab === 'menu' ? { background: 'linear-gradient(135deg, #fbbf24, #f59e0b)', color: '#0f172a', border: 'none', boxShadow: '0 6px 20px rgba(245,158,11,0.4)' } : {}}
           >
             <i className="bi bi-grid-fill me-1"></i> Menu Layanan
           </button>
           {currentUser && (
             <button 
               onClick={() => setActiveTab('tiket')}
-              className={`btn flex-grow-1 py-2 fw-bold rounded-pill text-nowrap small ${activeTab === 'tiket' ? 'btn-info text-dark shadow-lg' : 'btn-outline-light border-secondary text-white'}`}
+              className={`btn flex-grow-1 py-2.5 fw-bold rounded-pill text-nowrap small transition ${activeTab === 'tiket' ? 'shadow-lg' : 'btn-outline-light border-secondary text-white'}`}
+              style={activeTab === 'tiket' ? { background: 'linear-gradient(135deg, #fbbf24, #f59e0b)', color: '#0f172a', border: 'none', boxShadow: '0 6px 20px rgba(245,158,11,0.4)' } : {}}
             >
               <i className="bi bi-ticket-perforated-fill me-1"></i> Tiket Saya ({myQueues.length})
             </button>
@@ -485,8 +506,8 @@ export default function AntrianOnline() {
         {/* CONTENT DISPLAY */}
         {loading ? (
           <div className="text-center py-5">
-            <div className="spinner-border text-info" role="status"></div>
-            <p className="mt-3 text-info">Memuat layanan antrian...</p>
+            <div className="spinner-border text-warning" role="status"></div>
+            <p className="mt-3 text-warning fw-bold">Memuat layanan antrian Semringah...</p>
           </div>
         ) : (
           <>
@@ -494,8 +515,8 @@ export default function AntrianOnline() {
             {activeTab === 'menu' && (
               <div>
                 <h4 className="fw-bold mb-3 d-flex align-items-center justify-content-between">
-                  <span>Pilih Kategori Layanan</span>
-                  <span className="badge bg-primary rounded-pill small fw-normal fs-6">{pelayanan.length} Kategori</span>
+                  <span className="d-flex align-items-center gap-2"><i className="bi bi-hand-index-thumb text-warning"></i> Pilih Kategori Layanan</span>
+                  <span className="badge rounded-pill small fw-normal fs-6" style={{ background: 'rgba(251, 191, 36, 0.2)', color: '#fbbf24', border: '1px solid #fbbf24' }}>{pelayanan.length} Kategori</span>
                 </h4>
 
                 <div className="row g-3">
@@ -511,12 +532,12 @@ export default function AntrianOnline() {
                           setSelectedLayanan(p);
                           setActiveTab('antrian');
                         }}
-                        className="p-3 rounded-4 shadow-lg cursor-pointer transition"
+                        className="p-3.5 rounded-4 shadow-lg cursor-pointer transition position-relative overflow-hidden"
                         style={{
-                          background: 'rgba(255, 255, 255, 0.08)',
-                          backdropFilter: 'blur(8px)',
-                          WebkitBackdropFilter: 'blur(8px)',
-                          border: '2px solid rgba(255, 255, 255, 0.3)',
+                          background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(251, 191, 36, 0.05))',
+                          backdropFilter: 'blur(10px)',
+                          WebkitBackdropFilter: 'blur(10px)',
+                          border: '1.5px solid rgba(251, 191, 36, 0.35)',
                           cursor: 'pointer'
                         }}
                       >
@@ -525,18 +546,18 @@ export default function AntrianOnline() {
                             <span style={{ 
                               fontSize: '2.8rem', 
                               fontWeight: 900, 
-                              color: '#ff3333', 
+                              color: '#fbbf24', 
                               lineHeight: 1, 
-                              textShadow: '0 2px 0 #b91c1c, 0 4px 10px rgba(0,0,0,0.8)' 
+                              textShadow: '0 2px 0 #d97706, 0 4px 12px rgba(0,0,0,0.8)' 
                             }}>
                               {p.kode}
                             </span>
                             <div>
                               <h5 className="fw-bold m-0 text-white" style={{ fontSize: '1.25rem', textShadow: '0 1px 3px rgba(0,0,0,0.8)' }}>{p.nama}</h5>
-                              <small className="text-white-50">Estimasi pelayanan: {p.estimasi_waktu} Menit</small>
+                              <small className="text-white-50"><i className="bi bi-clock me-1 text-warning"></i> Estimasi pelayanan: {p.estimasi_waktu} Menit</small>
                             </div>
                           </div>
-                          <span className="btn btn-sm btn-info rounded-pill px-3 fw-bold text-dark shadow-sm">
+                          <span className="btn btn-sm rounded-pill px-3.5 py-1.5 fw-bold shadow-sm" style={{ background: '#fbbf24', color: '#0f172a', border: 'none' }}>
                             Ambil <i className="bi bi-chevron-right ms-1"></i>
                           </span>
                         </div>
@@ -549,8 +570,8 @@ export default function AntrianOnline() {
 
             {/* VIEW 2: LOGIN WARGA */}
             {activeTab === 'login' && (
-              <div className="card text-white p-4 shadow-lg" style={{ background: 'rgba(255,255,255,0.08)', backdropFilter: 'blur(12px)', border: '2px solid rgba(255,255,255,0.3)', borderRadius: '24px' }}>
-                <h3 className="fw-bold mb-1 text-info text-center">MASUK AKUN WARGA</h3>
+              <div className="card text-white p-4 shadow-lg" style={{ background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95))', backdropFilter: 'blur(14px)', border: '2px solid rgba(251, 191, 36, 0.4)', borderRadius: '24px' }}>
+                <h3 className="fw-bold mb-1 text-warning text-center">MASUK AKUN WARGA</h3>
                 <p className="text-center text-white-50 small mb-4">Gunakan NIK, Email, atau Nomor HP Anda</p>
 
                 {loginError && (
@@ -577,7 +598,7 @@ export default function AntrianOnline() {
                       <label className="form-label small fw-bold text-white-50 m-0">Kata Kunci (Password)</label>
                       <button 
                         type="button" 
-                        className="btn btn-link text-info text-decoration-none p-0 small fw-bold"
+                        className="btn btn-link text-warning text-decoration-none p-0 small fw-bold"
                         onClick={() => {
                           setResetStep(1);
                           setResetError('');
@@ -598,7 +619,7 @@ export default function AntrianOnline() {
                     />
                   </div>
 
-                  <button type="submit" className="btn btn-info w-100 py-3 fw-bold rounded-pill text-dark my-3 shadow-lg">
+                  <button type="submit" className="btn w-100 py-3 fw-bold rounded-pill my-3 shadow-lg" style={{ background: 'linear-gradient(135deg, #fbbf24, #f59e0b)', color: '#0f172a', border: 'none' }}>
                     Masuk Sekarang
                   </button>
 
@@ -607,7 +628,7 @@ export default function AntrianOnline() {
                     <button 
                       type="button" 
                       onClick={() => setActiveTab('register')}
-                      className="btn btn-link text-info text-decoration-none p-0 small fw-bold ms-1"
+                      className="btn btn-link text-warning text-decoration-none p-0 small fw-bold ms-1"
                     >
                       Daftar Baru
                     </button>
@@ -618,8 +639,8 @@ export default function AntrianOnline() {
 
             {/* VIEW 3: REGISTER WARGA */}
             {activeTab === 'register' && (
-              <div className="card text-white p-4 shadow-lg" style={{ background: 'rgba(255,255,255,0.08)', backdropFilter: 'blur(12px)', border: '2px solid rgba(255,255,255,0.3)', borderRadius: '24px' }}>
-                <h3 className="fw-bold mb-1 text-info text-center">PENDAFTARAN AKUN WARGA</h3>
+              <div className="card text-white p-4 shadow-lg" style={{ background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95))', backdropFilter: 'blur(14px)', border: '2px solid rgba(251, 191, 36, 0.4)', borderRadius: '24px' }}>
+                <h3 className="fw-bold mb-1 text-warning text-center">PENDAFTARAN AKUN WARGA</h3>
                 <p className="text-center text-white-50 small mb-4">Lengkapi data diri Anda untuk membuat akun antrian online</p>
 
                 {regError && (
@@ -731,7 +752,7 @@ export default function AntrianOnline() {
                     </div>
                   </div>
 
-                  <button type="submit" className="btn btn-info w-100 py-3 fw-bold rounded-pill text-dark mt-4 shadow-lg">
+                  <button type="submit" className="btn w-100 py-3 fw-bold rounded-pill mt-4 shadow-lg" style={{ background: 'linear-gradient(135deg, #fbbf24, #f59e0b)', color: '#0f172a', border: 'none' }}>
                     Daftar Akun Baru
                   </button>
 
@@ -740,7 +761,7 @@ export default function AntrianOnline() {
                     <button 
                       type="button" 
                       onClick={() => setActiveTab('login')}
-                      className="btn btn-link text-info text-decoration-none p-0 small fw-bold ms-1"
+                      className="btn btn-link text-warning text-decoration-none p-0 small fw-bold ms-1"
                     >
                       Masuk Di Sini
                     </button>
@@ -751,8 +772,8 @@ export default function AntrianOnline() {
 
             {/* VIEW 4: RESET PASSWORD / LUPA PASSWORD */}
             {activeTab === 'reset' && (
-              <div className="card text-white p-4 shadow-lg" style={{ background: 'rgba(255,255,255,0.08)', backdropFilter: 'blur(12px)', border: '2px solid rgba(255,255,255,0.3)', borderRadius: '24px' }}>
-                <h3 className="fw-bold mb-1 text-info text-center">PEMULIHAN KATA KUNCI</h3>
+              <div className="card text-white p-4 shadow-lg" style={{ background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95))', backdropFilter: 'blur(14px)', border: '2px solid rgba(251, 191, 36, 0.4)', borderRadius: '24px' }}>
+                <h3 className="fw-bold mb-1 text-warning text-center">PEMULIHAN KATA KUNCI</h3>
                 <p className="text-center text-white-50 small mb-4">Reset password akan diverifikasi & dikirimkan ke Email dan Nomor HP terdaftar</p>
 
                 {resetError && (
@@ -779,7 +800,7 @@ export default function AntrianOnline() {
                         onChange={e => setResetForm({ ...resetForm, identity: e.target.value })}
                       />
                     </div>
-                    <button type="submit" className="btn btn-info w-100 py-3 fw-bold rounded-pill text-dark shadow-lg">
+                    <button type="submit" className="btn w-100 py-3 fw-bold rounded-pill text-dark shadow-lg" style={{ background: 'linear-gradient(135deg, #fbbf24, #f59e0b)', color: '#0f172a', border: 'none' }}>
                       Verifikasi Data Pemohon
                     </button>
                     <div className="text-center mt-3">
@@ -822,10 +843,10 @@ export default function AntrianOnline() {
 
             {/* VIEW 5: FORM AMBIL ANTRIAN ONLINE & UPLOAD BERKAS */}
             {activeTab === 'antrian' && selectedLayanan && (
-              <div className="card text-white p-4 shadow-lg" style={{ background: 'rgba(255,255,255,0.08)', backdropFilter: 'blur(12px)', border: '2px solid rgba(255,255,255,0.3)', borderRadius: '24px' }}>
+              <div className="card text-white p-4 shadow-lg" style={{ background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95))', backdropFilter: 'blur(14px)', border: '2px solid rgba(251, 191, 36, 0.4)', borderRadius: '24px' }}>
                 <div className="d-flex align-items-center justify-content-between border-bottom border-white border-opacity-25 pb-3 mb-3">
                   <div>
-                    <span className="badge bg-danger text-white px-3 py-1 rounded-pill small fw-bold">Kategori {selectedLayanan.kode}</span>
+                    <span className="badge px-3 py-1 rounded-pill small fw-bold" style={{ background: '#fbbf24', color: '#0f172a' }}>Kategori {selectedLayanan.kode}</span>
                     <h4 className="fw-bold m-0 mt-1 text-white">{selectedLayanan.nama}</h4>
                   </div>
                   <button onClick={() => setActiveTab('menu')} className="btn btn-outline-light btn-sm rounded-pill">
@@ -835,8 +856,8 @@ export default function AntrianOnline() {
 
                 <form onSubmit={handleAmbilAntrianOnline}>
                   {/* Summary User Info */}
-                  <div className="p-3 rounded-3 mb-3" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }}>
-                    <h6 className="fw-bold text-info mb-2"><i className="bi bi-person-vcard me-1"></i> Data Pemohon Online</h6>
+                  <div className="p-3 rounded-3 mb-3" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(251, 191, 36, 0.2)' }}>
+                    <h6 className="fw-bold text-warning mb-2"><i className="bi bi-person-vcard me-1"></i> Data Pemohon Online</h6>
                     <div className="row g-2 small">
                       <div className="col-6">Nama: <strong>{currentUser.nama}</strong></div>
                       <div className="col-6">NIK: <strong>{currentUser.nik}</strong></div>
@@ -848,7 +869,7 @@ export default function AntrianOnline() {
                   {/* Upload Berkas KK */}
                   <div className="mb-3">
                     <label className="form-label small fw-bold text-white d-flex align-items-center justify-content-between">
-                      <span><i className="bi bi-file-earmark-arrow-up text-info me-1"></i> Upload Berkas Kartu Keluarga (KK) <span className="text-danger">*</span></span>
+                      <span><i className="bi bi-file-earmark-arrow-up text-warning me-1"></i> Upload Berkas Kartu Keluarga (KK) <span className="text-danger">*</span></span>
                       {berkasKKName && <span className="badge bg-success text-white">Terunggah</span>}
                     </label>
                     <input 
@@ -864,7 +885,7 @@ export default function AntrianOnline() {
                   {/* Upload Berkas KTP */}
                   <div className="mb-4">
                     <label className="form-label small fw-bold text-white d-flex align-items-center justify-content-between">
-                      <span><i className="bi bi-person-badge text-info me-1"></i> Upload Berkas KTP Pemohon <span className="text-danger">*</span></span>
+                      <span><i className="bi bi-person-badge text-warning me-1"></i> Upload Berkas KTP Pemohon <span className="text-danger">*</span></span>
                       {berkasKTPName && <span className="badge bg-success text-white">Terunggah</span>}
                     </label>
                     <input 
@@ -892,7 +913,8 @@ export default function AntrianOnline() {
                   <button 
                     type="submit" 
                     disabled={submittingQueue} 
-                    className="btn btn-info w-100 py-3 fw-bold rounded-pill text-dark shadow-lg fs-5"
+                    className="btn w-100 py-3 fw-bold rounded-pill shadow-lg fs-5"
+                    style={{ background: 'linear-gradient(135deg, #fbbf24, #f59e0b)', color: '#0f172a', border: 'none' }}
                   >
                     {submittingQueue ? (
                       <>
@@ -913,42 +935,46 @@ export default function AntrianOnline() {
             {activeTab === 'tiket' && (
               <div>
                 <h4 className="fw-bold mb-3 d-flex align-items-center justify-content-between">
-                  <span>Tiket Antrian Saya</span>
-                  <button onClick={() => setActiveTab('menu')} className="btn btn-sm btn-info rounded-pill fw-bold">
+                  <span className="d-flex align-items-center gap-2"><i className="bi bi-ticket-perforated text-warning"></i> Tiket Antrian Saya</span>
+                  <button onClick={() => setActiveTab('menu')} className="btn btn-sm rounded-pill fw-bold" style={{ background: '#fbbf24', color: '#0f172a', border: 'none' }}>
                     + Ambil Lagi
                   </button>
                 </h4>
 
                 {myQueues.length === 0 ? (
                   <div className="card p-4 text-center text-white-50 border-secondary bg-dark bg-opacity-50 rounded-4">
-                    <i className="bi bi-ticket-perforated fs-1 text-info mb-2"></i>
+                    <i className="bi bi-ticket-perforated fs-1 text-warning mb-2"></i>
                     <p className="m-0">Anda belum memiliki antrian online aktif hari ini.</p>
                   </div>
                 ) : (
                   <div className="row g-3">
                     {myQueues.map(q => (
                       <div className="col-12" key={q.id}>
-                        <div className="p-4 rounded-4 shadow-lg text-center position-relative" style={{
-                          background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95))',
-                          border: '2px solid #38bdf8',
-                          boxShadow: '0 20px 40px rgba(0,0,0,0.5)'
+                        <div className="p-4 rounded-4 shadow-lg text-center position-relative overflow-hidden" style={{
+                          background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(30, 41, 59, 0.96))',
+                          border: '2px solid #fbbf24',
+                          boxShadow: '0 20px 40px rgba(0,0,0,0.6)'
                         }}>
-                          <div className="d-flex justify-content-between align-items-center border-bottom border-secondary pb-2 mb-3">
-                            <span className="badge bg-info text-dark font-monospace fw-bold">ANTRIAN ONLINE MOBILE</span>
+                          {/* Top Decorative Banner */}
+                          <div className="py-1 px-3 rounded-bottom-4 mb-3 d-flex justify-content-between align-items-center" style={{ background: 'rgba(251, 191, 36, 0.15)', borderBottom: '1px solid rgba(251, 191, 36, 0.3)' }}>
+                            <div className="d-flex align-items-center gap-2">
+                              <img src="/img/logo-semringah.png" alt="Semringah" style={{ height: '24px', objectFit: 'contain' }} />
+                              <span className="badge font-monospace fw-bold" style={{ background: '#fbbf24', color: '#0f172a' }}>ANTRIAN MOBILE</span>
+                            </div>
                             <span className={`badge ${q.status === 'dipanggil' ? 'bg-danger text-white blink' : q.status === 'selesai' ? 'bg-success text-white' : 'bg-warning text-dark'} fw-bold`}>
                               STATUS: {q.status.toUpperCase()}
                             </span>
                           </div>
 
                           <h5 className="text-white-50 small mb-1">{instansiNama}</h5>
-                          <div className="fw-black text-info my-2" style={{ fontSize: '3.8rem', lineHeight: 1, letterSpacing: '-1px', textShadow: '0 2px 0 #0284c7, 0 4px 10px rgba(0,0,0,0.8)' }}>
+                          <div className="fw-black text-warning my-2" style={{ fontSize: '3.8rem', lineHeight: 1, letterSpacing: '-1px', textShadow: '0 2px 0 #d97706, 0 4px 12px rgba(0,0,0,0.9)' }}>
                             {q.nomor_lengkap}
                           </div>
 
                           <h5 className="fw-bold text-white mb-2">{q.pelayanan_nama}</h5>
                           
                           {q.loket && (
-                            <div className="p-2 rounded-3 bg-primary bg-opacity-25 border border-primary text-info fw-bold mb-3">
+                            <div className="p-2 rounded-3 border fw-bold mb-3" style={{ background: 'rgba(6, 182, 212, 0.15)', borderColor: '#06b6d4', color: '#38bdf8' }}>
                               MENUJU: {q.loket}
                             </div>
                           )}
@@ -959,14 +985,15 @@ export default function AntrianOnline() {
                           </div>
 
                           <div className="d-flex align-items-center justify-content-center gap-2 text-white-50 small border-top border-secondary pt-3">
-                            <i className="bi bi-clock-history text-info"></i>
+                            <i className="bi bi-clock-history text-warning"></i>
                             <span>Waktu Daftar: {q.waktu_str || new Date(q.created_at?.toMillis()).toLocaleString('id-ID')}</span>
                           </div>
 
                           <div className="mt-3">
                             <button 
                               onClick={() => alert(`Tiket Antrian Digital Anda [${q.nomor_lengkap}] aktif. Tunjukkan layar HP ini saat tiba di loket pelayanan.`)}
-                              className="btn btn-outline-info w-100 rounded-pill btn-sm fw-bold"
+                              className="btn w-100 rounded-pill btn-sm fw-bold shadow-sm"
+                              style={{ background: 'linear-gradient(135deg, #fbbf24, #f59e0b)', color: '#0f172a', border: 'none' }}
                             >
                               <i className="bi bi-qr-code-scan me-1"></i> Tunjukkan Tiket Digital Ini
                             </button>
