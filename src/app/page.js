@@ -45,14 +45,14 @@ export default function Home() {
 
         <div className="row justify-content-center g-3">
 
-          {/* Menu Antrian Online Mobile */}
+          {/* Menu Masuk Akun Warga */}
           <div className="col-md-4 col-lg">
             <Link href="/online" className="card h-100 text-decoration-none p-4 d-block text-white" style={{ background: 'linear-gradient(135deg, rgba(14, 165, 233, 0.2), rgba(3, 105, 161, 0.3))', backdropFilter: 'blur(10px)', border: '2px solid #38bdf8', borderRadius: '15px', transition: 'all 0.3s' }}
               onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-5px)'; e.currentTarget.style.boxShadow = '0 10px 25px rgba(56, 189, 248, 0.4)'; }}
               onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}>
-              <i className="bi bi-phone fs-1 text-info mb-3 d-block"></i>
-              <h4 className="fw-bold">Antrian Online</h4>
-              <p className="small text-white-50 m-0">Akses HP (Android & iOS) + Upload Berkas</p>
+              <i className="bi bi-person-lock fs-1 text-info mb-3 d-block"></i>
+              <h4 className="fw-bold">Masuk Akun Warga</h4>
+              <p className="small text-white-50 m-0">Antrian Online Mobile & Upload Berkas</p>
             </Link>
           </div>
 

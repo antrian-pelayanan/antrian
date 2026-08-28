@@ -6,7 +6,7 @@ import { collection, getDocs, query, where, addDoc, Timestamp, updateDoc, doc } 
 import Link from 'next/link';
 
 export default function AntrianOnline() {
-  const [activeTab, setActiveTab] = useState('login'); // 'login' is default for unauthenticated citizens
+  const [activeTab, setActiveTab] = useState('menu'); // 'menu' is default main screen for Antrian Online
   const [loading, setLoading] = useState(true);
   const [instansiNama, setInstansiNama] = useState('Kecamatan Gandrungmangu');
   const [instansiAlamat, setInstansiAlamat] = useState('Jl. Pertiwi Nomor 1');
@@ -491,31 +491,45 @@ export default function AntrianOnline() {
               className={`btn flex-grow-1 py-2.5 fw-bold rounded-pill text-nowrap small transition ${activeTab === 'menu' ? 'shadow-lg' : 'btn-outline-light border-secondary text-white'}`}
               style={activeTab === 'menu' ? { background: 'linear-gradient(135deg, #fbbf24, #f59e0b)', color: '#0f172a', border: 'none', boxShadow: '0 6px 20px rgba(245,158,11,0.4)' } : {}}
             >
-              <i className="bi bi-grid-fill me-1"></i> Menu Layanan
+              <i className="bi bi-grid-fill me-1"></i> Layanan
             </button>
             <button 
               onClick={() => setActiveTab('tiket')}
               className={`btn flex-grow-1 py-2.5 fw-bold rounded-pill text-nowrap small transition ${activeTab === 'tiket' ? 'shadow-lg' : 'btn-outline-light border-secondary text-white'}`}
               style={activeTab === 'tiket' ? { background: 'linear-gradient(135deg, #fbbf24, #f59e0b)', color: '#0f172a', border: 'none', boxShadow: '0 6px 20px rgba(245,158,11,0.4)' } : {}}
             >
-              <i className="bi bi-ticket-perforated-fill me-1"></i> Tiket Saya ({myQueues.length})
+              <i className="bi bi-ticket-perforated-fill me-1"></i> Tiket ({myQueues.length})
+            </button>
+            <button 
+              onClick={() => setActiveTab('akun')}
+              className={`btn flex-grow-1 py-2.5 fw-bold rounded-pill text-nowrap small transition ${activeTab === 'akun' ? 'shadow-lg' : 'btn-outline-light border-secondary text-white'}`}
+              style={activeTab === 'akun' ? { background: 'linear-gradient(135deg, #fbbf24, #f59e0b)', color: '#0f172a', border: 'none', boxShadow: '0 6px 20px rgba(245,158,11,0.4)' } : {}}
+            >
+              <i className="bi bi-person-badge-fill me-1"></i> Profil Akun Warga
             </button>
           </div>
         ) : (
           <div className="d-flex gap-2 mb-4">
             <button 
+              onClick={() => setActiveTab('menu')}
+              className={`btn flex-grow-1 py-2.5 fw-bold rounded-pill text-nowrap small transition ${activeTab === 'menu' ? 'shadow-lg' : 'btn-outline-light border-secondary text-white'}`}
+              style={activeTab === 'menu' ? { background: 'linear-gradient(135deg, #fbbf24, #f59e0b)', color: '#0f172a', border: 'none', boxShadow: '0 6px 20px rgba(245,158,11,0.4)' } : {}}
+            >
+              <i className="bi bi-grid-fill me-1"></i> Layanan Antrian
+            </button>
+            <button 
               onClick={() => setActiveTab('login')}
               className={`btn flex-grow-1 py-2.5 fw-bold rounded-pill text-nowrap small transition ${activeTab === 'login' ? 'shadow-lg' : 'btn-outline-light border-secondary text-white'}`}
               style={activeTab === 'login' ? { background: 'linear-gradient(135deg, #fbbf24, #f59e0b)', color: '#0f172a', border: 'none', boxShadow: '0 6px 20px rgba(245,158,11,0.4)' } : {}}
             >
-              <i className="bi bi-box-arrow-in-right me-1"></i> Masuk Akun
+              <i className="bi bi-box-arrow-in-right me-1"></i> Masuk Akun Warga
             </button>
             <button 
               onClick={() => setActiveTab('register')}
               className={`btn flex-grow-1 py-2.5 fw-bold rounded-pill text-nowrap small transition ${activeTab === 'register' ? 'shadow-lg' : 'btn-outline-light border-secondary text-white'}`}
               style={activeTab === 'register' ? { background: 'linear-gradient(135deg, #fbbf24, #f59e0b)', color: '#0f172a', border: 'none', boxShadow: '0 6px 20px rgba(245,158,11,0.4)' } : {}}
             >
-              <i className="bi bi-person-plus-fill me-1"></i> Daftar Akun Baru
+              <i className="bi bi-person-plus-fill me-1"></i> Daftar Baru
             </button>
           </div>
         )}
@@ -528,8 +542,8 @@ export default function AntrianOnline() {
           </div>
         ) : (
           <>
-            {/* VIEW 1: MENU LAYANAN (HANYA DITAMPILKAN SETELAH LOGIN) */}
-            {activeTab === 'menu' && currentUser && (
+            {/* VIEW 1: MENU LAYANAN */}
+            {activeTab === 'menu' && (
               <div>
                 <h4 className="fw-bold mb-3 d-flex align-items-center justify-content-between">
                   <span className="d-flex align-items-center gap-2"><i className="bi bi-hand-index-thumb text-warning"></i> Pilih Kategori Layanan</span>
@@ -1082,6 +1096,61 @@ export default function AntrianOnline() {
                     ))}
                   </div>
                 )}
+              </div>
+            )}
+
+            {/* VIEW 7: PROFIL & MASUK AKUN WARGA (AKUN SAYA) */}
+            {activeTab === 'akun' && currentUser && (
+              <div className="card text-white p-4 shadow-lg" style={{ background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95))', backdropFilter: 'blur(14px)', border: '2px solid rgba(251, 191, 36, 0.4)', borderRadius: '24px' }}>
+                <div className="text-center mb-4">
+                  <div className="rounded-circle d-inline-flex align-items-center justify-content-center mb-3 shadow" style={{ width: '80px', height: '80px', background: 'linear-gradient(135deg, #fbbf24, #f59e0b)', border: '3px solid #fef08a' }}>
+                    <i className="bi bi-person-circle fs-1 text-dark"></i>
+                  </div>
+                  <h3 className="fw-bold mb-1 text-white">{currentUser.nama}</h3>
+                  <span className="badge bg-success text-white px-3 py-1 rounded-pill small fw-bold">
+                    <i className="bi bi-shield-check me-1"></i> AKUN WARGA TERVERIFIKASI
+                  </span>
+                </div>
+
+                <div className="p-3.5 rounded-4 mb-4" style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(251,191,36,0.25)' }}>
+                  <h6 className="fw-bold text-warning mb-3 border-bottom border-secondary pb-2">
+                    <i className="bi bi-person-vcard me-2"></i> Detail Identitas Akun Warga
+                  </h6>
+                  <div className="row g-3 small">
+                    <div className="col-12">
+                      <div className="text-white-50">Nama Lengkap Pemohon:</div>
+                      <div className="fw-bold text-white fs-6">{currentUser.nama}</div>
+                    </div>
+                    <div className="col-6">
+                      <div className="text-white-50">NIK (KTP):</div>
+                      <div className="fw-bold text-white font-monospace">{currentUser.nik}</div>
+                    </div>
+                    <div className="col-6">
+                      <div className="text-white-50">Nomor KK:</div>
+                      <div className="fw-bold text-white font-monospace">{currentUser.no_kk}</div>
+                    </div>
+                    <div className="col-6">
+                      <div className="text-white-50">Alamat Email:</div>
+                      <div className="fw-bold text-white text-truncate">{currentUser.email || '-'}</div>
+                    </div>
+                    <div className="col-6">
+                      <div className="text-white-50">No. HP / WhatsApp:</div>
+                      <div className="fw-bold text-white">{currentUser.hp || '-'}</div>
+                    </div>
+                    <div className="col-12">
+                      <div className="text-white-50">Alamat Rumah Lengkap:</div>
+                      <div className="fw-bold text-white">{currentUser.alamat || '-'}</div>
+                    </div>
+                  </div>
+                </div>
+
+                <button 
+                  onClick={handleLogout} 
+                  className="btn btn-outline-danger w-100 py-3 fw-bold rounded-pill shadow-sm"
+                  style={{ border: '2px solid #ef4444' }}
+                >
+                  <i className="bi bi-box-arrow-right me-2"></i> Keluar / Logout Akun Warga
+                </button>
               </div>
             )}
           </>
