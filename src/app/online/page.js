@@ -426,9 +426,11 @@ export default function AntrianOnline() {
         }}>
           {/* Top Logo Container */}
           <div className="d-flex align-items-center justify-content-center gap-3 mb-3 flex-wrap">
-            <img src="/img/cilacap-bercahaya.png" alt="Logo Cilacap Bercahaya" style={{ height: '60px', objectFit: 'contain', filter: 'drop-shadow(0 4px 10px rgba(0,0,0,0.5))' }} />
+            <img src="/img/Logo.png" alt="Logo Cilacap" style={{ height: '65px', objectFit: 'contain', filter: 'drop-shadow(0 4px 10px rgba(0,0,0,0.5))' }} />
             <div style={{ width: '2px', height: '45px', background: 'rgba(255,255,255,0.25)' }}></div>
-            <img src="/img/logo-semringah.png" alt="Logo Gandrung Mangu Semringah" style={{ height: '75px', objectFit: 'contain', filter: 'drop-shadow(0 4px 12px rgba(251,191,36,0.3))' }} />
+            <img src="/img/cilacap-bercahaya.png" alt="Logo Cilacap Bercahaya" style={{ height: '55px', objectFit: 'contain', filter: 'drop-shadow(0 4px 10px rgba(0,0,0,0.5))' }} />
+            <div style={{ width: '2px', height: '45px', background: 'rgba(255,255,255,0.25)' }}></div>
+            <img src="/img/logo-semringah.png" alt="Logo Gandrung Mangu Semringah" style={{ height: '70px', objectFit: 'contain', filter: 'drop-shadow(0 4px 12px rgba(251,191,36,0.3))' }} />
           </div>
 
           {/* Slogan Banner */}

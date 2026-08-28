@@ -435,7 +435,8 @@ export default function Pengaturan() {
         <div className="card text-white p-5 shadow" style={{ maxWidth: '480px', width: '100%', background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(15px)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '20px' }}>
           <div className="text-center mb-4">
             <div className="d-flex align-items-center justify-content-center gap-3 mb-3">
-              <img src="/img/cilacap-bercahaya.png" alt="Logo Cilacap Bercahaya" style={{ height: '70px', objectFit: 'contain' }} />
+              <img src="/img/Logo.png" alt="Logo Cilacap" style={{ height: '75px', objectFit: 'contain' }} />
+              <img src="/img/cilacap-bercahaya.png" alt="Logo Cilacap Bercahaya" style={{ height: '65px', objectFit: 'contain' }} />
             </div>
             <h3 className="fw-bold text-white">Login Pengaturan</h3>
             <p className="text-info small">Sistem Antrian Kecamatan Gandrungmangu</p>
@@ -498,7 +499,8 @@ export default function Pengaturan() {
         {/* Header */}
         <div className="d-flex justify-content-between align-items-center mb-5 border-bottom pb-4">
           <div className="d-flex align-items-center gap-3">
-            <img src="/img/cilacap-bercahaya.png" alt="Logo Cilacap Bercahaya" style={{ height: '65px', objectFit: 'contain' }} />
+            <img src="/img/Logo.png" alt="Logo Cilacap" style={{ height: '65px', objectFit: 'contain' }} />
+            <img src="/img/cilacap-bercahaya.png" alt="Logo Cilacap Bercahaya" style={{ height: '55px', objectFit: 'contain' }} />
             <div>
               <h1 className="fw-bold text-white m-0" style={{ fontSize: '2rem' }}>PENGATURAN SISTEM</h1>
               <p className="text-info m-0 small">Kecamatan Gandrungmangu - Real-time Database Configurator</p>

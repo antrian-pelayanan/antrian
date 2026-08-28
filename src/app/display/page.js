@@ -177,7 +177,8 @@ export default function Display() {
         border: '2px solid rgba(255, 255, 255, 0.45)'
       }}>
         <div className="d-flex align-items-center gap-3">
-          <img src="/img/cilacap-bercahaya.png" alt="Logo Cilacap Bercahaya" style={{ height: '75px', objectFit: 'contain', filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.6))' }} />
+          <img src="/img/Logo.png" alt="Logo Cilacap" style={{ height: '75px', objectFit: 'contain', filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.6))' }} />
+          <img src="/img/cilacap-bercahaya.png" alt="Logo Cilacap Bercahaya" style={{ height: '65px', objectFit: 'contain', filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.6))' }} />
           <div>
             <h2 className="fw-bold m-0" style={{ color: '#ffffff', fontSize: '2.1rem', textShadow: '0 2px 4px rgba(0,0,0,0.9), 0 4px 10px rgba(0,0,0,0.7)' }}>{settings.instansi_nama}</h2>
             <p className="m-0 text-white fw-bold fs-6" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.9)' }}>{settings.instansi_alamat}</p>

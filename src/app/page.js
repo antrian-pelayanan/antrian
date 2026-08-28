@@ -34,9 +34,11 @@ export default function Home() {
     <div style={{ background: 'radial-gradient(circle at 50% 50%, #1a233a 0%, #0d111b 100%)', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <div className="container py-5 text-center" style={{ maxWidth: '900px' }}>
         <div className="d-flex align-items-center justify-content-center gap-4 mb-4 flex-wrap">
-          <img src="/img/cilacap-bercahaya.png" alt="Logo Cilacap Bercahaya" style={{ height: '90px', objectFit: 'contain', filter: 'drop-shadow(0 4px 10px rgba(0,0,0,0.5))' }} />
+          <img src="/img/Logo.png" alt="Logo Cilacap" style={{ height: '95px', objectFit: 'contain', filter: 'drop-shadow(0 4px 10px rgba(0,0,0,0.5))' }} />
           <div style={{ width: '2px', height: '60px', background: 'rgba(255,255,255,0.25)' }}></div>
-          <img src="/img/logo-semringah.png" alt="Logo Gandrung Mangu Semringah" style={{ height: '105px', objectFit: 'contain', filter: 'drop-shadow(0 4px 15px rgba(251,191,36,0.3))' }} />
+          <img src="/img/cilacap-bercahaya.png" alt="Logo Cilacap Bercahaya" style={{ height: '80px', objectFit: 'contain', filter: 'drop-shadow(0 4px 10px rgba(0,0,0,0.5))' }} />
+          <div style={{ width: '2px', height: '60px', background: 'rgba(255,255,255,0.25)' }}></div>
+          <img src="/img/logo-semringah.png" alt="Logo Gandrung Mangu Semringah" style={{ height: '100px', objectFit: 'contain', filter: 'drop-shadow(0 4px 15px rgba(251,191,36,0.3))' }} />
         </div>
         <h1 className="display-4 fw-bold text-white mb-2">Portal Sistem Antrian</h1>
         <h4 className="text-info fw-normal mb-5">Kecamatan Gandrungmangu - Berbasis Real-time Cloud</h4>

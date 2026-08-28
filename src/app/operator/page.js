@@ -289,7 +289,8 @@ export default function Operator() {
         }}>
           <div className="text-center mb-4">
             <div className="d-flex align-items-center justify-content-center gap-3 mb-3">
-              <img src="/img/cilacap-bercahaya.png" alt="Logo Cilacap Bercahaya" style={{ height: '70px', objectFit: 'contain', filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.6))' }} />
+              <img src="/img/Logo.png" alt="Logo Cilacap" style={{ height: '75px', objectFit: 'contain', filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.6))' }} />
+              <img src="/img/cilacap-bercahaya.png" alt="Logo Cilacap Bercahaya" style={{ height: '65px', objectFit: 'contain', filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.6))' }} />
             </div>
             <h3 className="fw-bold text-white mb-1" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.9)' }}>Konsol Operator</h3>
             <p className="text-info small fw-bold" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.9)' }}>Sistem Antrian Kecamatan Gandrungmangu</p>
@@ -425,7 +426,8 @@ export default function Operator() {
         boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 0 15px rgba(255, 255, 255, 0.15)'
       }}>
         <div className="d-flex align-items-center gap-3">
-          <img src="/img/cilacap-bercahaya.png" alt="Logo Cilacap Bercahaya" style={{ height: '45px', objectFit: 'contain', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.6))' }} />
+          <img src="/img/Logo.png" alt="Logo Cilacap" style={{ height: '45px', objectFit: 'contain', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.6))' }} />
+          <img src="/img/cilacap-bercahaya.png" alt="Logo Cilacap Bercahaya" style={{ height: '40px', objectFit: 'contain', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.6))' }} />
           <div>
             <h4 className="fw-bold m-0 text-white" style={{ fontSize: '1.4rem', textShadow: '0 2px 4px rgba(0,0,0,0.9)' }}>
               Konsol Operator: <span className="text-info">{selectedLoket}</span>
